@@ -1,0 +1,8 @@
+nav:
+    - ... | index.md
+    - "Stage 1: Agnocast Pub/Sub": stage1.md
+    - "Stage 2: agnocast::Node": stage2.md
+    - Polling Subscriber: polling-subscriber.md
+    - Services: services.md
+    - Message Filters: message-filters.md
+    - Bridge: bridge.md
