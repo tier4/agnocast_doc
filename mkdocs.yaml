@@ -1,9 +1,9 @@
 site_name: Agnocast
 site_url: https://tier4.github.io/agnocast_doc
-repo_url: https://github.com/tier4/agnocast_doc
+repo_url: https://github.com/autowarefoundation/agnocast
 edit_uri: edit/main/
 docs_dir: docs
-copyright: Copyright &copy; 2025 TIER IV, Inc.
+copyright: Copyright &copy; 2026 TIER IV, Inc.
 
 theme:
   name: material
