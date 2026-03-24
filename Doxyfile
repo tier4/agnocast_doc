@@ -26,6 +26,8 @@ INPUT                  = ../agnocast/src/agnocastlib/include/agnocast/agnocast.h
                          ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_only_multi_threaded_executor.hpp \
                          ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_only_callback_isolated_executor.hpp \
                          ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_context.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/message_event.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/simple_filter.hpp \
                          ../agnocast/src/agnocastlib/include/agnocast/message_filters/subscriber.hpp \
                          ../agnocast/src/agnocastlib/include/agnocast/message_filters/synchronizer.hpp \
                          ../agnocast/src/agnocastlib/include/agnocast/message_filters/pass_through.hpp \

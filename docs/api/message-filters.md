@@ -6,9 +6,264 @@
 Agnocast provides message synchronization filters compatible with the ROS 2 `message_filters` API. These allow you to synchronize messages from multiple Agnocast topics based on their timestamps.
 
 
+### `agnocast::message_filters::MessageEvent<M>`
+
+Wrapper around a message pointer that carries metadata for message filter pipelines.
+
+
+---
+
+#### `MessageEvent()`
+
+```cpp
+message_filters::MessageEvent<M>::MessageEvent()
+```
+
+Default-construct an empty MessageEvent.
+
+
+---
+
+#### `MessageEvent() [overload 2]`
+
+```cpp
+message_filters::MessageEvent<M>::MessageEvent(MessageEvent &rhs)
+```
+
+Copy constructor.
+
+
+---
+
+#### `MessageEvent() [overload 3]`
+
+```cpp
+message_filters::MessageEvent<M>::MessageEvent(ConstMessagePtr &message)
+```
+
+Construct from a message pointer, recording the current time as receipt time.
+
+
+---
+
+#### `MessageEvent() [overload 4]`
+
+```cpp
+message_filters::MessageEvent<M>::MessageEvent(ConstMessagePtr &message, rclcpp::Time receipt_time)
+```
+
+Construct from a message pointer and an explicit receipt time.
+
+
+---
+
+#### `operator=()`
+
+```cpp
+MessageEvent& message_filters::MessageEvent<M>::operator=(MessageEvent &rhs)
+```
+
+Copy assignment operator.
+
+
+---
+
+#### `getMessage()`
+
+```cpp
+ConstMessagePtr& message_filters::MessageEvent<M>::getMessage() const
+```
+
+Retrieve the message. Returns ipc_shared_ptr<M const> pointing to shared memory.
+
+
+---
+
+#### `getConstMessage()`
+
+```cpp
+ConstMessagePtr& message_filters::MessageEvent<M>::getConstMessage() const
+```
+
+Retrieve a const version of the message (same as getMessage() in agnocast)
+
+
+---
+
+#### `getReceiptTime()`
+
+```cpp
+rclcpp::Time message_filters::MessageEvent<M>::getReceiptTime() const
+```
+
+Returns the time at which this message was received.
+
+
+---
+
+#### `operator<()`
+
+```cpp
+bool message_filters::MessageEvent<M>::operator<(MessageEvent &rhs) const
+```
+
+Less-than comparison, ordered by pointer then receipt time.
+
+
+### `agnocast::message_filters::SimpleFilter<M>`
+
+**Extends:** `noncopyable`
+
+Base class for simple one-output filters. Provides callback registration and signal dispatch.
+
+
+---
+
+#### `registerCallback()`
+
+```cpp
+Connection message_filters::SimpleFilter<M>::registerCallback(C &callback)
+```
+
+Register a callback to be invoked when a message passes through this filter.
+
+| Parameter | Description |
+|-----------|-------------|
+| `callback` | Callback to register. |
+| | |
+| **Returns** | Connection object for disconnecting. |
+
+
+---
+
+#### `setName()`
+
+```cpp
+void message_filters::SimpleFilter<M>::setName(std::string &name)
+```
+
+Set the name of this filter (for debugging).
+
+| Parameter | Description |
+|-----------|-------------|
+| `name` | Filter name. |
+
+
+---
+
+#### `getName()`
+
+```cpp
+std::string& message_filters::SimpleFilter<M>::getName() const
+```
+
+Return the name of this filter.
+
+| | |
+|-----------|-------------|
+| **Returns** | Filter name string. |
+
+
+### `agnocast::message_filters::SubscriberBase<M>`
+
+Base class for Subscriber, allowing subscription management without knowing the message type. Used for type-erased subscriber collections.
+
+
+---
+
+#### `subscribe()`
+
+```cpp
+void message_filters::SubscriberBase<NodeType>::subscribe(NodePtr node, std::string &topic, rmw_qos_profile_t qos)
+```
+
+Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `node` | — | The `rclcpp::Node::SharedPtr` to use to subscribe. |
+| `topic` | — | The topic to subscribe to. |
+| `qos` | `rmw_qos_profile_default` | (optional) The rmw qos profile to use to subscribe. |
+
+
+---
+
+#### `subscribe() [overload 2]`
+
+```cpp
+void message_filters::SubscriberBase<NodeType>::subscribe(NodeType *node, std::string &topic, rmw_qos_profile_t qos)
+```
+
+Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `node` | — | The `rclcpp::Node` to use to subscribe. |
+| `topic` | — | The topic to subscribe to. |
+| `qos` | `rmw_qos_profile_default` | (optional) The rmw qos profile to use to subscribe. |
+
+
+---
+
+#### `subscribe() [overload 3]`
+
+```cpp
+void message_filters::SubscriberBase<NodeType>::subscribe(NodePtr node, std::string &topic, rmw_qos_profile_t qos, agnocast::SubscriptionOptions options)
+```
+
+Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe. This override allows SubscriptionOptions to be passed into the class without changing API.
+
+| Parameter | Description |
+|-----------|-------------|
+| `node` | The `rclcpp::Node::SharedPtr` to use to subscribe. |
+| `topic` | The topic to subscribe to. |
+| `qos` | The rmw qos profile to use to subscribe. |
+| `options` | The subscription options to use to subscribe. |
+
+
+---
+
+#### `subscribe() [overload 4]`
+
+```cpp
+void message_filters::SubscriberBase<NodeType>::subscribe(NodeType *node, std::string &topic, rmw_qos_profile_t qos, agnocast::SubscriptionOptions options)
+```
+
+Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.
+
+| Parameter | Description |
+|-----------|-------------|
+| `node` | The `rclcpp::Node` to use to subscribe. |
+| `topic` | The topic to subscribe to. |
+| `qos` | The rmw qos profile to use to subscribe. |
+| `options` | The subscription options to use to subscribe. |
+
+
+---
+
+#### `subscribe() [overload 5]`
+
+```cpp
+void message_filters::SubscriberBase<NodeType>::subscribe()
+```
+
+Re-subscribe to a topic. Only works if this subscriber has previously been subscribed to a topic.
+
+
+---
+
+#### `unsubscribe()`
+
+```cpp
+void message_filters::SubscriberBase<NodeType>::unsubscribe()
+```
+
+Force immediate unsubscription of this subscriber from its topic.
+
+
 ### `agnocast::message_filters::Subscriber<M>`
 
-**Extends:** `agnocast::message_filters::SubscriberBase< rclcpp::Node >`, `SimpleFilter< M >`
+**Extends:** `agnocast::message_filters::SubscriberBase< rclcpp::Node >`, `agnocast::message_filters::SimpleFilter< M >`
 
 Agnocast subscription filter. This class acts as a highest-level filter, simply passing messages from an agnocast subscription through to the filters which have connected to it. When this object is destroyed it will unsubscribe from the agnocast subscription. The Subscriber object is templated on the type of message being subscribed to.
 
@@ -185,7 +440,7 @@ Returns the internal `agnocast::Subscription`<M>::SharedPtr object.
 void message_filters::Subscriber<M, NodeType>::connectInput(F &f)
 ```
 
-Does nothing. Provided so that Subscriber may be used in a message_filters::Chain
+No-op. Provided for compatibility with message_filters::Chain.
 
 
 ---
@@ -196,7 +451,7 @@ Does nothing. Provided so that Subscriber may be used in a message_filters::Chai
 void message_filters::Subscriber<M, NodeType>::add(EventType &e)
 ```
 
-Does nothing. Provided so that Subscriber may be used in a message_filters::Chain
+No-op. Provided for compatibility with message_filters::Chain.
 
 
 ### `agnocast::message_filters::Synchronizer<Policy>`
@@ -258,6 +513,22 @@ Construct a synchronizer with a policy but no input filters.
 | Parameter | Description |
 |-----------|-------------|
 | `policy` | Sync policy instance. |
+
+
+---
+
+#### `connectInput()`
+
+```cpp
+void message_filters::Synchronizer<Policy>::connectInput(F0 &f0, F1 &f1)
+```
+
+Connect 2–9 input filters to this synchronizer. Replaces any previous connections.
+
+| Parameter | Description |
+|-----------|-------------|
+| `f0` | First input filter. |
+| `f1` | Second input filter. |
 
 
 ---
@@ -330,9 +601,54 @@ Register a member function callback.
 | **Returns** | Connection object. |
 
 
+---
+
+#### `setName()`
+
+```cpp
+void message_filters::Synchronizer<Policy>::setName(std::string &name)
+```
+
+Set the name of this synchronizer (for debugging).
+
+| Parameter | Description |
+|-----------|-------------|
+| `name` | Name string. |
+
+
+---
+
+#### `getName()`
+
+```cpp
+std::string& message_filters::Synchronizer<Policy>::getName()
+```
+
+Return the name of this synchronizer.
+
+| | |
+|-----------|-------------|
+| **Returns** | Name string. |
+
+
+---
+
+#### `getPolicy()`
+
+```cpp
+Policy* message_filters::Synchronizer<Policy>::getPolicy()
+```
+
+Return a pointer to the sync policy. Use this to configure policy parameters after construction (e.g., sync.getPolicy()->setAgePenalty(0.5) ).
+
+| | |
+|-----------|-------------|
+| **Returns** | Pointer to the policy object. |
+
+
 ### `agnocast::message_filters::PassThrough<M>`
 
-**Extends:** `SimpleFilter< M >`
+**Extends:** `agnocast::message_filters::SimpleFilter< M >`
 
 Simple passthrough filter. What comes in goes out immediately.
 
@@ -430,6 +746,49 @@ Construct with a queue size.
 | `queue_size` | Maximum number of messages to buffer per input. |
 
 
+---
+
+#### `ExactTime() [overload 2]`
+
+```cpp
+message_filters::sync_policies::ExactTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::ExactTime(ExactTime &e)
+```
+
+Copy constructor.
+
+
+---
+
+#### `operator=()`
+
+```cpp
+ExactTime& message_filters::sync_policies::ExactTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::operator=(ExactTime &rhs)
+```
+
+Copy assignment.
+
+| | |
+|-----------|-------------|
+| **Returns** | Reference to *this. |
+
+
+---
+
+#### `registerDropCallback()`
+
+```cpp
+Connection message_filters::sync_policies::ExactTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::registerDropCallback(C &callback)
+```
+
+Register a callback invoked when messages are dropped due to queue overflow or missing matches.
+
+| Parameter | Description |
+|-----------|-------------|
+| `callback` | Callback to register. |
+| | |
+| **Returns** | Connection object for disconnecting. |
+
+
 ### `agnocast::message_filters::sync_policies::ApproximateTime<M0, M1, ...>`
 
 **Extends:** `agnocast::message_filters::PolicyBase< M0, M1, NullType, NullType, NullType, NullType, NullType, NullType, NullType >`
@@ -450,6 +809,32 @@ Construct with a queue size.
 | Parameter | Description |
 |-----------|-------------|
 | `queue_size` | Maximum number of messages to buffer per input. |
+
+
+---
+
+#### `ApproximateTime() [overload 2]`
+
+```cpp
+message_filters::sync_policies::ApproximateTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::ApproximateTime(ApproximateTime &e)
+```
+
+Copy constructor.
+
+
+---
+
+#### `operator=()`
+
+```cpp
+ApproximateTime& message_filters::sync_policies::ApproximateTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::operator=(ApproximateTime &rhs)
+```
+
+Copy assignment.
+
+| | |
+|-----------|-------------|
+| **Returns** | Reference to *this. |
 
 
 ---

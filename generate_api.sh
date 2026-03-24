@@ -2,8 +2,8 @@
 # Generate the API Reference pages from the Agnocast source code.
 #
 # Usage:
-#   ./generate_api.sh                              # use default branch (api-reference)
-#   ./generate_api.sh main                         # use main branch
+#   ./generate_api.sh                              # use default branch (main)
+#   ./generate_api.sh some-branch                  # use a specific branch
 #   ./generate_api.sh /path/to/local/agnocast      # use a local checkout
 #
 # Requirements: doxygen, python3, git
@@ -13,7 +13,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 AGNOCAST_REPO="https://github.com/autowarefoundation/agnocast.git"
-DEFAULT_BRANCH="api-reference"  # TODO: change to "main" after merge
+DEFAULT_BRANCH="main"
 CLONE_DIR=".agnocast_src"
 
 # ── Resolve agnocast source path ──────────────────────────────────────────────
