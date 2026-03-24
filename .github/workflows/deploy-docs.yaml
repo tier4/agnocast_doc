@@ -9,7 +9,7 @@ on:
       agnocast_branch:
         description: "Agnocast branch to generate API reference from"
         required: false
-        default: "api-reference"  # TODO: change to "main" after merge
+        default: "main"
 
 jobs:
   deploy:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate API Reference
         run: |
-          BRANCH="${{ github.event.inputs.agnocast_branch || 'api-reference' }}"
+          BRANCH="${{ github.event.inputs.agnocast_branch || 'main' }}"
           ./generate_api.sh "$BRANCH"
 
       - name: Deploy to GitHub Pages
