@@ -1,0 +1,25 @@
+/* Agnocast Documentation - Custom Styles */
+
+/* Diff-style highlighting for migration examples */
+.md-typeset .highlight .hll {
+  background-color: rgba(0, 180, 0, 0.15);
+}
+
+/* Stage badge styling */
+.stage-badge {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85em;
+}
+
+.stage-badge--1 {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.stage-badge--2 {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
