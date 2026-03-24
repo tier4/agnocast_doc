@@ -8,7 +8,7 @@
 
 **Extends:** `agnocast::SubscriptionBase`
 
-Polling-based subscription that retrieves messages on demand via take(). Unlike BasicSubscription, no callback is invoked automatically. Call take() to retrieve the latest message. Useful in timer callbacks or control loops.
+Polling-based subscription that retrieves messages on demand via take().
 
 
 ---

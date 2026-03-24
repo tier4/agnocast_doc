@@ -569,17 +569,6 @@ Construct the executor.
 
 ---
 
-#### `~AgnocastOnlyCallbackIsolatedExecutor() (destructor)`
-
-```cpp
-AgnocastOnlyCallbackIsolatedExecutor::~AgnocastOnlyCallbackIsolatedExecutor()
-```
-
-Destroy the executor and clean up child threads.
-
-
----
-
 #### `spin()`
 
 ```cpp

@@ -236,6 +236,9 @@ def parse_memberdef(mdef):
 
     if mkind == "function":
         sig = clean_sig(defn, args)
+        # Skip broken operator== / operator!= from Doxygen 1.9.1 bug
+        if "operator= const" in sig or "operator! const" in sig:
+            return None
         return (sig, full_desc, tparams, params, ret)
     elif mkind == "variable":
         return (mname, full_desc, [], [], "")
@@ -461,8 +464,12 @@ def extract_short_name(sig):
     if m:
         return f"{m.group(1)}() (destructor)"
 
-    # Operators: "operator=", "operator*", "operator->", "operator bool"
+    # Operators: "operator=", "operator*", "operator->", "operator bool", "operator==", etc.
     m = re.search(r"(operator\s*(?:bool|[^\s(]+))\s*\(", sig)
+    if m:
+        return f"{m.group(1).strip()}()"
+    # Operators without parens in the sig (Doxygen sometimes puts "const" after)
+    m = re.search(r"(operator\s*(?:==|!=|<|>|<=|>=|<<|>>))", sig)
     if m:
         return f"{m.group(1).strip()}()"
 
@@ -719,16 +726,16 @@ CLASSES = [
      None),
     ("Publisher", "classagnocast_1_1BasicPublisher.xml",
      "agnocast::Publisher<MessageT>",
-     None),
+     "Zero-copy publisher that allocates messages in shared memory. Use borrow_loaned_message() to obtain a message, populate its fields, then call publish() to transfer it to subscribers without copying."),
     ("Subscription", "classagnocast_1_1BasicSubscription.xml",
      "agnocast::Subscription<MessageT>",
-     None),
+     "Event-driven subscription that invokes a callback on each new message. The callback signature is `void(const agnocast::ipc_shared_ptr<const MessageT>&)`."),
     ("TakeSubscription", "classagnocast_1_1BasicTakeSubscription.xml",
      "agnocast::TakeSubscription<MessageT>",
-     None),
+     "Polling-based subscription that retrieves messages on demand via take()."),
     ("PollingSubscriber", "classagnocast_1_1BasicPollingSubscriber.xml",
      "agnocast::PollingSubscriber<MessageT>",
-     None),
+     "Polling subscription that retrieves messages on demand. Wraps TakeSubscription with a simplified interface."),
     ("ipc_shared_ptr", "classagnocast_1_1ipc__shared__ptr.xml",
      "agnocast::ipc_shared_ptr<T>",
      None),
@@ -913,6 +920,12 @@ def main():
 
     # ── Message Filters page ─────────────────────────────────────────────────
     MESSAGE_FILTER_CLASSES = [
+        ("MessageEvent", "classagnocast_1_1message__filters_1_1MessageEvent.xml",
+         "agnocast::message_filters::MessageEvent<M>", None),
+        ("SimpleFilter", "classagnocast_1_1message__filters_1_1SimpleFilter.xml",
+         "agnocast::message_filters::SimpleFilter<M>", None),
+        ("SubscriberBase", "classagnocast_1_1message__filters_1_1SubscriberBase.xml",
+         "agnocast::message_filters::SubscriberBase<M>", None),
         ("Subscriber", "classagnocast_1_1message__filters_1_1Subscriber.xml",
          "agnocast::message_filters::Subscriber<M>", None),
         ("Synchronizer", "classagnocast_1_1message__filters_1_1Synchronizer.xml",
