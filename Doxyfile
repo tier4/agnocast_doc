@@ -1,0 +1,60 @@
+# Doxyfile — XML-only output for API reference generation
+# This is NOT used to produce HTML. A Python script reads the XML
+# and generates a single Markdown page.
+
+PROJECT_NAME           = "Agnocast"
+OUTPUT_DIRECTORY       = .doxygen_xml
+GENERATE_HTML          = NO
+GENERATE_LATEX         = NO
+GENERATE_XML           = YES
+XML_PROGRAMLISTING     = NO
+
+INPUT                  = ../agnocast/src/agnocastlib/include/agnocast/agnocast.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_publisher.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_subscription.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_smart_pointer.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_client.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_service.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_timer.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_single_threaded_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_multi_threaded_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/agnocast_callback_isolated_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_node.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_only_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_only_single_threaded_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_only_multi_threaded_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_only_callback_isolated_executor.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/node/agnocast_context.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/subscriber.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/synchronizer.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/pass_through.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/sync_policies/exact_time.hpp \
+                         ../agnocast/src/agnocastlib/include/agnocast/message_filters/sync_policies/approximate_time.hpp
+RECURSIVE              = NO
+FILE_PATTERNS          = *.hpp
+
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+HIDE_UNDOC_MEMBERS     = YES
+HIDE_UNDOC_CLASSES     = YES
+HIDE_FRIEND_COMPOUNDS  = YES
+HIDE_IN_BODY_DOCS      = YES
+INTERNAL_DOCS          = NO
+JAVADOC_AUTOBRIEF      = YES
+TYPEDEF_HIDES_STRUCT   = YES
+
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = AGNOCAST_PUBLIC= \
+                         RCLCPP_PUBLIC= \
+                         RCLCPP_SMART_PTR_DEFINITIONS(x)= \
+                         RCLCPP_SMART_PTR_DEFINITIONS_NOT_COPYABLE(x)= \
+                         RCLCPP_DISABLE_COPY(x)= \
+                         RCPPUTILS_TSA_GUARDED_BY(x)= \
+                         RCPPUTILS_TSA_REQUIRES(x)=
+
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO

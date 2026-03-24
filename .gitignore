@@ -1,0 +1,6 @@
+site/
+.doxygen_xml/
+.agnocast_src/
+doxygen_output/
+Doxyfile.generated
+__pycache__/

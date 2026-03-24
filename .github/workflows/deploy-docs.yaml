@@ -4,20 +4,32 @@ on:
   push:
     branches:
       - main
-    paths:
-      - mkdocs.yaml
-      - "**/*.md"
-      - "**/*.svg"
-      - "**/*.png"
-      - "**/*.jpg"
+  workflow_dispatch:
+    inputs:
+      agnocast_branch:
+        description: "Agnocast branch to generate API reference from"
+        required: false
+        default: "api-reference"  # TODO: change to "main" after merge
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v4
         with:
-          python-version: 3.10.12
-      - run: pip install -r requirements.txt
-      - run: mkdocs gh-deploy --force
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update && sudo apt-get install -y doxygen
+
+      - name: Generate API Reference
+        run: |
+          BRANCH="${{ github.event.inputs.agnocast_branch || 'api-reference' }}"
+          ./generate_api.sh "$BRANCH"
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
