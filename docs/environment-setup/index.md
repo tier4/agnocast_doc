@@ -48,8 +48,8 @@ Install kernel headers (required for DKMS to build the kernel module) and the Ag
 ```bash
 sudo apt install linux-headers-$(uname -r)
 sudo apt install \
-  agnocast-kmod-v2.3.1 \
-  agnocast-heaphook-v2.3.1
+  agnocast-kmod-v2.3.3 \
+  agnocast-heaphook-v2.3.3
 ```
 
 !!! note
@@ -65,14 +65,14 @@ sudo apt install \
     - **minor** — Incremented when the kmod syscall API changes. `agnocastlib` and `agnocast-kmod` with matching major and minor versions are guaranteed to work correctly together.
     - **patch** — Incremented for all other changes.
 
-    Packages use version-pinned names (e.g., `agnocast-kmod-v2.3.1`) to ensure all components are at exactly the same version.
+    Packages use version-pinned names (e.g., `agnocast-kmod-v2.3.3`) to ensure all components are at exactly the same version.
 
 ### 3. Build the ROS packages from source
 
 Since the ROS packages are not yet distributed from the ROS build farm, build them from source:
 
 ```bash
-git clone --branch 2.3.1 https://github.com/autowarefoundation/agnocast.git
+git clone --branch 2.3.3 https://github.com/autowarefoundation/agnocast.git
 cd agnocast
 rosdep install --from-paths src --ignore-src -y
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
@@ -80,7 +80,7 @@ source install/setup.bash
 ```
 
 !!! info
-    Once the ROS build farm release is available, the ROS packages will also be installable via apt (e.g., `ros-jazzy-agnocast=2.3.1*`), and this source build step will no longer be necessary.
+    Once the ROS build farm release is available, the ROS packages will also be installable via apt (e.g., `ros-jazzy-agnocast=2.3.3*`), and this source build step will no longer be necessary.
 
 ### 4. Load the kernel module
 

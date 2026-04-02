@@ -142,6 +142,9 @@ graph TD
 ```bash
 ros2 agnocast generate-bridge-plugins \
   --packages std_msgs sensor_msgs geometry_msgs
+
+# Or for all available message types
+ros2 agnocast generate-bridge-plugins --all
 ```
 
 **Step 2:** Build the plugins:

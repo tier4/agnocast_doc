@@ -13,7 +13,7 @@ The Agnocast kernel module (`agnocast-kmod`) must be installed on the **host** s
 **Non-Ubuntu hosts** (or environments where `apt` is not available) — Build the kernel module from source:
 
 ```bash
-git clone --branch 2.3.1 https://github.com/autowarefoundation/agnocast.git
+git clone --branch 2.3.3 https://github.com/autowarefoundation/agnocast.git
 cd agnocast/agnocast_kmod
 make
 sudo insmod agnocast.ko
