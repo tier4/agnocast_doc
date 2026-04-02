@@ -12,7 +12,7 @@ sudo apt install \
   agnocast-heaphook-v<NEW_VERSION>
 ```
 
-For example, to upgrade from 2.3.1 to 2.4.0:
+For example, to upgrade from 2.3.3 to 2.4.0:
 
 ```bash
 sudo apt install agnocast-kmod-v2.4.0 agnocast-heaphook-v2.4.0
@@ -29,7 +29,7 @@ source install/setup.bash
 ```
 
 !!! info
-    Once the ROS build farm release is available, the ROS packages will also be installable via apt (e.g., `ros-jazzy-agnocast=2.3.1*`), and this source build step will no longer be necessary.
+    Once the ROS build farm release is available, the ROS packages will also be installable via apt (e.g., `ros-jazzy-agnocast=2.3.3*`), and this source build step will no longer be necessary.
 
 ## 3. Reload the kernel module
 
@@ -45,6 +45,6 @@ sudo modprobe agnocast
 
 When upgrading, keep the [versioning rules](index.md) in mind:
 
-- **Patch upgrades** (e.g., 2.3.1 → 2.3.2) — Safe. No API or syscall changes.
+- **Patch upgrades** (e.g., 2.3.3 → 2.3.2) — Safe. No API or syscall changes.
 - **Minor upgrades** (e.g., 2.3.x → 2.4.0) — `agnocastlib` and `agnocast-kmod` must be upgraded together, as the kmod syscall API may have changed.
 - **Major upgrades** — User-facing API may have breaking changes. Review the changelog before upgrading.
