@@ -79,7 +79,7 @@ callback_groups:
 ```
 
 !!! note
-    `SCHED_DEADLINE` uses cgroup cpuset for CPU affinity, which requires cgroup v1. See [Kernel boot parameter](getting-started.md#kernel-boot-parameter-sched_deadline-only) for setup.
+    `SCHED_DEADLINE` uses cgroup cpuset for CPU affinity, which requires cgroup v1. See [Kernel boot parameter](integration-guide.md#kernel-boot-parameter-sched_deadline-only) for setup.
 
 !!! note
     `SCHED_DEADLINE` configuration is applied after all other CallbackGroups have been configured.
