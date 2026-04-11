@@ -1,0 +1,21 @@
+# markdownlint configuration
+# Rule reference: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+default: true
+
+# Long prose lines are intentional in the docs.
+MD013: false
+
+# The docs use inline HTML (e.g. <img>) and MkDocs Material extensions.
+MD033: false
+
+# Some pages start with YAML frontmatter instead of an H1.
+MD041: false
+
+# Bare URLs appear in README and link lists.
+MD034: false
+
+# Allow duplicate headings as long as they are not siblings
+# (e.g. "Before" / "After" subsections repeated under different parents).
+MD024:
+  siblings_only: true

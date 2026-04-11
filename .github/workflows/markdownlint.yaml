@@ -1,0 +1,25 @@
+name: markdownlint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # Run the exact same hook that developers run locally via pre-commit,
+      # so CI and pre-commit can never drift apart. The fix hook will modify
+      # files if any violations are auto-fixable; pre-commit then exits non-zero
+      # because files were modified, causing CI to fail as intended.
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: markdownlint-fix --all-files
