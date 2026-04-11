@@ -48,7 +48,7 @@ The `id` is auto-generated and composed of the node name followed by callback id
 Callback identifiers include: `Subscription(<topic>)`, `Timer(<period_ns>)`, `Service(<name>)`, `Client(<name>)`.
 
 !!! tip
-    Use the `prerun_node` to discover the exact IDs for your application rather than constructing them manually.
+    Use the prerun mode to discover the exact IDs for your application rather than constructing them manually.
 
 !!! warning
     If a node has multiple CallbackGroups with timers of the same period, their auto-generated IDs will collide. To avoid this, slightly offset the timer periods (e.g., `100ms` and `100ms + 1ns`).
