@@ -61,4 +61,3 @@ This allows RT tasks to use up to 98% of each 1-second period, leaving 20 ms for
 
 !!! warning
     Setting `sched_rt_runtime_us = -1` disables RT throttling entirely, which can lock up the system if an RT task runs away. Only use `-1` if you fully understand the implications.
-

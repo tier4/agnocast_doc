@@ -11,7 +11,6 @@ ROS 2 supports a wide variety of languages, operating systems, and network trans
 
 Currently, **Linux (Ubuntu)** and **C++ (rclcpp)** applications are supported. Whether support for other OSes or language bindings will be added in the future is undecided.
 
-
 <img src="assets/images/agnocast_stack.png" alt="Agnocast Stack" width="560">
 
 ## Key Features

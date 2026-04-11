@@ -97,7 +97,7 @@ sudo ldconfig
 
 If using `SCHED_DEADLINE`, CPU affinity requires cgroup v1:
 
-```
+```text
 GRUB_CMDLINE_LINUX_DEFAULT="... systemd.unified_cgroup_hierarchy=0 ..."
 ```
 

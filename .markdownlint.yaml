@@ -19,3 +19,9 @@ MD034: false
 # (e.g. "Before" / "After" subsections repeated under different parents).
 MD024:
   siblings_only: true
+
+# MkDocs Material admonitions require 4-space indented content, which
+# markdownlint misparses as indented code blocks when the content contains
+# a list after a blank line. Disable the fenced-vs-indented check so this
+# pattern works. Fenced code blocks remain the de-facto style everywhere.
+MD046: false
