@@ -46,4 +46,4 @@ The fields are the same as `callback_groups` except `name` is used instead of `i
 
 ## Prerun Mode
 
-Non-ROS threads are also discovered by `--prerun` mode and included in the generated `template.yaml`.
+Non-ROS threads are also discovered by the prerun mode and included in the generated `template.yaml`.

@@ -4,7 +4,7 @@
 
 1. **Switch the executor** in your application code or launch file
 2. **Set up the thread configurator** (one-time system configuration)
-3. **Generate a YAML template** by running the configurator in `--prerun` mode
+3. **Generate a YAML template** by running the configurator in the prerun mode
 4. **Edit the YAML** to assign scheduling policies, priorities, and CPU affinities
 5. **Launch the configurator** with your config file, then start your application
 
@@ -115,7 +115,7 @@ Start the prerun node **before** launching your application:
 
 ```bash
 # Terminal 1: start the prerun node first
-ros2 run agnocast_cie_thread_configurator thread_configurator_node --prerun
+ros2 launch agnocast_cie_thread_configurator thread_configurator.launch.xml prerun:=true
 
 # Terminal 2: then launch your application
 ros2 launch your_package your_launch.xml
@@ -134,10 +134,10 @@ For callback groups that don't need configuration, delete the entry or leave the
 Start the configurator **before** the target application:
 
 ```bash
-ros2 run agnocast_cie_thread_configurator thread_configurator_node --config-file /path/to/config.yaml
+ros2 launch agnocast_cie_thread_configurator thread_configurator.launch.xml config_file:=/path/to/config.yaml
 ```
 
 Then launch your application. The configurator applies scheduling parameters as CallbackGroups register.
 
 !!! note
-    The configurator automatically subscribes to all ROS domains referenced by `domain_id` in the YAML configuration. For `--prerun` mode, use the `--domains` option to specify which domains to discover.
+    The configurator automatically subscribes to all ROS domains referenced by `domain_id` in the YAML configuration. For the prerun mode, use the `domains` parameter to specify which domains to discover.
