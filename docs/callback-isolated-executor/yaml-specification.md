@@ -41,7 +41,7 @@ Each entry configures one CallbackGroup's thread:
 
 The `id` is auto-generated and composed of the node name followed by callback identifiers separated by `@`:
 
-```
+```text
 /<node_name>@<Callback1>@<Callback2>...
 ```
 

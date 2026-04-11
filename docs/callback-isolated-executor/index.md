@@ -6,7 +6,7 @@ The `CallbackIsolatedAgnocastExecutor` assigns a dedicated OS thread to each Cal
 
 Standard ROS 2 executors share threads across callbacks — you cannot control which callback runs on which CPU or at what priority.
 
-```
+```text
 Standard Executor:                  CallbackIsolatedExecutor:
 
   CallbackGroup A ─┐                 CallbackGroup A → Thread (FIFO, prio=90, CPU0)
