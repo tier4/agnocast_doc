@@ -25,7 +25,7 @@ You should see interleaved log messages from the three callbacks.
 Start the prerun node **before** launching your application:
 
 ```bash
-ros2 run agnocast_cie_thread_configurator thread_configurator_node --prerun
+ros2 launch agnocast_cie_thread_configurator thread_configurator.launch.xml prerun:=true
 ```
 
 Wait until the log output settles (all three CallbackGroups are discovered), then press Ctrl+C. A `template.yaml` is created in the current directory:
@@ -102,7 +102,7 @@ Before the first run, complete the [thread configurator setup](integration-guide
 Then start the configurator:
 
 ```bash
-ros2 run agnocast_cie_thread_configurator thread_configurator_node --config-file cie_tutorial_config.yaml
+ros2 launch agnocast_cie_thread_configurator thread_configurator.launch.xml config_file:=cie_tutorial_config.yaml
 ```
 
 Then, in another terminal, launch the application:
