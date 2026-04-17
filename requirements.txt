@@ -16,6 +16,6 @@ mkdocs-autorefs
 mkdocs-glightbox
 
 # fontawesome_markdown imports markdown.util.etree, removed in markdown 3.4+
-markdown==3.3.7
+markdown==3.8.1
 # pygments 2.20 passes filename=None to html.escape() via pymdownx.highlight
 pygments<2.20
