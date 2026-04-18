@@ -139,5 +139,7 @@ ros2 launch agnocast_cie_thread_configurator thread_configurator.launch.xml conf
 
 Then launch your application. The configurator applies scheduling parameters as CallbackGroups register.
 
+The configurator keeps running after all configurations have been applied. If the target application restarts, the configurator automatically re-applies configurations to newly discovered threads.
+
 !!! note
     The configurator automatically subscribes to all ROS domains referenced by `domain_id` in the YAML configuration. For the prerun mode, use the `domains` parameter to specify which domains to discover.
