@@ -1,4 +1,5 @@
 nav:
     - ... | index.md
     - System Configuration: configuration.md
+    - Scripts: scripts.md
     - Upgrading: upgrading.md
