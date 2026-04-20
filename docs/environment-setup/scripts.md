@@ -10,8 +10,8 @@ Neither script requires `agnocast.ko` to be loaded or `libagnocast_heaphook.so` 
 
 | Script | Purpose |
 |---|---|
-| `dds_config.bash` | Apply Cyclone DDS runtime settings (`net.core.rmem_max`, loopback multicast) required for Agnocast over Cyclone DDS. Guarded by `/tmp/cycloneDDS_configured` so it runs only once per boot. |
-| `setup_thread_configurator.bash` | Grant `CAP_SYS_NICE` to `thread_configurator_node` and register library paths in `/etc/ld.so.conf.d/agnocast-cie.conf`. Automates the manual steps described in [Callback Isolated Executor → Integration Guide, Step 2](../callback-isolated-executor/integration-guide.md#step-2-set-up-the-thread-configurator). |
+| `dds_config.bash` | Apply CycloneDDS runtime settings (`net.core.rmem_max`, loopback multicast) required for Agnocast over CycloneDDS. Guarded by `/tmp/cycloneDDS_configured` so it runs only once per boot. |
+| `setup_thread_configurator.bash` | Grant `CAP_SYS_NICE` to `thread_configurator_node` and register library paths in `/etc/ld.so.conf.d/agnocast-cie.conf`. Automates the manual steps described in [CallbackIsolatedExecutor → Integration Guide, Step 2](../callback-isolated-executor/integration-guide.md#step-2-set-up-the-thread-configurator). |
 
 ## Sample application launchers
 
@@ -23,8 +23,8 @@ Each `sample_application/run_*.bash` script is a thin wrapper that runs `source 
 |---|---|
 | `run_talker.bash` | `talker.launch.xml` |
 | `run_listener.bash` | `listener.launch.xml` |
-| `run_cie_talker.bash` | `cie_talker.launch.xml` (Callback Isolated Executor) |
-| `run_cie_listener.bash` | `cie_listener.launch.xml` (Callback Isolated Executor) |
+| `run_cie_talker.bash` | `cie_talker.launch.xml` (`CallbackIsolatedAgnocastExecutor`) |
+| `run_cie_listener.bash` | `cie_listener.launch.xml` (`CallbackIsolatedAgnocastExecutor`) |
 | `run_client.bash` | `client.launch.xml` (service client) |
 | `run_server.bash` | `server.launch.xml` (service server) |
 
