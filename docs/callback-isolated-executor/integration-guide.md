@@ -64,6 +64,9 @@ For multiple ROS domains, use the `--domains` option:
 </node_container>
 ```
 
+!!! warning
+    Due to [autowarefoundation/agnocast#1263](https://github.com/autowarefoundation/agnocast/issues/1263), `CallbackIsolatedAgnocastExecutor` and `agnocast_component_container_cie` assume that all callback groups containing Agnocast callbacks are created before they are associated with the Executor by calling `add_node()` or `add_callback_group()`. If an Agnocast callback is added to a callback group after the callback group is associated with the Executor, the wrong executor type may be selected and the callback will not execute.
+
 ## Step 2: Set Up the Thread Configurator
 
 ### Grant capabilities
