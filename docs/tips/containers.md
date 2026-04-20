@@ -117,3 +117,12 @@ The script unloads the current module, purges every installed `agnocast-kmod-v*`
 
 !!! warning
     The kmod version on the host and the `libagnocast_heaphook.so` version inside the container must share the same ioctl ABI. Mismatched versions cause runtime errors. This script does not touch the container; it is the operator's responsibility to roll the container to a matching version.
+
+After the swap, verify that the host kmod, the in-container `libagnocast_heaphook.so`, and the in-container `agnocastlib` are on compatible versions by running
+
+```bash
+source <your-workspace>/install/setup.bash   # must include the ros2agnocast package
+ros2 agnocast -v
+```
+
+**inside the container** where your Agnocast application actually runs. The command prints the detected kmod / heaphook / agnocastlib versions and flags any incompatibility.
