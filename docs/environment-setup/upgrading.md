@@ -48,3 +48,23 @@ When upgrading, keep the [versioning rules](index.md) in mind:
 - **Patch upgrades** (e.g., 2.3.3 → 2.3.2) — Safe. No API or syscall changes.
 - **Minor upgrades** (e.g., 2.3.x → 2.4.0) — `agnocastlib` and `agnocast-kmod` must be upgraded together, as the kmod syscall API may have changed.
 - **Major upgrades** — User-facing API may have breaking changes. Review the changelog before upgrading.
+
+## Switching only the host kmod (container-based setups)
+
+When Agnocast workloads run inside a container, `agnocast-heaphook` is bundled with the container image and is swapped by rolling to a new container. In that setup, only the host-side `agnocast-kmod` needs to be replaced independently to keep the ioctl ABI in sync with the heaphook inside the container.
+
+The [`switch_kmod.bash`](https://github.com/autowarefoundation/agnocast/blob/main/scripts/switch_kmod.bash) script automates the host-side kmod swap:
+
+```bash
+sudo ./scripts/switch_kmod.bash <VERSION>
+# e.g.
+sudo ./scripts/switch_kmod.bash 2.4.0
+```
+
+The script unloads the current module, purges every installed `agnocast-kmod-v*` package, cleans any leftover DKMS state, installs the target from apt, and verifies the new load via `dmesg`.
+
+!!! warning
+    All Agnocast containers and ROS nodes must be stopped before running this script — the module cannot be unloaded while `/dev/agnocast` is held open.
+
+!!! warning
+    The kmod version on the host and the `libagnocast_heaphook.so` version inside the container must share the same ioctl ABI. Mismatched versions cause runtime errors. This script does not touch the container; it is the operator's responsibility to roll the container to a matching version.
