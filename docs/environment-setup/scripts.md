@@ -17,7 +17,7 @@ Neither script requires `agnocast.ko` to be loaded or `libagnocast_heaphook.so` 
 
 | Script | Purpose |
 |---|---|
-| `switch_kmod.bash` | Swap the host's `agnocast-kmod-v<ver>` to another version. For container-based setups where the heaphook travels with the container image and only the host-side kmod needs to be replaced independently. See [Upgrading → Switching only the host kmod](./upgrading.md#switching-only-the-host-kmod-container-based-setups) for details. |
+| `switch_kmod.bash` | Swap the host's `agnocast-kmod-v<ver>` to another version. For container-based setups where the heaphook travels with the container image and only the host-side kmod needs to be replaced independently. See [Running in Containers → Swapping the host kernel module](../tips/containers.md#swapping-the-host-kernel-module) for details. |
 
 ## Sample application launchers
 

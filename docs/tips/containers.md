@@ -99,3 +99,21 @@ services:
     devices:
       - /dev/agnocast
 ```
+
+## Swapping the host kernel module
+
+When you need to change the host's `agnocast-kmod` version independently of the heaphook bundled in the container (for example, after rolling the container image to a new version, or to reproduce a bug on an older kmod), use [`switch_kmod.bash`](https://github.com/autowarefoundation/agnocast/blob/main/scripts/switch_kmod.bash):
+
+```bash
+sudo ./scripts/switch_kmod.bash <VERSION>
+# e.g.
+sudo ./scripts/switch_kmod.bash 2.4.0
+```
+
+The script unloads the current module, purges every installed `agnocast-kmod-v*` package, cleans any leftover DKMS state, installs the target from apt, and verifies the new load via `dmesg`.
+
+!!! warning
+    All Agnocast containers and ROS nodes must be stopped before running this script — the module cannot be unloaded while `/dev/agnocast` is held open.
+
+!!! warning
+    The kmod version on the host and the `libagnocast_heaphook.so` version inside the container must share the same ioctl ABI. Mismatched versions cause runtime errors. This script does not touch the container; it is the operator's responsibility to roll the container to a matching version.
