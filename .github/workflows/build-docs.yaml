@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    if: contains(github.event.pull_request.labels.*.name, 'check_page')
+    if: contains(github.event.pull_request.labels.*.name, 'check-page')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
