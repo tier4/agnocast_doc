@@ -24,4 +24,4 @@ jobs:
         run: ./generate_api.sh main
 
       - name: Build docs
-        run: mkdocs build --strict
+        run: mkdocs build -f mkdocs.yaml --strict
