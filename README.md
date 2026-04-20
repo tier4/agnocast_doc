@@ -16,3 +16,10 @@ pre-commit install
 ```
 
 From then on, `git commit` will run `markdownlint --fix` automatically against the staged Markdown files.
+
+### Docs build check & PR preview
+
+Apply the `check-page` label to a PR to trigger a full documentation build
+(`mkdocs build --strict`, including Doxygen API reference generation). If the
+build succeeds, a live preview is deployed to GitHub Pages and linked from the
+PR. The preview is removed automatically when the PR is closed.
