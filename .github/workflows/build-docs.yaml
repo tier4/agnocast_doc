@@ -41,6 +41,7 @@ jobs:
       - uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: ./site/
+          action: deploy
 
   cleanup:
     if: github.event.action == 'closed'
