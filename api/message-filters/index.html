@@ -1,0 +1,3418 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://autowarefoundation.github.io/agnocast_doc/api/message-filters/">
+      
+      
+        <link rel="prev" href="../options/">
+      
+      
+        <link rel="next" href="../environment-variables/">
+      
+      <link rel="icon" href="../../assets/images/tier4.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Message Filters - Agnocast</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/mermaid@8.13.10/dist/mermaid.css">
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#message-filters" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Agnocast" class="md-header__button md-logo" aria-label="Agnocast" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 117.4 109.1 192h293.8l-26.1-74.6c-4.5-12.8-16.6-21.4-30.2-21.4H165.4c-13.6 0-25.7 8.6-30.2 21.4zm-95.6 79.4L74.8 96.3C88.3 57.8 124.6 32 165.4 32h181.2c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2v192c0 17.7-14.3 32-32 32h-32c-17.7 0-32-14.3-32-32v-48H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0-64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Agnocast
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Message Filters
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/autowarefoundation/agnocast" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../environment-setup/" class="md-tabs__link">
+        Environment Setup
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../migration-guide/" class="md-tabs__link">
+        Migration Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../callback-isolated-executor/" class="md-tabs__link">
+        CallbackIsolatedExecutor
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tips/" class="md-tabs__link">
+        Tips
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        API Reference
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Agnocast" class="md-nav__button md-logo" aria-label="Agnocast" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 117.4 109.1 192h293.8l-26.1-74.6c-4.5-12.8-16.6-21.4-30.2-21.4H165.4c-13.6 0-25.7 8.6-30.2 21.4zm-95.6 79.4L74.8 96.3C88.3 57.8 124.6 32 165.4 32h181.2c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2v192c0 17.7-14.3 32-32 32h-32c-17.7 0-32-14.3-32-32v-48H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0-64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
+
+    </a>
+    Agnocast
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/autowarefoundation/agnocast" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../environment-setup/">Environment Setup</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Environment Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment-setup/configuration/" class="md-nav__link">
+        System Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment-setup/scripts/" class="md-nav__link">
+        Scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment-setup/upgrading/" class="md-nav__link">
+        Upgrading
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../migration-guide/">Migration Guide</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Migration Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migration-guide/stage1/" class="md-nav__link">
+        Stage 1: Agnocast Pub/Sub
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migration-guide/stage2/" class="md-nav__link">
+        Stage 2: agnocast::Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migration-guide/polling-subscriber/" class="md-nav__link">
+        Polling Subscriber
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migration-guide/services/" class="md-nav__link">
+        Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migration-guide/message-filters/" class="md-nav__link">
+        Message Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migration-guide/bridge/" class="md-nav__link">
+        Bridge
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../callback-isolated-executor/">CallbackIsolatedExecutor</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          CallbackIsolatedExecutor
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../callback-isolated-executor/integration-guide/" class="md-nav__link">
+        Integration Guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../callback-isolated-executor/yaml-specification/" class="md-nav__link">
+        YAML Specification
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../callback-isolated-executor/non-ros-threads/" class="md-nav__link">
+        Non-ROS Threads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../callback-isolated-executor/tutorial/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../tips/">Tips</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Tips
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tips/containers/" class="md-nav__link">
+        Running in Containers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tips/caret/" class="md-nav__link">
+        CARET Support
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tips/cli-tools/" class="md-nav__link">
+        CLI Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tips/troubleshooting/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">API Reference</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../free-functions/" class="md-nav__link">
+        Free Functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-aliases/" class="md-nav__link">
+        Type Aliases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../node/" class="md-nav__link">
+        Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../publisher/" class="md-nav__link">
+        Publisher
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subscription/" class="md-nav__link">
+        Subscription
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../takesubscription/" class="md-nav__link">
+        TakeSubscription
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pollingsubscriber/" class="md-nav__link">
+        PollingSubscriber
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipc_shared_ptr/" class="md-nav__link">
+        ipc_shared_ptr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/" class="md-nav__link">
+        Client
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service/" class="md-nav__link">
+        Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../timerbase/" class="md-nav__link">
+        TimerBase
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generictimer/" class="md-nav__link">
+        GenericTimer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../walltimer/" class="md-nav__link">
+        WallTimer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../executors/" class="md-nav__link">
+        Executors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/" class="md-nav__link">
+        Options
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Message Filters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Message Filters
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filtersmessageeventm" class="md-nav__link">
+    agnocast::message_filters::MessageEvent&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::MessageEvent<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messageevent" class="md-nav__link">
+    MessageEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messageevent-overload-2" class="md-nav__link">
+    MessageEvent() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messageevent-overload-3" class="md-nav__link">
+    MessageEvent() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messageevent-overload-4" class="md-nav__link">
+    MessageEvent() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    operator=()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getmessage" class="md-nav__link">
+    getMessage()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getconstmessage" class="md-nav__link">
+    getConstMessage()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getreceipttime" class="md-nav__link">
+    getReceiptTime()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    operator&lt;()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssimplefilterm" class="md-nav__link">
+    agnocast::message_filters::SimpleFilter&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::SimpleFilter<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registercallback" class="md-nav__link">
+    registerCallback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setname" class="md-nav__link">
+    setName()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getname" class="md-nav__link">
+    getName()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssubscriberbasem" class="md-nav__link">
+    agnocast::message_filters::SubscriberBase&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::SubscriberBase<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subscribe" class="md-nav__link">
+    subscribe()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-2" class="md-nav__link">
+    subscribe() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-3" class="md-nav__link">
+    subscribe() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-4" class="md-nav__link">
+    subscribe() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-5" class="md-nav__link">
+    subscribe() [overload 5]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsubscribe" class="md-nav__link">
+    unsubscribe()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssubscriberm" class="md-nav__link">
+    agnocast::message_filters::Subscriber&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::Subscriber<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subscriber" class="md-nav__link">
+    Subscriber()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscriber-overload-2" class="md-nav__link">
+    Subscriber() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscriber-overload-3" class="md-nav__link">
+    Subscriber() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe_1" class="md-nav__link">
+    subscribe()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-2_1" class="md-nav__link">
+    subscribe() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-3_1" class="md-nav__link">
+    subscribe() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-4_1" class="md-nav__link">
+    subscribe() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-5_1" class="md-nav__link">
+    subscribe() [overload 5]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsubscribe_1" class="md-nav__link">
+    unsubscribe()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gettopic" class="md-nav__link">
+    getTopic()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getsubscriber" class="md-nav__link">
+    getSubscriber()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectinput" class="md-nav__link">
+    connectInput()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssynchronizerpolicy" class="md-nav__link">
+    agnocast::message_filters::Synchronizer&lt;Policy&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::Synchronizer<Policy>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer" class="md-nav__link">
+    Synchronizer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer-overload-2" class="md-nav__link">
+    Synchronizer() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer-overload-3" class="md-nav__link">
+    Synchronizer() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer-overload-4" class="md-nav__link">
+    Synchronizer() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectinput_1" class="md-nav__link">
+    connectInput()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback_1" class="md-nav__link">
+    registerCallback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback-overload-2" class="md-nav__link">
+    registerCallback() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback-overload-3" class="md-nav__link">
+    registerCallback() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback-overload-4" class="md-nav__link">
+    registerCallback() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setname_1" class="md-nav__link">
+    setName()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getname_1" class="md-nav__link">
+    getName()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getpolicy" class="md-nav__link">
+    getPolicy()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterspassthroughm" class="md-nav__link">
+    agnocast::message_filters::PassThrough&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::PassThrough<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passthrough" class="md-nav__link">
+    PassThrough()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passthrough-overload-2" class="md-nav__link">
+    PassThrough() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectinput_2" class="md-nav__link">
+    connectInput()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_1" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-overload-2" class="md-nav__link">
+    add() [overload 2]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssync_policiesexacttimem0-m1" class="md-nav__link">
+    agnocast::message_filters::sync_policies::ExactTime&lt;M0, M1, ...&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::sync_policies::ExactTime<M0, M1, ...>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exacttime" class="md-nav__link">
+    ExactTime()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exacttime-overload-2" class="md-nav__link">
+    ExactTime() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    operator=()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registerdropcallback" class="md-nav__link">
+    registerDropCallback()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssync_policiesapproximatetimem0-m1" class="md-nav__link">
+    agnocast::message_filters::sync_policies::ApproximateTime&lt;M0, M1, ...&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::sync_policies::ApproximateTime<M0, M1, ...>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approximatetime" class="md-nav__link">
+    ApproximateTime()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximatetime-overload-2" class="md-nav__link">
+    ApproximateTime() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    operator=()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setagepenalty" class="md-nav__link">
+    setAgePenalty()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setintermessagelowerbound" class="md-nav__link">
+    setInterMessageLowerBound()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setmaxintervalduration" class="md-nav__link">
+    setMaxIntervalDuration()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    Full Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment-variables/" class="md-nav__link">
+        Environment Variables
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filtersmessageeventm" class="md-nav__link">
+    agnocast::message_filters::MessageEvent&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::MessageEvent<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messageevent" class="md-nav__link">
+    MessageEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messageevent-overload-2" class="md-nav__link">
+    MessageEvent() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messageevent-overload-3" class="md-nav__link">
+    MessageEvent() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messageevent-overload-4" class="md-nav__link">
+    MessageEvent() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator" class="md-nav__link">
+    operator=()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getmessage" class="md-nav__link">
+    getMessage()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getconstmessage" class="md-nav__link">
+    getConstMessage()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getreceipttime" class="md-nav__link">
+    getReceiptTime()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" class="md-nav__link">
+    operator&lt;()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssimplefilterm" class="md-nav__link">
+    agnocast::message_filters::SimpleFilter&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::SimpleFilter<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registercallback" class="md-nav__link">
+    registerCallback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setname" class="md-nav__link">
+    setName()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getname" class="md-nav__link">
+    getName()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssubscriberbasem" class="md-nav__link">
+    agnocast::message_filters::SubscriberBase&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::SubscriberBase<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subscribe" class="md-nav__link">
+    subscribe()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-2" class="md-nav__link">
+    subscribe() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-3" class="md-nav__link">
+    subscribe() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-4" class="md-nav__link">
+    subscribe() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-5" class="md-nav__link">
+    subscribe() [overload 5]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsubscribe" class="md-nav__link">
+    unsubscribe()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssubscriberm" class="md-nav__link">
+    agnocast::message_filters::Subscriber&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::Subscriber<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subscriber" class="md-nav__link">
+    Subscriber()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscriber-overload-2" class="md-nav__link">
+    Subscriber() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscriber-overload-3" class="md-nav__link">
+    Subscriber() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe_1" class="md-nav__link">
+    subscribe()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-2_1" class="md-nav__link">
+    subscribe() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-3_1" class="md-nav__link">
+    subscribe() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-4_1" class="md-nav__link">
+    subscribe() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-overload-5_1" class="md-nav__link">
+    subscribe() [overload 5]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsubscribe_1" class="md-nav__link">
+    unsubscribe()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gettopic" class="md-nav__link">
+    getTopic()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getsubscriber" class="md-nav__link">
+    getSubscriber()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectinput" class="md-nav__link">
+    connectInput()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssynchronizerpolicy" class="md-nav__link">
+    agnocast::message_filters::Synchronizer&lt;Policy&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::Synchronizer<Policy>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer" class="md-nav__link">
+    Synchronizer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer-overload-2" class="md-nav__link">
+    Synchronizer() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer-overload-3" class="md-nav__link">
+    Synchronizer() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronizer-overload-4" class="md-nav__link">
+    Synchronizer() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectinput_1" class="md-nav__link">
+    connectInput()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback_1" class="md-nav__link">
+    registerCallback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback-overload-2" class="md-nav__link">
+    registerCallback() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback-overload-3" class="md-nav__link">
+    registerCallback() [overload 3]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registercallback-overload-4" class="md-nav__link">
+    registerCallback() [overload 4]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setname_1" class="md-nav__link">
+    setName()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getname_1" class="md-nav__link">
+    getName()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getpolicy" class="md-nav__link">
+    getPolicy()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterspassthroughm" class="md-nav__link">
+    agnocast::message_filters::PassThrough&lt;M&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::PassThrough<M>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passthrough" class="md-nav__link">
+    PassThrough()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passthrough-overload-2" class="md-nav__link">
+    PassThrough() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectinput_2" class="md-nav__link">
+    connectInput()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_1" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-overload-2" class="md-nav__link">
+    add() [overload 2]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssync_policiesexacttimem0-m1" class="md-nav__link">
+    agnocast::message_filters::sync_policies::ExactTime&lt;M0, M1, ...&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::sync_policies::ExactTime<M0, M1, ...>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exacttime" class="md-nav__link">
+    ExactTime()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exacttime-overload-2" class="md-nav__link">
+    ExactTime() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" class="md-nav__link">
+    operator=()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registerdropcallback" class="md-nav__link">
+    registerDropCallback()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocastmessage_filterssync_policiesapproximatetimem0-m1" class="md-nav__link">
+    agnocast::message_filters::sync_policies::ApproximateTime&lt;M0, M1, ...&gt;
+  </a>
+  
+    <nav class="md-nav" aria-label="agnocast::message_filters::sync_policies::ApproximateTime<M0, M1, ...>">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approximatetime" class="md-nav__link">
+    ApproximateTime()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximatetime-overload-2" class="md-nav__link">
+    ApproximateTime() [overload 2]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" class="md-nav__link">
+    operator=()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setagepenalty" class="md-nav__link">
+    setAgePenalty()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setintermessagelowerbound" class="md-nav__link">
+    setInterMessageLowerBound()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setmaxintervalduration" class="md-nav__link">
+    setMaxIntervalDuration()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    Full Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="message-filters">Message Filters<a class="headerlink" href="#message-filters" title="Permanent link">#</a></h1>
+<!-- Auto-generated — do not edit. Regenerate with: doxygen Doxyfile && python3 generate_api_reference.py -->
+
+<p>Agnocast provides message synchronization filters compatible with the ROS 2 <code>message_filters</code> API. These allow you to synchronize messages from multiple Agnocast topics based on their timestamps.</p>
+<h3 id="agnocastmessage_filtersmessageeventm"><code>agnocast::message_filters::MessageEvent&lt;M&gt;</code><a class="headerlink" href="#agnocastmessage_filtersmessageeventm" title="Permanent link">#</a></h3>
+<p>Wrapper around a message pointer that carries metadata for message filter pipelines.</p>
+<hr />
+<h4 id="messageevent"><code>MessageEvent()</code><a class="headerlink" href="#messageevent" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">MessageEvent</span><span class="p">()</span>
+</code></pre></div>
+<p>Default-construct an empty MessageEvent.</p>
+<hr />
+<h4 id="messageevent-overload-2"><code>MessageEvent() [overload 2]</code><a class="headerlink" href="#messageevent-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">MessageEvent</span><span class="p">(</span><span class="n">MessageEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
+</code></pre></div>
+<p>Copy constructor.</p>
+<hr />
+<h4 id="messageevent-overload-3"><code>MessageEvent() [overload 3]</code><a class="headerlink" href="#messageevent-overload-3" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">MessageEvent</span><span class="p">(</span><span class="n">ConstMessagePtr</span><span class="w"> </span><span class="o">&amp;</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct from a message pointer, recording the current time as receipt time.</p>
+<hr />
+<h4 id="messageevent-overload-4"><code>MessageEvent() [overload 4]</code><a class="headerlink" href="#messageevent-overload-4" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">MessageEvent</span><span class="p">(</span><span class="n">ConstMessagePtr</span><span class="w"> </span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="n">receipt_time</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct from a message pointer and an explicit receipt time.</p>
+<hr />
+<h4 id="operator"><code>operator=()</code><a class="headerlink" href="#operator" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">MessageEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MessageEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
+</code></pre></div>
+<p>Copy assignment operator.</p>
+<hr />
+<h4 id="getmessage"><code>getMessage()</code><a class="headerlink" href="#getmessage" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">ConstMessagePtr</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">getMessage</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Retrieve the message. Returns ipc_shared_ptr<M const> pointing to shared memory.</p>
+<hr />
+<h4 id="getconstmessage"><code>getConstMessage()</code><a class="headerlink" href="#getconstmessage" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">ConstMessagePtr</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">getConstMessage</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Retrieve a const version of the message (same as getMessage() in agnocast)</p>
+<hr />
+<h4 id="getreceipttime"><code>getReceiptTime()</code><a class="headerlink" href="#getreceipttime" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">getReceiptTime</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Returns the time at which this message was received.</p>
+<hr />
+<h4 id="operator_1"><code>operator&lt;()</code><a class="headerlink" href="#operator_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="n">MessageEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Less-than comparison, ordered by pointer then receipt time.</p>
+<h3 id="agnocastmessage_filterssimplefilterm"><code>agnocast::message_filters::SimpleFilter&lt;M&gt;</code><a class="headerlink" href="#agnocastmessage_filterssimplefilterm" title="Permanent link">#</a></h3>
+<p><strong>Extends:</strong> <code>noncopyable</code></p>
+<p>Base class for simple one-output filters. Provides callback registration and signal dispatch.</p>
+<hr />
+<h4 id="registercallback"><code>registerCallback()</code><a class="headerlink" href="#registercallback" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SimpleFilter</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p>Register a callback to be invoked when a message passes through this filter.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>Callback to register.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Connection object for disconnecting.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="setname"><code>setName()</code><a class="headerlink" href="#setname" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SimpleFilter</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">setName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+<p>Set the name of this filter (for debugging).</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Filter name.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="getname"><code>getName()</code><a class="headerlink" href="#getname" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SimpleFilter</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Return the name of this filter.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Filter name string.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agnocastmessage_filterssubscriberbasem"><code>agnocast::message_filters::SubscriberBase&lt;M&gt;</code><a class="headerlink" href="#agnocastmessage_filterssubscriberbasem" title="Permanent link">#</a></h3>
+<p>Base class for Subscriber, allowing subscription management without knowing the message type. Used for type-erased subscriber collections.</p>
+<hr />
+<h4 id="subscribe"><code>subscribe()</code><a class="headerlink" href="#subscribe" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SubscriberBase</span><span class="o">&lt;</span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>—</td>
+<td>The <code>rclcpp::Node::SharedPtr</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>—</td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td><code>rmw_qos_profile_default</code></td>
+<td>(optional) The rmw qos profile to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-2"><code>subscribe() [overload 2]</code><a class="headerlink" href="#subscribe-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SubscriberBase</span><span class="o">&lt;</span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodeType</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>—</td>
+<td>The <code>rclcpp::Node</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>—</td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td><code>rmw_qos_profile_default</code></td>
+<td>(optional) The rmw qos profile to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-3"><code>subscribe() [overload 3]</code><a class="headerlink" href="#subscribe-overload-3" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SubscriberBase</span><span class="o">&lt;</span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">,</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">SubscriptionOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe. This override allows SubscriptionOptions to be passed into the class without changing API.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>The <code>rclcpp::Node::SharedPtr</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td>The rmw qos profile to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>The subscription options to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-4"><code>subscribe() [overload 4]</code><a class="headerlink" href="#subscribe-overload-4" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SubscriberBase</span><span class="o">&lt;</span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodeType</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">,</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">SubscriptionOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>The <code>rclcpp::Node</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td>The rmw qos profile to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>The subscription options to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-5"><code>subscribe() [overload 5]</code><a class="headerlink" href="#subscribe-overload-5" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SubscriberBase</span><span class="o">&lt;</span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">()</span>
+</code></pre></div>
+<p>Re-subscribe to a topic. Only works if this subscriber has previously been subscribed to a topic.</p>
+<hr />
+<h4 id="unsubscribe"><code>unsubscribe()</code><a class="headerlink" href="#unsubscribe" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">SubscriberBase</span><span class="o">&lt;</span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">unsubscribe</span><span class="p">()</span>
+</code></pre></div>
+<p>Force immediate unsubscription of this subscriber from its topic.</p>
+<h3 id="agnocastmessage_filterssubscriberm"><code>agnocast::message_filters::Subscriber&lt;M&gt;</code><a class="headerlink" href="#agnocastmessage_filterssubscriberm" title="Permanent link">#</a></h3>
+<p><strong>Extends:</strong> <code>agnocast::message_filters::SubscriberBase&lt; rclcpp::Node &gt;</code>, <code>agnocast::message_filters::SimpleFilter&lt; M &gt;</code></p>
+<p>Agnocast subscription filter. This class acts as a highest-level filter, simply passing messages from an agnocast subscription through to the filters which have connected to it. When this object is destroyed it will unsubscribe from the agnocast subscription. The Subscriber object is templated on the type of message being subscribed to.</p>
+<hr />
+<h4 id="subscriber"><code>Subscriber()</code><a class="headerlink" href="#subscriber" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">Subscriber</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">)</span>
+</code></pre></div>
+<p>Constructor. See the <code>agnocast::create_subscription</code>() variants for more information on the parameters</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>—</td>
+<td>The <code>rclcpp::Node::SharedPtr</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>—</td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td><code>rmw_qos_profile_default</code></td>
+<td>(optional) The rmw qos profile to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscriber-overload-2"><code>Subscriber() [overload 2]</code><a class="headerlink" href="#subscriber-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">Subscriber</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">,</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">SubscriptionOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>Constructor. See the <code>agnocast::create_subscription</code>() variants for more information on the parameters</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>The <code>rclcpp::Node::SharedPtr</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td>The rmw qos profile to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>The subscription options to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscriber-overload-3"><code>Subscriber() [overload 3]</code><a class="headerlink" href="#subscriber-overload-3" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">Subscriber</span><span class="p">()</span>
+</code></pre></div>
+<p>Empty constructor, use subscribe() to subscribe to a topic.</p>
+<hr />
+<h4 id="subscribe_1"><code>subscribe()</code><a class="headerlink" href="#subscribe_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>—</td>
+<td>The <code>rclcpp::Node::SharedPtr</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>—</td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td><code>rmw_qos_profile_default</code></td>
+<td>(optional) The rmw qos profile to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-2_1"><code>subscribe() [overload 2]</code><a class="headerlink" href="#subscribe-overload-2_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodeType</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>—</td>
+<td>The <code>rclcpp::Node</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>—</td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td><code>rmw_qos_profile_default</code></td>
+<td>(optional) The rmw qos profile to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-3_1"><code>subscribe() [overload 3]</code><a class="headerlink" href="#subscribe-overload-3_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">,</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">SubscriptionOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>The <code>rclcpp::Node::SharedPtr</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td>The rmw qos profile to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>The subscription options to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-4_1"><code>subscribe() [overload 4]</code><a class="headerlink" href="#subscribe-overload-4_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">(</span><span class="n">NodeType</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">rmw_qos_profile_t</span><span class="w"> </span><span class="n">qos</span><span class="p">,</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">SubscriptionOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>Subscribe to a topic. If this Subscriber is already subscribed to a topic, this function will first unsubscribe.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node</code></td>
+<td>The <code>rclcpp::Node</code> to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>topic</code></td>
+<td>The topic to subscribe to.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td>The rmw qos profile to use to subscribe.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>The subscription options to use to subscribe.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="subscribe-overload-5_1"><code>subscribe() [overload 5]</code><a class="headerlink" href="#subscribe-overload-5_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">subscribe</span><span class="p">()</span>
+</code></pre></div>
+<p>Re-subscribe to a topic. Only works if this subscriber has previously been subscribed to a topic.</p>
+<hr />
+<h4 id="unsubscribe_1"><code>unsubscribe()</code><a class="headerlink" href="#unsubscribe_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">unsubscribe</span><span class="p">()</span>
+</code></pre></div>
+<p>Force immediate unsubscription of this subscriber from its topic.</p>
+<hr />
+<h4 id="gettopic"><code>getTopic()</code><a class="headerlink" href="#gettopic" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">getTopic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Return the topic name this subscriber is subscribed to.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Topic name string.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="getsubscriber"><code>getSubscriber()</code><a class="headerlink" href="#getsubscriber" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">agnocast</span><span class="o">::</span><span class="n">Subscription</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">getSubscriber</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+</code></pre></div>
+<p>Returns the internal <code>agnocast::Subscription</code><M>::SharedPtr object.</p>
+<hr />
+<h4 id="connectinput"><code>connectInput()</code><a class="headerlink" href="#connectinput" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">connectInput</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<p>No-op. Provided for compatibility with message_filters::Chain.</p>
+<hr />
+<h4 id="add"><code>add()</code><a class="headerlink" href="#add" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">NodeType</span><span class="o">&gt;::</span><span class="n">add</span><span class="p">(</span><span class="n">EventType</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+</code></pre></div>
+<p>No-op. Provided for compatibility with message_filters::Chain.</p>
+<h3 id="agnocastmessage_filterssynchronizerpolicy"><code>agnocast::message_filters::Synchronizer&lt;Policy&gt;</code><a class="headerlink" href="#agnocastmessage_filterssynchronizerpolicy" title="Permanent link">#</a></h3>
+<p><strong>Extends:</strong> <code>noncopyable</code>, <code>Policy</code></p>
+<p>Synchronizes messages from 2–9 input filters based on a time policy. Drop-in replacement for message_filters::Synchronizer<Policy>. When matching messages are found according to the policy, the registered callback is invoked with one <code>agnocast::ipc_shared_ptr</code><const M> per input.</p>
+<hr />
+<h4 id="synchronizer"><code>Synchronizer()</code><a class="headerlink" href="#synchronizer" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">Synchronizer</span><span class="p">(</span><span class="n">F0</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f0</span><span class="p">,</span><span class="w"> </span><span class="n">F1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f1</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct a synchronizer with 2-9 input filters.</p>
+<hr />
+<h4 id="synchronizer-overload-2"><code>Synchronizer() [overload 2]</code><a class="headerlink" href="#synchronizer-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">Synchronizer</span><span class="p">()</span>
+</code></pre></div>
+<p>Construct an unconnected synchronizer. Call connectInput() to connect filters.</p>
+<hr />
+<h4 id="synchronizer-overload-3"><code>Synchronizer() [overload 3]</code><a class="headerlink" href="#synchronizer-overload-3" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">Synchronizer</span><span class="p">(</span><span class="n">Policy</span><span class="w"> </span><span class="o">&amp;</span><span class="n">policy</span><span class="p">,</span><span class="w"> </span><span class="n">F0</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f0</span><span class="p">,</span><span class="w"> </span><span class="n">F1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f1</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct a synchronizer with a policy and 2–9 input filters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>policy</code></td>
+<td>Sync policy instance.</td>
+</tr>
+<tr>
+<td><code>f0</code></td>
+<td>First input filter.</td>
+</tr>
+<tr>
+<td><code>f1</code></td>
+<td>Second input filter.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="synchronizer-overload-4"><code>Synchronizer() [overload 4]</code><a class="headerlink" href="#synchronizer-overload-4" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">Synchronizer</span><span class="p">(</span><span class="n">Policy</span><span class="w"> </span><span class="o">&amp;</span><span class="n">policy</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct a synchronizer with a policy but no input filters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>policy</code></td>
+<td>Sync policy instance.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="connectinput_1"><code>connectInput()</code><a class="headerlink" href="#connectinput_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">connectInput</span><span class="p">(</span><span class="n">F0</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f0</span><span class="p">,</span><span class="w"> </span><span class="n">F1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f1</span><span class="p">)</span>
+</code></pre></div>
+<p>Connect 2–9 input filters to this synchronizer. Replaces any previous connections.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f0</code></td>
+<td>First input filter.</td>
+</tr>
+<tr>
+<td><code>f1</code></td>
+<td>Second input filter.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="registercallback_1"><code>registerCallback()</code><a class="headerlink" href="#registercallback_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p>Register a callback invoked when matching messages are found.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>Callback to register.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Connection object for disconnecting.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="registercallback-overload-2"><code>registerCallback() [overload 2]</code><a class="headerlink" href="#registercallback-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p>Register a const callback.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>Callback to register.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Connection object.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="registercallback-overload-3"><code>registerCallback() [overload 3]</code><a class="headerlink" href="#registercallback-overload-3" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+<p>Register a member function callback.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>Member function pointer.</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>Object to call the member function on.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Connection object.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="registercallback-overload-4"><code>registerCallback() [overload 4]</code><a class="headerlink" href="#registercallback-overload-4" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+<p>Register a member function callback.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>Member function pointer.</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>Object to call the member function on.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Connection object.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="setname_1"><code>setName()</code><a class="headerlink" href="#setname_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">setName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+<p>Set the name of this synchronizer (for debugging).</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Name string.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="getname_1"><code>getName()</code><a class="headerlink" href="#getname_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">getName</span><span class="p">()</span>
+</code></pre></div>
+<p>Return the name of this synchronizer.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Name string.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="getpolicy"><code>getPolicy()</code><a class="headerlink" href="#getpolicy" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Policy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;::</span><span class="n">getPolicy</span><span class="p">()</span>
+</code></pre></div>
+<p>Return a pointer to the sync policy. Use this to configure policy parameters after construction (e.g., sync.getPolicy()-&gt;setAgePenalty(0.5) ).</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Pointer to the policy object.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agnocastmessage_filterspassthroughm"><code>agnocast::message_filters::PassThrough&lt;M&gt;</code><a class="headerlink" href="#agnocastmessage_filterspassthroughm" title="Permanent link">#</a></h3>
+<p><strong>Extends:</strong> <code>agnocast::message_filters::SimpleFilter&lt; M &gt;</code></p>
+<p>Simple passthrough filter. What comes in goes out immediately.</p>
+<hr />
+<h4 id="passthrough"><code>PassThrough()</code><a class="headerlink" href="#passthrough" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">PassThrough</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">PassThrough</span><span class="p">()</span>
+</code></pre></div>
+<p>Construct an unconnected PassThrough filter.</p>
+<hr />
+<h4 id="passthrough-overload-2"><code>PassThrough() [overload 2]</code><a class="headerlink" href="#passthrough-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">PassThrough</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">PassThrough</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct and connect to an upstream filter.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td>Upstream filter to connect.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="connectinput_2"><code>connectInput()</code><a class="headerlink" href="#connectinput_2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">PassThrough</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">connectInput</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<p>Connect an upstream filter so its output is forwarded through this PassThrough.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td>Upstream filter.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="add_1"><code>add()</code><a class="headerlink" href="#add_1" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">PassThrough</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">add</span><span class="p">(</span><span class="n">MConstPtr</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span>
+</code></pre></div>
+<p>Feed a message to all downstream filters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>msg</code></td>
+<td>Message to forward.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="add-overload-2"><code>add() [overload 2]</code><a class="headerlink" href="#add-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">PassThrough</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">add</span><span class="p">(</span><span class="n">EventType</span><span class="w"> </span><span class="o">&amp;</span><span class="n">evt</span><span class="p">)</span>
+</code></pre></div>
+<p>Feed a message event to all downstream filters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>evt</code></td>
+<td>Event to forward.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agnocastmessage_filterssync_policiesexacttimem0-m1"><code>agnocast::message_filters::sync_policies::ExactTime&lt;M0, M1, ...&gt;</code><a class="headerlink" href="#agnocastmessage_filterssync_policiesexacttimem0-m1" title="Permanent link">#</a></h3>
+<p><strong>Extends:</strong> <code>agnocast::message_filters::PolicyBase&lt; M0, M1, NullType, NullType, NullType, NullType, NullType, NullType, NullType &gt;</code></p>
+<p>Sync policy that matches messages with exactly equal timestamps. Supports 2-9 message types.</p>
+<hr />
+<h4 id="exacttime"><code>ExactTime()</code><a class="headerlink" href="#exacttime" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ExactTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">ExactTime</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">queue_size</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct with a queue size.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>queue_size</code></td>
+<td>Maximum number of messages to buffer per input.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="exacttime-overload-2"><code>ExactTime() [overload 2]</code><a class="headerlink" href="#exacttime-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ExactTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">ExactTime</span><span class="p">(</span><span class="n">ExactTime</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+</code></pre></div>
+<p>Copy constructor.</p>
+<hr />
+<h4 id="operator_2"><code>operator=()</code><a class="headerlink" href="#operator_2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">ExactTime</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ExactTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">ExactTime</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
+</code></pre></div>
+<p>Copy assignment.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Reference to *this.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="registerdropcallback"><code>registerDropCallback()</code><a class="headerlink" href="#registerdropcallback" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ExactTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">registerDropCallback</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p>Register a callback invoked when messages are dropped due to queue overflow or missing matches.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>Callback to register.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Connection object for disconnecting.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agnocastmessage_filterssync_policiesapproximatetimem0-m1"><code>agnocast::message_filters::sync_policies::ApproximateTime&lt;M0, M1, ...&gt;</code><a class="headerlink" href="#agnocastmessage_filterssync_policiesapproximatetimem0-m1" title="Permanent link">#</a></h3>
+<p><strong>Extends:</strong> <code>agnocast::message_filters::PolicyBase&lt; M0, M1, NullType, NullType, NullType, NullType, NullType, NullType, NullType &gt;</code></p>
+<p>Sync policy that matches messages with approximately equal timestamps using cost-based optimization. Supports 2-9 message types.</p>
+<hr />
+<h4 id="approximatetime"><code>ApproximateTime()</code><a class="headerlink" href="#approximatetime" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ApproximateTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">ApproximateTime</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">queue_size</span><span class="p">)</span>
+</code></pre></div>
+<p>Construct with a queue size.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>queue_size</code></td>
+<td>Maximum number of messages to buffer per input.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="approximatetime-overload-2"><code>ApproximateTime() [overload 2]</code><a class="headerlink" href="#approximatetime-overload-2" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ApproximateTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">ApproximateTime</span><span class="p">(</span><span class="n">ApproximateTime</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+</code></pre></div>
+<p>Copy constructor.</p>
+<hr />
+<h4 id="operator_3"><code>operator=()</code><a class="headerlink" href="#operator_3" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">ApproximateTime</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ApproximateTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">ApproximateTime</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
+</code></pre></div>
+<p>Copy assignment.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Reference to *this.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="setagepenalty"><code>setAgePenalty()</code><a class="headerlink" href="#setagepenalty" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ApproximateTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">setAgePenalty</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">age_penalty</span><span class="p">)</span>
+</code></pre></div>
+<p>Set the weight given to message age when computing match cost. Higher values prefer newer messages.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>age_penalty</code></td>
+<td>Age penalty weight (must be &gt;= 0, default: 0.1).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="setintermessagelowerbound"><code>setInterMessageLowerBound()</code><a class="headerlink" href="#setintermessagelowerbound" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ApproximateTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">setInterMessageLowerBound</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="n">lower_bound</span><span class="p">)</span>
+</code></pre></div>
+<p>Set the minimum expected interval between consecutive messages for a given input.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i</code></td>
+<td>Input index (0-based).</td>
+</tr>
+<tr>
+<td><code>lower_bound</code></td>
+<td>Minimum expected interval (default: 0, auto-estimated).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="setmaxintervalduration"><code>setMaxIntervalDuration()</code><a class="headerlink" href="#setmaxintervalduration" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ApproximateTime</span><span class="o">&lt;</span><span class="n">M0</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M5</span><span class="p">,</span><span class="w"> </span><span class="n">M6</span><span class="p">,</span><span class="w"> </span><span class="n">M7</span><span class="p">,</span><span class="w"> </span><span class="n">M8</span><span class="o">&gt;::</span><span class="n">setMaxIntervalDuration</span><span class="p">(</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="n">max_interval_duration</span><span class="p">)</span>
+</code></pre></div>
+<p>Set the maximum allowed time difference between matched messages.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_interval_duration</code></td>
+<td>Maximum interval (default: no limit).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="full-example">Full Example<a class="headerlink" href="#full-example" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;agnocast/agnocast.hpp&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">MsgA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Image</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">MsgB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">CameraInfo</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">message_filters</span><span class="o">::</span><span class="n">sync_policies</span><span class="o">::</span><span class="n">ExactTime</span><span class="o">&lt;</span><span class="n">MsgA</span><span class="p">,</span><span class="w"> </span><span class="n">MsgB</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MySyncNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">agnocast</span><span class="o">::</span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">MsgA</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sub_a_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">agnocast</span><span class="o">::</span><span class="n">message_filters</span><span class="o">::</span><span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">MsgB</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sub_b_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">agnocast</span><span class="o">::</span><span class="n">message_filters</span><span class="o">::</span><span class="n">Synchronizer</span><span class="o">&lt;</span><span class="n">Policy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sync_</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MsgA</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span>
+<span class="w">                </span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MsgB</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Process synchronized messages</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">MySyncNode</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="s">&quot;sync_node&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">sub_a_</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/image&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">sub_b_</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/camera_info&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">sync_</span><span class="p">(</span><span class="n">Policy</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">sub_a_</span><span class="p">,</span><span class="w"> </span><span class="n">sub_b_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sync_</span><span class="p">.</span><span class="n">registerCallback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">MySyncNode</span><span class="o">::</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../options/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Options" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Options
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../environment-variables/" class="md-footer__link md-footer__link--next" aria-label="Next: Environment Variables" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Environment Variables
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 TIER IV, Inc.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://unpkg.com/mermaid@8.13.10/dist/mermaid.min.js"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+      
+    
+  </body>
+</html>
