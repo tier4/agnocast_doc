@@ -42,20 +42,20 @@ public:
 #include "my_package/srv/my_service.hpp"
 
 using ServiceT = my_package::srv::MyService;
-using RequestT = agnocast::Service<ServiceT>::RequestT;                // (2)
-using ResponseT = agnocast::Service<ServiceT>::ResponseT;              // (2)
+using RequestT = ServiceT::Request;
+using ResponseT = ServiceT::Response;
 
 class MyServer : public rclcpp::Node
 {
-  agnocast::Service<ServiceT>::SharedPtr service_;                     // (3)
+  agnocast::Service<ServiceT>::SharedPtr service_;                     // (2)
 
 public:
   MyServer() : Node("my_server")
   {
-    service_ = agnocast::create_service<ServiceT>(                     // (4)
+    service_ = agnocast::create_service<ServiceT>(                     // (3)
       this, "my_service",
-      [this](const agnocast::ipc_shared_ptr<RequestT> & request,      // (5)
-             agnocast::ipc_shared_ptr<ResponseT> & response) {
+      [this](const agnocast::ipc_shared_ptr<RequestT> & request,
+             const agnocast::ipc_shared_ptr<ResponseT> & response) {   // (4)
         response->result = process(request->data);
         RCLCPP_INFO(get_logger(), "Processed request");
       });
@@ -66,10 +66,9 @@ public:
 Key changes:
 
 1. Include changes to `agnocast/agnocast.hpp`
-2. Type aliases change to `agnocast::Service<ServiceT>::RequestT` / `ResponseT`
-3. `rclcpp::Service` → `agnocast::Service`
-4. Use free function `agnocast::create_service(this, ...)` instead of `this->create_service(...)`
-5. Callback takes `agnocast::ipc_shared_ptr` references instead of `std::shared_ptr`
+2. `rclcpp::Service` → `agnocast::Service`
+3. Use free function `agnocast::create_service(this, ...)` instead of `this->create_service(...)`
+4. Callback takes const `agnocast::ipc_shared_ptr` references instead of `std::shared_ptr`
 
 ### After (Agnocast Stage 2)
 
@@ -78,8 +77,8 @@ Key changes:
 #include "my_package/srv/my_service.hpp"
 
 using ServiceT = my_package::srv::MyService;
-using RequestT = agnocast::Service<ServiceT>::RequestT;
-using ResponseT = agnocast::Service<ServiceT>::ResponseT;
+using RequestT = ServiceT::Request;
+using ResponseT = ServiceT::Response;
 
 class MyServer : public agnocast::Node                                 // (1)
 {
@@ -91,7 +90,7 @@ public:
     service_ = this->create_service<ServiceT>(                         // (2)
       "my_service",
       [this](const agnocast::ipc_shared_ptr<RequestT> & request,
-             agnocast::ipc_shared_ptr<ResponseT> & response) {
+             const agnocast::ipc_shared_ptr<ResponseT> & response) {
         response->result = process(request->data);
         RCLCPP_INFO(get_logger(), "Processed request");
       });
