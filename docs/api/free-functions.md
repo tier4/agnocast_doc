@@ -181,7 +181,7 @@ Create an Agnocast service server (Stage 1 free function).
 | Template Parameter | Description |
 |-----------|-------------|
 | `ServiceT` | ROS service type. |
-| `Func` | Callable with signature void(const `agnocast::ipc_shared_ptr`<const RequestT>&, `agnocast::ipc_shared_ptr`<ResponseT>&). |
+| `Func` | Callable with signature void(const `agnocast::ipc_shared_ptr`<const RequestT>&, / `agnocast::ipc_shared_ptr`<ResponseT>&). |
 | **Parameter** | **Default** | **Description** |
 | `node` | — | Pointer to `rclcpp::Node`. |
 | `service_name` | — | Service name. |
@@ -225,10 +225,21 @@ Create a timer with a given clock. This free function mirrors the `rclcpp::creat
 void init(int argc, char **argv)
 ```
 
-Initialize Agnocast for Stage 2 (`agnocast::Node`). Must be called once before creating any `agnocast::Node` . This is the Stage 2 equivalent of `rclcpp::init`().
+Initialize Agnocast. Must be called once before creating any `agnocast::Node` . This is the counterpart of `rclcpp::init`() for `agnocast::Node` .
 
 | Parameter | Description |
 |-----------|-------------|
 | `argc` | Number of command-line arguments. |
 | `argv` | Command-line argument array. |
+
+
+---
+
+#### `shutdown()`
+
+```cpp
+void shutdown()
+```
+
+Shut down Agnocast. Should be called before process exit in `agnocast::Node` processes. This is the counterpart of `rclcpp::shutdown`() for `agnocast::Node`.
 

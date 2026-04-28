@@ -157,6 +157,17 @@ Request the executor to stop spinning. Causes the current or next spin() call to
 
 ---
 
+#### `stop_callback_group()`
+
+```cpp
+void CallbackIsolatedAgnocastExecutor::stop_callback_group(rclcpp::CallbackGroup::SharedPtr &group_ptr)
+```
+
+Stop the child executor running the given callback group, join its thread, and remove it. If group_ptr is nullptr or not found, this is a no-op.
+
+
+---
+
 #### `add_callback_group()`
 
 ```cpp

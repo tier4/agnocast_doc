@@ -75,7 +75,7 @@ Return the total subscriber count for this topic (Agnocast + ROS 2 via bridge).
 #### `get_gid()`
 
 ```cpp
-rmw_gid_t& Publisher::get_gid() const
+rmw_gid_t & Publisher::get_gid() const
 ```
 
 Return the GID of this publisher, unique across both Agnocast and ROS 2.
@@ -105,7 +105,7 @@ Return the number of Agnocast intra-process subscribers only (excludes ROS 2).
 #### `get_topic_name()`
 
 ```cpp
-char* Publisher::get_topic_name() const
+char * Publisher::get_topic_name() const
 ```
 
 Return the fully-resolved topic name.
