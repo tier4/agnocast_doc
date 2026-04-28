@@ -136,7 +136,7 @@ Iterate over all callback groups, invoking the given function on each.
 #### `declare_parameter()`
 
 ```cpp
-rclcpp::ParameterValue& Node::declare_parameter(std::string &name, rclcpp::ParameterValue &default_value, rcl_interfaces::msg::ParameterDescriptor &descriptor, bool ignore_override)
+rclcpp::ParameterValue & Node::declare_parameter(std::string &name, rclcpp::ParameterValue &default_value, rcl_interfaces::msg::ParameterDescriptor &descriptor, bool ignore_override)
 ```
 
 Declare a parameter with a default value.
@@ -156,7 +156,7 @@ Declare a parameter with a default value.
 #### `declare_parameter() [overload 2]`
 
 ```cpp
-rclcpp::ParameterValue& Node::declare_parameter(std::string &name, rclcpp::ParameterType type, rcl_interfaces::msg::ParameterDescriptor &descriptor, bool ignore_override)
+rclcpp::ParameterValue & Node::declare_parameter(std::string &name, rclcpp::ParameterType type, rcl_interfaces::msg::ParameterDescriptor &descriptor, bool ignore_override)
 ```
 
 Declare a parameter with a given type (no default value).
@@ -728,7 +728,8 @@ Create a service server.
 
 | Template Parameter | Description |
 |-----------|-------------|
-| `Func` | Callable with signature void(const `agnocast::ipc_shared_ptr`<const RequestT>&, `agnocast::ipc_shared_ptr`<ResponseT>&). |
+| `Func` | Callable with signature void(const `agnocast::ipc_shared_ptr`<const RequestT>&,
+`agnocast::ipc_shared_ptr`<ResponseT>&). |
 | **Parameter** | **Default** | **Description** |
 | `service_name` | — | Service name. |
 | `callback` | — | Callback invoked on each request. |

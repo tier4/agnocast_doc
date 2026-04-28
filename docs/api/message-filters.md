@@ -60,7 +60,7 @@ Construct from a message pointer and an explicit receipt time.
 #### `operator=()`
 
 ```cpp
-MessageEvent& message_filters::MessageEvent<M>::operator=(MessageEvent &rhs)
+MessageEvent & message_filters::MessageEvent<M>::operator=(MessageEvent &rhs)
 ```
 
 Copy assignment operator.
@@ -71,7 +71,7 @@ Copy assignment operator.
 #### `getMessage()`
 
 ```cpp
-ConstMessagePtr& message_filters::MessageEvent<M>::getMessage() const
+ConstMessagePtr & message_filters::MessageEvent<M>::getMessage() const
 ```
 
 Retrieve the message. Returns ipc_shared_ptr<M const> pointing to shared memory.
@@ -82,7 +82,7 @@ Retrieve the message. Returns ipc_shared_ptr<M const> pointing to shared memory.
 #### `getConstMessage()`
 
 ```cpp
-ConstMessagePtr& message_filters::MessageEvent<M>::getConstMessage() const
+ConstMessagePtr & message_filters::MessageEvent<M>::getConstMessage() const
 ```
 
 Retrieve a const version of the message (same as getMessage() in agnocast)
@@ -154,7 +154,7 @@ Set the name of this filter (for debugging).
 #### `getName()`
 
 ```cpp
-std::string& message_filters::SimpleFilter<M>::getName() const
+std::string & message_filters::SimpleFilter<M>::getName() const
 ```
 
 Return the name of this filter.
@@ -621,7 +621,7 @@ Set the name of this synchronizer (for debugging).
 #### `getName()`
 
 ```cpp
-std::string& message_filters::Synchronizer<Policy>::getName()
+std::string & message_filters::Synchronizer<Policy>::getName()
 ```
 
 Return the name of this synchronizer.
@@ -636,7 +636,7 @@ Return the name of this synchronizer.
 #### `getPolicy()`
 
 ```cpp
-Policy* message_filters::Synchronizer<Policy>::getPolicy()
+Policy * message_filters::Synchronizer<Policy>::getPolicy()
 ```
 
 Return a pointer to the sync policy. Use this to configure policy parameters after construction (e.g., sync.getPolicy()->setAgePenalty(0.5) ).
@@ -762,7 +762,7 @@ Copy constructor.
 #### `operator=()`
 
 ```cpp
-ExactTime& message_filters::sync_policies::ExactTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::operator=(ExactTime &rhs)
+ExactTime & message_filters::sync_policies::ExactTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::operator=(ExactTime &rhs)
 ```
 
 Copy assignment.
@@ -827,7 +827,7 @@ Copy constructor.
 #### `operator=()`
 
 ```cpp
-ApproximateTime& message_filters::sync_policies::ApproximateTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::operator=(ApproximateTime &rhs)
+ApproximateTime & message_filters::sync_policies::ApproximateTime<M0, M1, M2, M3, M4, M5, M6, M7, M8>::operator=(ApproximateTime &rhs)
 ```
 
 Copy assignment.

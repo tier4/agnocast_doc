@@ -23,7 +23,7 @@
 | [`agnocast::PollingSubscriber<MessageT>`](pollingsubscriber.md) | Polling subscription that retrieves messages on demand. |
 | [`agnocast::ipc_shared_ptr<T>`](ipc_shared_ptr.md) | Smart pointer for zero-copy IPC message sharing between publishers and subscribers. |
 | [`agnocast::Client<ServiceT>`](client.md) | Service client for zero-copy Agnocast service communication. |
-| [`agnocast::Service<ServiceT>`](service.md) | Agnocast service server. |
+| [`agnocast::Service<ServiceT>`](service.md) |  |
 | [`agnocast::TimerBase`](timerbase.md) | Base class for Agnocast timers providing periodic callback execution. |
 | [`agnocast::GenericTimer<FunctorT>`](generictimer.md) | Timer that fires periodically using a user-provided clock. |
 | [`agnocast::WallTimer<FunctorT>`](walltimer.md) | Timer that uses a steady (wall) clock. |
