@@ -193,5 +193,6 @@ The Bridge's internal ROS 2 publisher uses fixed QoS:
 - Durability: TransientLocal
 
 ## Known Limitations
+
 - Cross-IPC Namespace Bridge (Unsupported as of v2.3.3)
-    - Communication between Agnocast nodes and ROS 2 nodes across different IPC namespaces is not currently supported. The Bridge only operates within the same IPC namespace. Cross-IPC namespace bridging is planned for a future release.
+  - Communication between Agnocast nodes and ROS 2 nodes across different IPC namespaces is not currently supported. The Bridge only operates within the same IPC namespace. Cross-IPC namespace bridging is planned for a future release.
