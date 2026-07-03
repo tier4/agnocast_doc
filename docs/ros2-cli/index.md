@@ -204,7 +204,7 @@ The `(Agnocast enabled, bridged)` suffix means **the topic has both Agnocast end
 
 - at least one Agnocast publisher or subscriber on the topic,
 - at least one ROS 2 (DDS-side) endpoint on the other direction (e.g. an Agnocast publisher with a ROS 2 subscriber, or vice versa), and
-- the bridge process currently running for that topic.
+- the bridge manager process is enabled (`AGNOCAST_BRIDGE_MODE=on`) and running.
 
 If any one of these is missing, the suffix is just `(Agnocast enabled)`. For example, a topic with only an Agnocast publisher and no ROS 2 subscriber is shown as `(Agnocast enabled)` regardless of whether the bridge process is running — there is simply no DDS-side counterpart to bridge to. Table 1 below enumerates every combination.
 

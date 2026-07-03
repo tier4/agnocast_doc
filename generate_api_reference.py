@@ -989,7 +989,7 @@ def main():
         f.write("Enables or disables the Agnocast–ROS 2 Bridge for interoperability with standard ROS 2 nodes.\n\n")
         f.write("| Value | Description |\n")
         f.write("|-------|-------------|\n")
-        f.write("| `0` or `off` | Bridge disabled. Agnocast topics are not visible to ROS 2 nodes. |\n")
+        f.write("| `0` or `off` | Bridge disabled. Agnocast and ROS 2 nodes cannot communicate. |\n")
         f.write("| `on` | **Bridge enabled (default).** One bridge manager per IPC namespace. |\n")
         f.write("\nCase-insensitive. Falls back to `on` with a warning if an unknown value is given. "
                 "`1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.\n\n")

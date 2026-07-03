@@ -27,7 +27,7 @@ Enables or disables the Agnocast–ROS 2 Bridge for interoperability with standa
 
 | Value | Description |
 |-------|-------------|
-| `0` or `off` | Bridge disabled. Agnocast topics are not visible to ROS 2 nodes. |
+| `0` or `off` | Bridge disabled. Agnocast and ROS 2 nodes cannot communicate. |
 | `on` | **Bridge enabled (default).** One bridge manager per IPC namespace. |
 
 Case-insensitive. Falls back to `on` with a warning if an unknown value is given. `1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.
