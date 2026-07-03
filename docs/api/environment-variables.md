@@ -23,25 +23,24 @@ Set it per-node in a launch file:
 
 #### `AGNOCAST_BRIDGE_MODE`
 
-Controls the Agnocast–ROS 2 bridge mode for interoperability with standard ROS 2 nodes.
+Enables or disables the Agnocast–ROS 2 Bridge for interoperability with standard ROS 2 nodes.
 
 | Value | Description |
 |-------|-------------|
-| `0` or `off` | Bridge disabled. Agnocast topics are not visible to ROS 2 nodes. |
-| `1` or `standard` | **Standard mode (default).** Each Agnocast process runs its own bridge manager. |
-| `2` or `performance` | **Performance mode.** A single global bridge manager handles all bridging with pre-compiled plugins for lower overhead. |
+| `0` or `off` | Bridge disabled. Agnocast and ROS 2 nodes cannot communicate. |
+| `on` | **Bridge enabled (default).** One bridge manager per IPC namespace. |
 
-Case-insensitive. Falls back to Standard mode with a warning if an unknown value is given.
+Case-insensitive. Falls back to `on` with a warning if an unknown value is given. `1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.
 
 ```bash
-export AGNOCAST_BRIDGE_MODE=standard
+export AGNOCAST_BRIDGE_MODE=on
 ```
 
 ---
 
 #### `AGNOCAST_BRIDGE_PLUGINS_PATH`
 
-**Performance mode only.** Colon-separated list of additional search paths for bridge plugin shared libraries (`.so` files). If not set, plugins are searched in the default package install location.
+Colon-separated list of additional search paths for bridge plugin shared libraries (`.so` files). If not set, plugins are searched in the default package install location.
 
 ```bash
 export AGNOCAST_BRIDGE_PLUGINS_PATH=/opt/my_plugins:/home/user/plugins

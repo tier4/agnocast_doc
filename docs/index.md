@@ -40,7 +40,7 @@ graph LR
 | **Stage 1** | `rclcpp::Node` (unchanged) | Rewrite publishers, subscriptions, and smart pointers to use Agnocast APIs | Zero-copy IPC for Agnocast topics |
 | **Stage 2** | `agnocast::Node` | Replace the node base class (requires all pub/sub in the node to be Agnocast-ized) | Bypass rcl layer — reduced launch time and CPU usage |
 
-The [Agnocast-ROS 2 Bridge](migration-guide/bridge.md) enables interoperability between Agnocast and standard ROS 2 nodes at any stage. It offers three modes — Off, Standard, and Performance — so you can start simple and optimize later.
+The [Agnocast-ROS 2 Bridge](migration-guide/bridge.md) enables interoperability between Agnocast and standard ROS 2 nodes at any stage. It is on by default and can be turned off with an environment variable when RMW interoperability is not needed.
 
 See the [Migration Guide](migration-guide/index.md) for details and code examples.
 

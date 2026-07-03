@@ -986,18 +986,18 @@ def main():
 
         f.write("---\n\n")
         f.write("#### `AGNOCAST_BRIDGE_MODE`\n\n")
-        f.write("Controls the Agnocast–ROS 2 bridge mode for interoperability with standard ROS 2 nodes.\n\n")
+        f.write("Enables or disables the Agnocast–ROS 2 Bridge for interoperability with standard ROS 2 nodes.\n\n")
         f.write("| Value | Description |\n")
         f.write("|-------|-------------|\n")
-        f.write("| `0` or `off` | Bridge disabled. Agnocast topics are not visible to ROS 2 nodes. |\n")
-        f.write("| `1` or `standard` | **Standard mode (default).** Each Agnocast process runs its own bridge manager. |\n")
-        f.write("| `2` or `performance` | **Performance mode.** A single global bridge manager handles all bridging with pre-compiled plugins for lower overhead. |\n")
-        f.write("\nCase-insensitive. Falls back to Standard mode with a warning if an unknown value is given.\n\n")
-        f.write("```bash\nexport AGNOCAST_BRIDGE_MODE=standard\n```\n\n")
+        f.write("| `0` or `off` | Bridge disabled. Agnocast and ROS 2 nodes cannot communicate. |\n")
+        f.write("| `on` | **Bridge enabled (default).** One bridge manager per IPC namespace. |\n")
+        f.write("\nCase-insensitive. Falls back to `on` with a warning if an unknown value is given. "
+                "`1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.\n\n")
+        f.write("```bash\nexport AGNOCAST_BRIDGE_MODE=on\n```\n\n")
 
         f.write("---\n\n")
         f.write("#### `AGNOCAST_BRIDGE_PLUGINS_PATH`\n\n")
-        f.write("**Performance mode only.** Colon-separated list of additional search paths for "
+        f.write("Colon-separated list of additional search paths for "
                 "bridge plugin shared libraries (`.so` files). If not set, plugins are searched in "
                 "the default package install location.\n\n")
         f.write("```bash\nexport AGNOCAST_BRIDGE_PLUGINS_PATH=/opt/my_plugins:/home/user/plugins\n```\n\n")
