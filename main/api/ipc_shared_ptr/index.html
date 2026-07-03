@@ -1632,7 +1632,7 @@
 </table>
 <hr />
 <h4 id="operator_1"><code>operator*()</code><a class="headerlink" href="#operator_1" title="Permanent link">#</a></h4>
-<div class="highlight"><pre><span></span><code><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">::</span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span>
+<div class="highlight"><pre><span></span><code><span class="n">U</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">::</span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span>
 </code></pre></div>
 <p>Dereference the managed message. Calls <code>std::terminate()</code> if the pointer has been invalidated by publish().</p>
 <table>
@@ -1651,7 +1651,7 @@
 </table>
 <hr />
 <h4 id="operator-"><code>operator-&gt;()</code><a class="headerlink" href="#operator-" title="Permanent link">#</a></h4>
-<div class="highlight"><pre><span></span><code><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">::</span><span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span>
+<div class="highlight"><pre><span></span><code><span class="n">U</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">::</span><span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span>
 </code></pre></div>
 <p>Access a member of the managed message. Calls <code>std::terminate()</code> if the pointer has been invalidated by publish().</p>
 <table>

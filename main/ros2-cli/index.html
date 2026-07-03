@@ -2128,9 +2128,9 @@
 <ul>
 <li>at least one Agnocast publisher or subscriber on the topic,</li>
 <li>at least one ROS 2 (DDS-side) endpoint on the other direction (e.g. an Agnocast publisher with a ROS 2 subscriber, or vice versa), and</li>
-<li>a bridge process (standard or performance) currently running for that topic.</li>
+<li>the bridge manager process is enabled (<code>AGNOCAST_BRIDGE_MODE=on</code>) and running.</li>
 </ul>
-<p>If any one of these is missing, the suffix is just <code>(Agnocast enabled)</code>. For example, a topic with only an Agnocast publisher and no ROS 2 subscriber is shown as <code>(Agnocast enabled)</code> regardless of whether a bridge process is running — there is simply no DDS-side counterpart to bridge to. Table 1 below enumerates every combination.</p>
+<p>If any one of these is missing, the suffix is just <code>(Agnocast enabled)</code>. For example, a topic with only an Agnocast publisher and no ROS 2 subscriber is shown as <code>(Agnocast enabled)</code> regardless of whether the bridge process is running — there is simply no DDS-side counterpart to bridge to. Table 1 below enumerates every combination.</p>
 <h4 id="table-1-pubsub-situations-and-display-names">Table 1: Pub/Sub situations and display names<a class="headerlink" href="#table-1-pubsub-situations-and-display-names" title="Permanent link">#</a></h4>
 <table>
 <thead>
@@ -2145,7 +2145,7 @@
 <tr>
 <td align="left"><code>rclcpp::publisher</code></td>
 <td align="left"><code>rclcpp::subscription</code></td>
-<td align="left">off / standard / performance</td>
+<td align="left">off / on</td>
 <td align="left"><code>/my_topic</code></td>
 </tr>
 <tr>
@@ -2157,7 +2157,7 @@
 <tr>
 <td align="left"><code>agnocast::publisher</code></td>
 <td align="left"><code>rclcpp::subscription</code></td>
-<td align="left">standard / performance</td>
+<td align="left">on</td>
 <td align="left"><code>/my_topic (Agnocast enabled, bridged)</code></td>
 </tr>
 <tr>
@@ -2169,25 +2169,25 @@
 <tr>
 <td align="left"><code>rclcpp::publisher</code></td>
 <td align="left"><code>agnocast::subscription</code></td>
-<td align="left">standard / performance</td>
+<td align="left">on</td>
 <td align="left"><code>/my_topic (Agnocast enabled, bridged)</code></td>
 </tr>
 <tr>
 <td align="left"><code>agnocast::publisher</code></td>
 <td align="left"><code>agnocast::subscription</code></td>
-<td align="left">off / standard / performance</td>
+<td align="left">off / on</td>
 <td align="left"><code>/my_topic (Agnocast enabled)</code></td>
 </tr>
 <tr>
 <td align="left"><code>agnocast::publisher</code></td>
 <td align="left">none</td>
-<td align="left">off / standard / performance</td>
+<td align="left">off / on</td>
 <td align="left"><code>/my_topic (Agnocast enabled)</code></td>
 </tr>
 <tr>
 <td align="left">none</td>
 <td align="left"><code>agnocast::subscription</code></td>
-<td align="left">off / standard / performance</td>
+<td align="left">off / on</td>
 <td align="left"><code>/my_topic (Agnocast enabled)</code></td>
 </tr>
 </tbody>

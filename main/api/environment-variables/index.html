@@ -1344,7 +1344,7 @@
 </code></pre></div>
 <hr />
 <h4 id="agnocast_bridge_mode"><code>AGNOCAST_BRIDGE_MODE</code><a class="headerlink" href="#agnocast_bridge_mode" title="Permanent link">#</a></h4>
-<p>Controls the Agnocast–ROS 2 bridge mode for interoperability with standard ROS 2 nodes.</p>
+<p>Enables or disables the Agnocast–ROS 2 Bridge for interoperability with standard ROS 2 nodes.</p>
 <table>
 <thead>
 <tr>
@@ -1355,24 +1355,20 @@
 <tbody>
 <tr>
 <td><code>0</code> or <code>off</code></td>
-<td>Bridge disabled. Agnocast topics are not visible to ROS 2 nodes.</td>
+<td>Bridge disabled. Agnocast and ROS 2 nodes cannot communicate.</td>
 </tr>
 <tr>
-<td><code>1</code> or <code>standard</code></td>
-<td><strong>Standard mode (default).</strong> Each Agnocast process runs its own bridge manager.</td>
-</tr>
-<tr>
-<td><code>2</code> or <code>performance</code></td>
-<td><strong>Performance mode.</strong> A single global bridge manager handles all bridging with pre-compiled plugins for lower overhead.</td>
+<td><code>on</code></td>
+<td><strong>Bridge enabled (default).</strong> One bridge manager per IPC namespace.</td>
 </tr>
 </tbody>
 </table>
-<p>Case-insensitive. Falls back to Standard mode with a warning if an unknown value is given.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">AGNOCAST_BRIDGE_MODE</span><span class="o">=</span>standard
+<p>Case-insensitive. Falls back to <code>on</code> with a warning if an unknown value is given. <code>1</code> / <code>standard</code> and <code>2</code> / <code>performance</code> are accepted for backward compatibility but are deprecated aliases for <code>on</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">AGNOCAST_BRIDGE_MODE</span><span class="o">=</span>on
 </code></pre></div>
 <hr />
 <h4 id="agnocast_bridge_plugins_path"><code>AGNOCAST_BRIDGE_PLUGINS_PATH</code><a class="headerlink" href="#agnocast_bridge_plugins_path" title="Permanent link">#</a></h4>
-<p><strong>Performance mode only.</strong> Colon-separated list of additional search paths for bridge plugin shared libraries (<code>.so</code> files). If not set, plugins are searched in the default package install location.</p>
+<p>Colon-separated list of additional search paths for bridge plugin shared libraries (<code>.so</code> files). If not set, plugins are searched in the default package install location.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">AGNOCAST_BRIDGE_PLUGINS_PATH</span><span class="o">=</span>/opt/my_plugins:/home/user/plugins
 </code></pre></div>
 

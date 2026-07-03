@@ -652,19 +652,6 @@
     Bridge Modes
   </a>
   
-    <nav class="md-nav" aria-label="Bridge Modes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#choosing-a-mode" class="md-nav__link">
-    Choosing a Mode
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -695,30 +682,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#standard-mode" class="md-nav__link">
-    Standard Mode
+  <a href="#bridge-architecture" class="md-nav__link">
+    Bridge Architecture
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#performance-mode" class="md-nav__link">
-    Performance Mode
-  </a>
-  
-    <nav class="md-nav" aria-label="Performance Mode">
+    <nav class="md-nav" aria-label="Bridge Architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    Setup
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#performance-mode-limitations" class="md-nav__link">
-    Performance Mode Limitations
+  <a href="#bridge-plugins-optional" class="md-nav__link">
+    Bridge Plugins (Optional)
   </a>
   
 </li>
@@ -1365,19 +1338,6 @@
     Bridge Modes
   </a>
   
-    <nav class="md-nav" aria-label="Bridge Modes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#choosing-a-mode" class="md-nav__link">
-    Choosing a Mode
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1408,30 +1368,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#standard-mode" class="md-nav__link">
-    Standard Mode
+  <a href="#bridge-architecture" class="md-nav__link">
+    Bridge Architecture
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#performance-mode" class="md-nav__link">
-    Performance Mode
-  </a>
-  
-    <nav class="md-nav" aria-label="Performance Mode">
+    <nav class="md-nav" aria-label="Bridge Architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    Setup
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#performance-mode-limitations" class="md-nav__link">
-    Performance Mode Limitations
+  <a href="#bridge-plugins-optional" class="md-nav__link">
+    Bridge Plugins (Optional)
   </a>
   
 </li>
@@ -1498,8 +1444,8 @@ The Bridge can be introduced at <strong>either Stage 1 or Stage 2</strong>. It i
         P2[ROS 2 Publisher] --&gt; BR2[Bridge] --&gt; S2[Agnocast Subscriber]
     end</code></pre>
 <h2 id="bridge-modes">Bridge Modes<a class="headerlink" href="#bridge-modes" title="Permanent link">#</a></h2>
-<p>The Bridge is enabled by default in Standard Mode, so the system continues to work as-is even when individual publishers or subscribers are migrated to Agnocast — no additional setup is required.
-Agnocast supports three bridge modes, controlled by the <code>AGNOCAST_BRIDGE_MODE</code> environment variable:</p>
+<p>The Bridge is enabled by default, so the system continues to work as-is even when individual publishers or subscribers are migrated to Agnocast — no additional setup is required.
+Agnocast supports the following bridge modes, controlled by the <code>AGNOCAST_BRIDGE_MODE</code> environment variable:</p>
 <table>
 <thead>
 <tr>
@@ -1515,92 +1461,30 @@ Agnocast supports three bridge modes, controlled by the <code>AGNOCAST_BRIDGE_MO
 <td>Bridge disabled. Agnocast and ROS 2 nodes cannot communicate.</td>
 </tr>
 <tr>
-<td><strong>Standard</strong></td>
-<td><code>1</code> or <code>standard</code></td>
-<td>One bridge manager process forked per Agnocast process. <strong>Default mode.</strong></td>
-</tr>
-<tr>
-<td><strong>Performance</strong></td>
-<td><code>2</code> or <code>performance</code></td>
-<td>Single bridge manager process per IPC namespace. Lower overhead.</td>
+<td><strong>On</strong></td>
+<td><code>on</code></td>
+<td>Single bridge manager process per IPC namespace. <strong>Default mode.</strong></td>
 </tr>
 </tbody>
 </table>
-<p>Standard Mode forks a dedicated bridge manager process for each Agnocast process, which is simple but not resource-efficient at scale. Performance Mode forks a single bridge manager process per IPC namespace, significantly reducing overhead. It requires building a dedicated shared library for the message types you use, but this can be done with a single CLI command (<code>ros2 agnocast generate-bridge-plugins</code>).</p>
-<h3 id="choosing-a-mode">Choosing a Mode<a class="headerlink" href="#choosing-a-mode" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>Consideration</th>
-<th>Standard</th>
-<th>Performance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Setup complexity</td>
-<td>None (works out of the box)</td>
-<td>Requires plugin generation and build</td>
-</tr>
-<tr>
-<td>Resource usage</td>
-<td>Higher (one bridge per process)</td>
-<td>Lower (single bridge per IPC namespace)</td>
-</tr>
-<tr>
-<td>Process isolation</td>
-<td>High (bridge failure affects only one process)</td>
-<td>Low (single point of failure)</td>
-</tr>
-<tr>
-<td>Topic support</td>
-<td>All ROS message types</td>
-<td>Only pre-compiled message types</td>
-</tr>
-<tr>
-<td>Bridge activation</td>
-<td>Eager (created when Agnocast pub/sub is created)</td>
-<td>Lazy (created when both Agnocast and ROS 2 endpoints exist)</td>
-</tr>
-</tbody>
-</table>
-<p>For most use cases, start with <strong>Standard Mode</strong>. Switch to <strong>Performance Mode</strong> when you need to optimize resource usage in production.</p>
+<p>Values are case-insensitive. <code>1</code> / <code>standard</code> and <code>2</code> / <code>performance</code> are accepted for backward compatibility but are deprecated aliases for <code>on</code>.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
 <h3 id="setting-the-bridge-mode">Setting the Bridge Mode<a class="headerlink" href="#setting-the-bridge-mode" title="Permanent link">#</a></h3>
 <p><strong>In launch files (XML):</strong></p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;your_package&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;your_node&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;your_node&quot;</span><span class="w"> </span><span class="na">output=</span><span class="s">&quot;screen&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;LD_PRELOAD&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;libagnocast_heaphook.so:$(env LD_PRELOAD &#39;&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AGNOCAST_BRIDGE_MODE&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;standard&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AGNOCAST_BRIDGE_MODE&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;on&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/node&gt;</span>
 </code></pre></div>
 <p><strong>As an environment variable:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">AGNOCAST_BRIDGE_MODE</span><span class="o">=</span>standard<span class="w">  </span><span class="c1"># or &quot;performance&quot; or &quot;off&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">AGNOCAST_BRIDGE_MODE</span><span class="o">=</span>on<span class="w">  </span><span class="c1"># or &quot;off&quot;</span>
 </code></pre></div>
 <h3 id="disabling-the-bridge">Disabling the Bridge<a class="headerlink" href="#disabling-the-bridge" title="Permanent link">#</a></h3>
 <p>If all your nodes use Agnocast and you don't need RMW interoperability:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AGNOCAST_BRIDGE_MODE&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;off&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
-<h2 id="standard-mode">Standard Mode<a class="headerlink" href="#standard-mode" title="Permanent link">#</a></h2>
-<p>Standard Mode is the default. Each Agnocast process forks a dedicated bridge manager process. No additional configuration is needed beyond <code>LD_PRELOAD</code>.</p>
-<pre class="mermaid"><code>graph TD
-    subgraph Agnocast Process A
-        PA[Agnocast Publisher]
-    end
-    subgraph Agnocast Process B
-        SB[Agnocast Subscriber]
-    end
-    BMA[Bridge Manager A]
-    BMB[Bridge Manager B]
-    subgraph ROS 2 Network
-        R2[ROS 2 Subscriber]
-        R1[ROS 2 Publisher]
-    end
-    PA --&gt;|shared memory| BMA
-    BMA --&gt;|RMW| R2
-    R1 --&gt;|RMW| BMB
-    BMB --&gt;|shared memory| SB</code></pre>
-<h2 id="performance-mode">Performance Mode<a class="headerlink" href="#performance-mode" title="Permanent link">#</a></h2>
-<p>Performance Mode uses a single bridge manager process per IPC namespace. It reduces resource overhead but requires pre-compiled bridge plugins.</p>
+<h2 id="bridge-architecture">Bridge Architecture<a class="headerlink" href="#bridge-architecture" title="Permanent link">#</a></h2>
+<p>The Bridge uses a single bridge manager process per IPC namespace. A bridge for a topic is created <strong>lazily</strong> — only when both an Agnocast endpoint and an external ROS 2 endpoint exist for that topic — and destroyed when either endpoint disappears.</p>
 <pre class="mermaid"><code>graph TD
     subgraph Process A
         PA[Agnocast Publisher]
@@ -1619,7 +1503,8 @@ Agnocast supports three bridge modes, controlled by the <code>AGNOCAST_BRIDGE_MO
     BM --&gt;|RMW| R2
     R1 --&gt;|RMW| BM
     BM --&gt;|shared memory| SB</code></pre>
-<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">#</a></h3>
+<h3 id="bridge-plugins-optional">Bridge Plugins (Optional)<a class="headerlink" href="#bridge-plugins-optional" title="Permanent link">#</a></h3>
+<p>The Bridge works out of the box — message types are resolved at runtime. For higher throughput, you can optionally provide pre-compiled bridge plugins via the <code>agnocast_bridge_plugins</code> package. When a plugin is available for a given message type, the Bridge uses it; otherwise, it falls back to runtime resolution automatically.</p>
 <p><strong>Step 1:</strong> Generate bridge plugins for the message types you need:</p>
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>agnocast<span class="w"> </span>generate-bridge-plugins<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--message-types<span class="w"> </span>std_msgs/msg/String<span class="w"> </span>sensor_msgs/msg/Image<span class="w"> </span>geometry_msgs/msg/Pose
@@ -1634,21 +1519,8 @@ ros2<span class="w"> </span>agnocast<span class="w"> </span>generate-bridge-plug
 <p>Specify interface types with their fully-qualified names (e.g., <code>std_msgs/msg/String</code>).
 At least one of <code>--message-types</code>, <code>--service-types</code>, or <code>--all</code> is required.</p>
 <p><strong>Step 2:</strong> Build the plugins:</p>
-<div class="highlight"><pre><span></span><code>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>agnocast_bridge_plugins<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+<div class="highlight"><pre><span></span><code>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>agnocast_bridge_plugins
 </code></pre></div>
-<p><strong>Step 3:</strong> Set all Agnocast nodes to Performance Mode:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;your_package&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;your_node&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;your_node&quot;</span><span class="w"> </span><span class="na">output=</span><span class="s">&quot;screen&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;LD_PRELOAD&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;libagnocast_heaphook.so:$(env LD_PRELOAD &#39;&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AGNOCAST_BRIDGE_MODE&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;performance&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/node&gt;</span>
-</code></pre></div>
-<h3 id="performance-mode-limitations">Performance Mode Limitations<a class="headerlink" href="#performance-mode-limitations" title="Permanent link">#</a></h3>
-<ul>
-<li>Only message types included in the generated plugins can be bridged</li>
-<li>If the bridge process crashes, all Agnocast ↔ ROS 2 communication is lost</li>
-<li>Requires a separate build step for plugin generation</li>
-</ul>
 <p>For Agnocast-wide limitations (memory layout requirements, single-ECU scope, domain isolation), see <a href="../../#limitations">Limitations</a>.</p>
 <h2 id="qos-behavior">QoS Behavior<a class="headerlink" href="#qos-behavior" title="Permanent link">#</a></h2>
 <p>The Bridge's QoS behavior differs by direction:</p>

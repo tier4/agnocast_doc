@@ -1605,7 +1605,7 @@
 </table>
 <hr />
 <h4 id="wait_for_service"><code>wait_for_service()</code><a class="headerlink" href="#wait_for_service" title="Permanent link">#</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="n">Client</span><span class="o">::</span><span class="n">wait_for_service</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">RepT</span><span class="p">,</span><span class="w"> </span><span class="n">RatioT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">timeout</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="n">Client</span><span class="o">::</span><span class="n">wait_for_service</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">RepT</span><span class="p">,</span><span class="w"> </span><span class="n">RatioT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="n">RatioT</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">-1</span><span class="p">))</span><span class="w"> </span><span class="k">const</span>
 </code></pre></div>
 <p>Block until the service is available or the timeout expires.</p>
 <table>
@@ -1619,7 +1619,7 @@
 <tbody>
 <tr>
 <td><code>timeout</code></td>
-<td><code>std::chrono::nanoseconds(-1)</code></td>
+<td><code>std::chrono::duration&lt; RepT, RatioT &gt;(-1)</code></td>
 <td>Maximum duration to wait (-1 = wait forever).</td>
 </tr>
 </tbody>

@@ -1308,15 +1308,7 @@
 <!-- Auto-generated — do not edit. Regenerate with: doxygen Doxyfile && python3 generate_api_reference.py -->
 
 <h3 id="agnocastsubscriptionmessaget"><code>agnocast::Subscription&lt;MessageT&gt;</code><a class="headerlink" href="#agnocastsubscriptionmessaget" title="Permanent link">#</a></h3>
-<p>Event-driven subscription that invokes a callback on each new message. The callback signature is <code>void(const agnocast::ipc_shared_ptr&lt;const MessageT&gt;&amp;)</code>.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Event-driven subscription (Stage 1, with rclcpp::Node)</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">create_subscription</span><span class="o">&lt;</span><span class="n">MyMsg</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">  </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/topic&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
-<span class="w">  </span><span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MyMsg</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Received: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
-<span class="w">  </span><span class="p">});</span>
-</code></pre></div>
+<p><em>Documentation not generated.</em></p>
 
 
 

@@ -1272,26 +1272,6 @@
 </thead>
 <tbody>
 <tr>
-<td><code>agnocast::Publisher&lt;MessageT&gt;</code></td>
-<td><code>agnocast::BasicPublisher&lt;MessageT, agnocast::AgnocastToRosPubsubRegistrationPolicy&gt;</code></td>
-<td>The user-facing Agnocast publisher type. Alias for BasicPublisher<MessageT>. Use this type (not BasicPublisher directly) when declaring publisher variables.</td>
-</tr>
-<tr>
-<td><code>agnocast::Subscription&lt;MessageT&gt;</code></td>
-<td><code>agnocast::BasicSubscription&lt;MessageT, agnocast::RosToAgnocastPubsubRegistrationPolicy&gt;</code></td>
-<td>The user-facing event-driven subscription type. Alias for BasicSubscription<MessageT>. Use this type (not BasicSubscription directly) when declaring subscription variables.</td>
-</tr>
-<tr>
-<td><code>agnocast::TakeSubscription&lt;MessageT&gt;</code></td>
-<td><code>agnocast::BasicTakeSubscription&lt;MessageT, agnocast::RosToAgnocastPubsubRegistrationPolicy&gt;</code></td>
-<td>The user-facing polling take-subscription type. Alias for BasicTakeSubscription<MessageT>. Use this type (not BasicTakeSubscription directly) when declaring take-subscription variables.</td>
-</tr>
-<tr>
-<td><code>agnocast::PollingSubscriber&lt;MessageT&gt;</code></td>
-<td><code>agnocast::BasicPollingSubscriber&lt;MessageT, agnocast::RosToAgnocastPubsubRegistrationPolicy&gt;</code></td>
-<td>The user-facing polling subscriber type. Alias for BasicPollingSubscriber<MessageT>. Use this type (not BasicPollingSubscriber directly) when declaring polling subscriber variables.</td>
-</tr>
-<tr>
 <td><code>agnocast::Service&lt;ServiceT&gt;</code></td>
 <td><code>agnocast::BasicService&lt;ServiceT, RosToAgnocastServiceRegistrationPolicy&gt;</code></td>
 <td>The user-facing Agnocast service server. Alias for BasicService<ServiceT>. Use this type (not BasicService directly) when declaring service server variables.</td>

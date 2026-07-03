@@ -1096,19 +1096,6 @@
     agnocast::PollingSubscriber&lt;MessageT&gt;
   </a>
   
-    <nav class="md-nav" aria-label="agnocast::PollingSubscriber<MessageT>">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#take_data" class="md-nav__link">
-    take_data()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1297,19 +1284,6 @@
     agnocast::PollingSubscriber&lt;MessageT&gt;
   </a>
   
-    <nav class="md-nav" aria-label="agnocast::PollingSubscriber<MessageT>">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#take_data" class="md-nav__link">
-    take_data()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1334,51 +1308,7 @@
 <!-- Auto-generated — do not edit. Regenerate with: doxygen Doxyfile && python3 generate_api_reference.py -->
 
 <h3 id="agnocastpollingsubscribermessaget"><code>agnocast::PollingSubscriber&lt;MessageT&gt;</code><a class="headerlink" href="#agnocastpollingsubscribermessaget" title="Permanent link">#</a></h3>
-<p>Polling subscription that retrieves messages on demand. Wraps TakeSubscription with a simplified interface.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Polling subscription — call take_data() in a timer callback</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">create_subscription</span><span class="o">&lt;</span><span class="n">MyMsg</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;/topic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">QoS</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-
-<span class="k">auto</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">create_wall_timer</span><span class="p">(</span><span class="mi">100</span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">sub</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sub</span><span class="o">-&gt;</span><span class="n">take_data</span><span class="p">();</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Polled: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<hr />
-<h4 id="take_data"><code>take_data()</code><a class="headerlink" href="#take_data" title="Permanent link">#</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MessageT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PollingSubscriber</span><span class="o">::</span><span class="n">take_data</span><span class="p">()</span>
-</code></pre></div>
-<p>Retrieve the latest message. Always returns the most recent message even if already retrieved. Returns an empty pointer if no message has been published yet.</p>
-<table>
-<thead>
-<tr>
-<th>Template Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>MessageT</code></td>
-<td>ROS message type.</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Returns</strong></td>
-<td>Shared pointer to the latest message.</td>
-</tr>
-</tbody>
-</table>
+<p><em>Documentation not generated.</em></p>
 
 
 
