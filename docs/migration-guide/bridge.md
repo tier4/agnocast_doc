@@ -39,28 +39,15 @@ graph LR
 
 ## Bridge Modes
 
-The Bridge is enabled by default in Standard Mode, so the system continues to work as-is even when individual publishers or subscribers are migrated to Agnocast — no additional setup is required.
-Agnocast supports three bridge modes, controlled by the `AGNOCAST_BRIDGE_MODE` environment variable:
+The Bridge is enabled by default, so the system continues to work as-is even when individual publishers or subscribers are migrated to Agnocast — no additional setup is required.
+Agnocast supports the following bridge modes, controlled by the `AGNOCAST_BRIDGE_MODE` environment variable:
 
 | Mode | Value | Description |
 |------|-------|-------------|
 | **Off** | `0` or `off` | Bridge disabled. Agnocast and ROS 2 nodes cannot communicate. |
-| **Standard** | `1` or `standard` | One bridge manager process forked per Agnocast process. **Default mode.** |
-| **Performance** | `2` or `performance` | Single bridge manager process per IPC namespace. Lower overhead. |
+| **On** | `on` | Single bridge manager process per IPC namespace. **Default mode.** |
 
-Standard Mode forks a dedicated bridge manager process for each Agnocast process, which is simple but not resource-efficient at scale. Performance Mode forks a single bridge manager process per IPC namespace, significantly reducing overhead. It requires building a dedicated shared library for the message types you use, but this can be done with a single CLI command (`ros2 agnocast generate-bridge-plugins`).
-
-### Choosing a Mode
-
-| Consideration | Standard | Performance |
-|--------------|----------|-------------|
-| Setup complexity | None (works out of the box) | Requires plugin generation and build |
-| Resource usage | Higher (one bridge per process) | Lower (single bridge per IPC namespace) |
-| Process isolation | High (bridge failure affects only one process) | Low (single point of failure) |
-| Topic support | All ROS message types | Only pre-compiled message types |
-| Bridge activation | Eager (created when Agnocast pub/sub is created) | Lazy (created when both Agnocast and ROS 2 endpoints exist) |
-
-For most use cases, start with **Standard Mode**. Switch to **Performance Mode** when you need to optimize resource usage in production.
+Values are case-insensitive. `1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.
 
 ## Configuration
 
@@ -71,14 +58,14 @@ For most use cases, start with **Standard Mode**. Switch to **Performance Mode**
 ```xml
 <node pkg="your_package" exec="your_node" name="your_node" output="screen">
     <env name="LD_PRELOAD" value="libagnocast_heaphook.so:$(env LD_PRELOAD '')" />
-    <env name="AGNOCAST_BRIDGE_MODE" value="standard" />
+    <env name="AGNOCAST_BRIDGE_MODE" value="on" />
 </node>
 ```
 
 **As an environment variable:**
 
 ```bash
-export AGNOCAST_BRIDGE_MODE=standard  # or "performance" or "off"
+export AGNOCAST_BRIDGE_MODE=on  # or "off"
 ```
 
 ### Disabling the Bridge
@@ -89,33 +76,9 @@ If all your nodes use Agnocast and you don't need RMW interoperability:
 <env name="AGNOCAST_BRIDGE_MODE" value="off" />
 ```
 
-## Standard Mode
+## Bridge Architecture
 
-Standard Mode is the default. Each Agnocast process forks a dedicated bridge manager process. No additional configuration is needed beyond `LD_PRELOAD`.
-
-```mermaid
-graph TD
-    subgraph Agnocast Process A
-        PA[Agnocast Publisher]
-    end
-    subgraph Agnocast Process B
-        SB[Agnocast Subscriber]
-    end
-    BMA[Bridge Manager A]
-    BMB[Bridge Manager B]
-    subgraph ROS 2 Network
-        R2[ROS 2 Subscriber]
-        R1[ROS 2 Publisher]
-    end
-    PA -->|shared memory| BMA
-    BMA -->|RMW| R2
-    R1 -->|RMW| BMB
-    BMB -->|shared memory| SB
-```
-
-## Performance Mode
-
-Performance Mode uses a single bridge manager process per IPC namespace. It reduces resource overhead but requires pre-compiled bridge plugins.
+The Bridge uses a single bridge manager process per IPC namespace. A bridge for a topic is created **lazily** — only when both an Agnocast endpoint and an external ROS 2 endpoint exist for that topic — and destroyed when either endpoint disappears.
 
 ```mermaid
 graph TD
@@ -138,7 +101,9 @@ graph TD
     BM -->|shared memory| SB
 ```
 
-### Setup
+### Bridge Plugins (Optional)
+
+The Bridge works out of the box — message types are resolved at runtime. For higher throughput, you can optionally provide pre-compiled bridge plugins via the `agnocast_bridge_plugins` package. When a plugin is available for a given message type, the Bridge uses it; otherwise, it falls back to runtime resolution automatically.
 
 **Step 1:** Generate bridge plugins for the message types you need:
 
@@ -160,24 +125,8 @@ At least one of `--message-types`, `--service-types`, or `--all` is required.
 **Step 2:** Build the plugins:
 
 ```bash
-colcon build --packages-select agnocast_bridge_plugins \
-  --cmake-args -DCMAKE_BUILD_TYPE=Release
+colcon build --packages-select agnocast_bridge_plugins
 ```
-
-**Step 3:** Set all Agnocast nodes to Performance Mode:
-
-```xml
-<node pkg="your_package" exec="your_node" name="your_node" output="screen">
-    <env name="LD_PRELOAD" value="libagnocast_heaphook.so:$(env LD_PRELOAD '')" />
-    <env name="AGNOCAST_BRIDGE_MODE" value="performance" />
-</node>
-```
-
-### Performance Mode Limitations
-
-- Only message types included in the generated plugins can be bridged
-- If the bridge process crashes, all Agnocast ↔ ROS 2 communication is lost
-- Requires a separate build step for plugin generation
 
 For Agnocast-wide limitations (memory layout requirements, single-ECU scope, domain isolation), see [Limitations](../index.md#limitations).
 

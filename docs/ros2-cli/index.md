@@ -204,22 +204,22 @@ The `(Agnocast enabled, bridged)` suffix means **the topic has both Agnocast end
 
 - at least one Agnocast publisher or subscriber on the topic,
 - at least one ROS 2 (DDS-side) endpoint on the other direction (e.g. an Agnocast publisher with a ROS 2 subscriber, or vice versa), and
-- a bridge process (standard or performance) currently running for that topic.
+- the bridge process currently running for that topic.
 
-If any one of these is missing, the suffix is just `(Agnocast enabled)`. For example, a topic with only an Agnocast publisher and no ROS 2 subscriber is shown as `(Agnocast enabled)` regardless of whether a bridge process is running — there is simply no DDS-side counterpart to bridge to. Table 1 below enumerates every combination.
+If any one of these is missing, the suffix is just `(Agnocast enabled)`. For example, a topic with only an Agnocast publisher and no ROS 2 subscriber is shown as `(Agnocast enabled)` regardless of whether the bridge process is running — there is simply no DDS-side counterpart to bridge to. Table 1 below enumerates every combination.
 
 #### Table 1: Pub/Sub situations and display names
 
 | pub | sub | bridge | display |
 | :--- | :--- | :--- | :--- |
-| `rclcpp::publisher` | `rclcpp::subscription` | off / standard / performance | `/my_topic` |
+| `rclcpp::publisher` | `rclcpp::subscription` | off / on | `/my_topic` |
 | `agnocast::publisher` | `rclcpp::subscription` | off | `/my_topic (WARN: one or more necessary bridges are not running)` |
-| `agnocast::publisher` | `rclcpp::subscription` | standard / performance | `/my_topic (Agnocast enabled, bridged)` |
+| `agnocast::publisher` | `rclcpp::subscription` | on | `/my_topic (Agnocast enabled, bridged)` |
 | `rclcpp::publisher` | `agnocast::subscription` | off | `/my_topic (WARN: one or more necessary bridges are not running)` |
-| `rclcpp::publisher` | `agnocast::subscription` | standard / performance | `/my_topic (Agnocast enabled, bridged)` |
-| `agnocast::publisher` | `agnocast::subscription` | off / standard / performance | `/my_topic (Agnocast enabled)` |
-| `agnocast::publisher` | none | off / standard / performance | `/my_topic (Agnocast enabled)` |
-| none | `agnocast::subscription` | off / standard / performance | `/my_topic (Agnocast enabled)` |
+| `rclcpp::publisher` | `agnocast::subscription` | on | `/my_topic (Agnocast enabled, bridged)` |
+| `agnocast::publisher` | `agnocast::subscription` | off / on | `/my_topic (Agnocast enabled)` |
+| `agnocast::publisher` | none | off / on | `/my_topic (Agnocast enabled)` |
+| none | `agnocast::subscription` | off / on | `/my_topic (Agnocast enabled)` |
 
 #### Notes
 
