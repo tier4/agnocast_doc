@@ -47,3 +47,13 @@ export AGNOCAST_BRIDGE_MODE=standard
 export AGNOCAST_BRIDGE_PLUGINS_PATH=/opt/my_plugins:/home/user/plugins
 ```
 
+---
+
+#### `AGNOCAST_DOMAIN_BRIDGE_CONFIG`
+
+Default path to a [`domain_bridge` rule file](../domain-bridge/configuration.md) for the standalone `register_domain_bridge` tool: `ros2 run ros2agnocast_discovery_agent register_domain_bridge` reads it when `--config` is not given. Register the rules **before** the nodes that use those topics start.
+
+```bash
+export AGNOCAST_DOMAIN_BRIDGE_CONFIG=/path/to/domain_bridge.yaml
+```
+
