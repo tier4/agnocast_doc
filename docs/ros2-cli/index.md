@@ -52,14 +52,14 @@ Columns used in the tables below:
 
 | Verb | Works as-is | Agnocast version | Scope of Agnocast verb | Planned | Notes |
 |------|:-----------:|:----------------:|:----------------------:|:-------:|-------|
-| `ros2 node list` | ⚠ | ✓ `list_agnocast` | Cluster-wide | - | `as-is` lists only `rclcpp::Node`-based nodes, not pure `agnocast::Node` instances. `list_agnocast` also lists `agnocast::Node` instances, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports `-a`, `-c`, and `-d` (`-d` includes internal `agnocast_bridge_node_*`). |
+| `ros2 node list` | ⚠ | ✓ `list_agnocast` | Cluster-wide | - | `as-is` lists only `rclcpp::Node`-based nodes, not pure `agnocast::Node` instances. `list_agnocast` also lists `agnocast::Node` instances, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports `-a`, `-c`, and `-d` (`-d` includes internal nodes: the domain bridge (`agnocast_bridge_node_*`), the CIE thread configurator (`/agnocast_cie_thread_configurator/*`), and the discovery agent (`agnocast_discovery_agent_*`)). |
 | `ros2 node info` | ⚠ | ✓ `info_agnocast` | Cluster-wide | - | `as-is` cannot target a pure `agnocast::Node` (it is absent from `ros2 node list`), and does not label Agnocast publishers/subscribers on the nodes it can show. `info_agnocast` adds those Agnocast publishers/subscribers and bridge-status labels, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. |
 
 ### 3. `ros2 topic` verbs
 
 | Verb | Works as-is | Agnocast version | Scope of Agnocast verb | Planned | Notes |
 |------|:-----------:|:----------------:|:----------------------:|:-------:|-------|
-| `ros2 topic list` | ⚠ | ✓ `list_agnocast` | Cluster-wide | - | `as-is` lists only topics with DDS endpoints, so pure Agnocast-only topics are missing and bridged topics carry no Agnocast marking. `list_agnocast` adds Agnocast-only topics and tags Agnocast topics `(Agnocast enabled)` / `(Agnocast enabled, bridged)`, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. See [Topic List](#topic-list) below. |
+| `ros2 topic list` | ⚠ | ✓ `list_agnocast` | Cluster-wide | - | `as-is` lists only topics with DDS endpoints, so pure Agnocast-only topics are missing and bridged topics carry no Agnocast marking. `list_agnocast` adds Agnocast-only topics and tags Agnocast topics `(Agnocast enabled)` / `(Agnocast enabled, bridged)`, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports `-d` (includes the internal CIE thread configurator topic, `/agnocast_cie_thread_configurator/*`). See [Topic List](#topic-list) below. |
 | `ros2 topic info` | ⚠ | ✓ `info_agnocast` | Cluster-wide | - | `as-is` cannot target a pure Agnocast-only topic (it is absent from `ros2 topic list`), and shows only DDS publishers/subscribers for bridged topics. `info_agnocast` adds Agnocast publisher/subscriber counts, QoS and message type, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports `-v` and `-d`. See [Topic Info](#topic-info) below. |
 | `ros2 topic echo` | ⚠ | ✓ `echo_agnocast` | Cluster-wide | - | `as-is` cannot target pure Agnocast-only topics and works only for bridged topics. `echo_agnocast` adds support for pure Agnocast-only topics, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise, these topics cannot be observed. See [Topic Echo](#topic-echo) below. |
 | `ros2 topic pub` | ⚠ | ✗ | — | TBD | Publishes via DDS, so messages reach Agnocast subscribers only via the bridge. The `--wait-matching-subscriptions` option does **not** work correctly for Agnocast subscribers — DDS discovery counts only the bridge-side DDS subscription (if any), not the Agnocast subscribers behind it. |
@@ -224,6 +224,21 @@ If any one of these is missing, the suffix is just `(Agnocast enabled)`. For exa
 #### Notes
 
 - If an Agnocast topic and a ROS 2 topic share the same name but have different message types, the status will still be displayed as (Agnocast enabled, bridged). However, in this case, the actual communication will not be established.
+
+#### Debug Mode
+
+By default, `ros2 topic list_agnocast` hides the internal CIE thread configurator topic (`/agnocast_cie_thread_configurator/callback_group_info`) to provide a cleaner view. To include it, use the `--debug` or `-d` flag.
+
+```bash
+$ ros2 topic list_agnocast
+/topic_name1
+/topic_name2 (Agnocast enabled)
+
+$ ros2 topic list_agnocast -d
+/agnocast_cie_thread_configurator/callback_group_info
+/topic_name1
+/topic_name2 (Agnocast enabled)
+```
 
 ### Topic Info
 
@@ -502,12 +517,14 @@ $ ros2 node list_agnocast
 
 #### Debug Mode
 
-By default, `ros2 node list_agnocast` hides internal bridge nodes and endpoints to provide a cleaner view. To include these internal details, use the `--debug` or `-d` flag.
+By default, `ros2 node list_agnocast` hides internal nodes — the domain bridge (`agnocast_bridge_node_*`), the CIE thread configurator (`/agnocast_cie_thread_configurator/*`, one per process using CIE), and the discovery agent (`agnocast_discovery_agent_*`) — to provide a cleaner view. To include these internal details, use the `--debug` or `-d` flag.
 
 ```bash
 $ ros2 node list_agnocast -d
 /ros2_talker_node
 /agnocast_bridge_node_86050
+/agnocast_cie_thread_configurator/client_node_86123
+/agnocast_discovery_agent_25c9a78b_4026531839_d0
 /agnocast_listener_node (Agnocast enabled)
 ```
 
