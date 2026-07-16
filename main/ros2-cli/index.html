@@ -1351,6 +1351,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#debug-mode" class="md-nav__link">
+    Debug Mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1365,7 +1372,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#debug-mode" class="md-nav__link">
+  <a href="#debug-mode_1" class="md-nav__link">
     Debug Mode
   </a>
   
@@ -1406,7 +1413,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#debug-mode_1" class="md-nav__link">
+  <a href="#debug-mode_2" class="md-nav__link">
     Debug Mode
   </a>
   
@@ -1644,7 +1651,7 @@
 <td align="center">✓ <code>list_agnocast</code></td>
 <td align="center">Cluster-wide</td>
 <td align="center">-</td>
-<td><code>as-is</code> lists only <code>rclcpp::Node</code>-based nodes, not pure <code>agnocast::Node</code> instances. <code>list_agnocast</code> also lists <code>agnocast::Node</code> instances, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports <code>-a</code>, <code>-c</code>, and <code>-d</code> (<code>-d</code> includes internal <code>agnocast_bridge_node_*</code>).</td>
+<td><code>as-is</code> lists only <code>rclcpp::Node</code>-based nodes, not pure <code>agnocast::Node</code> instances. <code>list_agnocast</code> also lists <code>agnocast::Node</code> instances, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports <code>-a</code>, <code>-c</code>, and <code>-d</code>. Internal nodes — the domain bridge (<code>agnocast_bridge_node_*</code>), the <a href="../callback-isolated-executor/">CIE (Callback Isolated Executor)</a> thread configurator (<code>/agnocast_cie_thread_configurator/*</code>), and the discovery agent (<code>agnocast_discovery_agent_*</code>) — are hidden by default and shown by both <code>-d</code> and <code>--all</code>/<code>-a</code>. <code>-c</code> counts the currently displayed set (internal nodes included only with <code>-d</code> or <code>-a</code>).</td>
 </tr>
 <tr>
 <td><code>ros2 node info</code></td>
@@ -1675,7 +1682,7 @@
 <td align="center">✓ <code>list_agnocast</code></td>
 <td align="center">Cluster-wide</td>
 <td align="center">-</td>
-<td><code>as-is</code> lists only topics with DDS endpoints, so pure Agnocast-only topics are missing and bridged topics carry no Agnocast marking. <code>list_agnocast</code> adds Agnocast-only topics and tags Agnocast topics <code>(Agnocast enabled)</code> / <code>(Agnocast enabled, bridged)</code>, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. See <a href="#topic-list">Topic List</a> below.</td>
+<td><code>as-is</code> lists only topics with DDS endpoints, so pure Agnocast-only topics are missing and bridged topics carry no Agnocast marking. <code>list_agnocast</code> adds Agnocast-only topics and tags Agnocast topics <code>(Agnocast enabled)</code> / <code>(Agnocast enabled, bridged)</code>, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports <code>-d</code> (includes internal topics under <code>/agnocast_cie_thread_configurator/</code>, currently <code>callback_group_info</code>). See <a href="#topic-list">Topic List</a> below.</td>
 </tr>
 <tr>
 <td><code>ros2 topic info</code></td>
@@ -2196,6 +2203,17 @@
 <ul>
 <li>If an Agnocast topic and a ROS 2 topic share the same name but have different message types, the status will still be displayed as (Agnocast enabled, bridged). However, in this case, the actual communication will not be established.</li>
 </ul>
+<h4 id="debug-mode">Debug Mode<a class="headerlink" href="#debug-mode" title="Permanent link">#</a></h4>
+<p>By default, <code>ros2 topic list_agnocast</code> hides internal topics under <code>/agnocast_cie_thread_configurator/</code> (currently <code>callback_group_info</code>) to provide a cleaner view. To include them, use the <code>--debug</code> or <code>-d</code> flag.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast
+/topic_name1
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+
+$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast<span class="w"> </span>-d
+/agnocast_cie_thread_configurator/callback_group_info
+/topic_name1
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+</code></pre></div>
 <h3 id="topic-info">Topic Info<a class="headerlink" href="#topic-info" title="Permanent link">#</a></h3>
 <p>To show the topic info including Agnocast, use <code>ros2 topic info_agnocast /topic_name</code>.</p>
 <p>The Agnocast publisher/subscriber details below cover every IPC namespace and ECU where a discovery agent runs; otherwise they reflect only the current IPC namespace.</p>
@@ -2232,7 +2250,7 @@ QoS<span class="w"> </span>profile:
 <span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
 <span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
 </code></pre></div>
-<h4 id="debug-mode">Debug Mode<a class="headerlink" href="#debug-mode" title="Permanent link">#</a></h4>
+<h4 id="debug-mode_1">Debug Mode<a class="headerlink" href="#debug-mode_1" title="Permanent link">#</a></h4>
 <p>By default, <code>ros2 topic info_agnocast</code> hides internal bridge nodes and endpoints to provide a cleaner view. To include these internal details, use the <code>--debug</code> or <code>-d</code> flag.</p>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info_agnocast<span class="w"> </span>/my_topic<span class="w"> </span>-d
 Type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
@@ -2414,11 +2432,13 @@ average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</
 /ros2_talker_node
 /agnocast_listener_node<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
 </code></pre></div>
-<h4 id="debug-mode_1">Debug Mode<a class="headerlink" href="#debug-mode_1" title="Permanent link">#</a></h4>
-<p>By default, <code>ros2 node list_agnocast</code> hides internal bridge nodes and endpoints to provide a cleaner view. To include these internal details, use the <code>--debug</code> or <code>-d</code> flag.</p>
+<h4 id="debug-mode_2">Debug Mode<a class="headerlink" href="#debug-mode_2" title="Permanent link">#</a></h4>
+<p>By default, <code>ros2 node list_agnocast</code> hides internal nodes — the domain bridge (<code>agnocast_bridge_node_*</code>), the CIE thread configurator (<code>/agnocast_cie_thread_configurator/*</code>, one per process using CIE), and the discovery agent (<code>agnocast_discovery_agent_*</code>) — to provide a cleaner view. To include these internal details, use the <code>--debug</code> or <code>-d</code> flag. They are also shown by <code>--all</code>/<code>-a</code>.</p>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>node<span class="w"> </span>list_agnocast<span class="w"> </span>-d
 /ros2_talker_node
 /agnocast_bridge_node_86050
+/agnocast_cie_thread_configurator/client_node_86123
+/agnocast_discovery_agent_25c9a78b_4026531839_d0
 /agnocast_listener_node<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
 </code></pre></div>
 <h4 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">#</a></h4>

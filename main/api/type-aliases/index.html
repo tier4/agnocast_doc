@@ -1272,8 +1272,13 @@
 </thead>
 <tbody>
 <tr>
+<td><code>agnocast::Client&lt;ServiceT&gt;</code></td>
+<td><code>agnocast::BasicClient&lt;ServiceT&gt;</code></td>
+<td>Service client for zero-copy Agnocast service communication. The service/client API is experimental and may change in future versions.</td>
+</tr>
+<tr>
 <td><code>agnocast::Service&lt;ServiceT&gt;</code></td>
-<td><code>agnocast::BasicService&lt;ServiceT, RosToAgnocastServiceRegistrationPolicy&gt;</code></td>
+<td><code>agnocast::BasicService&lt;ServiceT&gt;</code></td>
 <td>The user-facing Agnocast service server. Alias for BasicService<ServiceT>. Use this type (not BasicService directly) when declaring service server variables.</td>
 </tr>
 </tbody>
