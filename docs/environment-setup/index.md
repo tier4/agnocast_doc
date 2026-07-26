@@ -103,6 +103,9 @@ sudo modprobe agnocast mempool_num=8192 mempool_size_gb=32
 !!! note
     These parameters use virtual address space, not physical memory. Actual physical memory is allocated on demand as pages are touched.
 
+!!! warning
+    Size the pool generously. When a process exhausts its memory pool, allocations simply fail (`malloc` returns `NULL`, `posix_memalign` returns `ENOMEM`), which typically crashes the application. The pool is not grown at runtime, so if a process may need more memory, increase `mempool_size_gb` in advance.
+
 To persist parameters and auto-load at boot:
 
 ```ini
