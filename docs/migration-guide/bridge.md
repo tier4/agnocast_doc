@@ -1,6 +1,7 @@
 # Agnocast-ROS 2 Bridge
 
 The Bridge enables communication between Agnocast nodes and standard ROS 2 nodes (RMW). It automatically forwards messages bidirectionally, allowing gradual migration — you don't need to migrate all nodes at once.
+Message circulation (echo-back) is automatically prevented by the Bridge's internal logic; no additional configuration or constraints are required.
 The Bridge can be introduced at **either Stage 1 or Stage 2**. It is independent of which node class you use.
 
 !!! note
@@ -47,7 +48,7 @@ Agnocast supports the following bridge modes, controlled by the `AGNOCAST_BRIDGE
 | **Off** | `0` or `off` | Bridge disabled. Agnocast and ROS 2 nodes cannot communicate. |
 | **On** | `on` | Single bridge manager process per IPC namespace. **Default mode.** |
 
-Values are case-insensitive. `1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.
+Values are case-insensitive. If an unknown value is given, the Bridge falls back to `on` with a warning. `1` / `standard` and `2` / `performance` are accepted for backward compatibility but are deprecated aliases for `on`.
 
 ## Configuration
 
@@ -121,12 +122,20 @@ ros2 agnocast generate-bridge-plugins --all
 
 Specify interface types with their fully-qualified names (e.g., `std_msgs/msg/String`).
 At least one of `--message-types`, `--service-types`, or `--all` is required.
+Use `--output-dir` to choose where the package is generated (default: `./agnocast_bridge_plugins`):
+
+```bash
+ros2 agnocast generate-bridge-plugins --all --output-dir ~/my_ws/src/agnocast_bridge_plugins
+```
 
 **Step 2:** Build the plugins:
 
 ```bash
 colcon build --packages-select agnocast_bridge_plugins
 ```
+
+!!! note
+    If you add new custom message types later, regenerate and rebuild the plugins. To search additional plugin directories, set [`AGNOCAST_BRIDGE_PLUGINS_PATH`](../api/environment-variables.md#agnocast_bridge_plugins_path).
 
 For Agnocast-wide limitations (memory layout requirements, single-ECU scope, domain isolation), see [Limitations](../index.md#limitations).
 
@@ -135,7 +144,13 @@ For Agnocast-wide limitations (memory layout requirements, single-ECU scope, dom
 The Bridge's QoS behavior differs by direction:
 
 **ROS 2 → Agnocast (R2A):**
-The Bridge's internal ROS 2 subscription inherits the QoS settings from the external Agnocast subscriber.
+The Bridge's internal ROS 2 subscription inherits the QoS settings from the external Agnocast subscriber. The Bridge's internal Agnocast publisher uses fixed QoS:
+
+- Depth: 10
+- Durability: TransientLocal
+
+!!! warning
+    Because the internal ROS 2 subscription inherits the external Agnocast subscriber's QoS, avoid a QoS mismatch on the ROS 2 side — specifically, a **Volatile publisher vs. Transient Local subscriber** combination, which prevents the connection.
 
 **Agnocast → ROS 2 (A2R):**
 The Bridge's internal ROS 2 publisher uses fixed QoS:
