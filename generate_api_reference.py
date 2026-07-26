@@ -979,10 +979,29 @@ def main():
         f.write("#### `LD_PRELOAD`\n\n")
         f.write("**Required.** Must include `libagnocast_heaphook.so` to route heap allocations "
                 "to shared memory. Agnocast validates this at startup and exits with an error if missing.\n\n")
-        f.write("Set it per-node in a launch file:\n\n")
+        f.write("The heaphook replaces the following allocation/deallocation functions: "
+                "`malloc`, `free`, `calloc`, `realloc`, `posix_memalign`, `aligned_alloc`, and `memalign`. "
+                "`valloc` and `pvalloc` are intercepted but not supported; calling them aborts the process.\n\n")
+        f.write("Set it per-node in a launch file. Prepend `libagnocast_heaphook.so` to the existing "
+                "`LD_PRELOAD` value (the `$(env LD_PRELOAD '')` part) so that libraries already listed "
+                "there are preserved:\n\n")
         f.write("```xml\n<node pkg=\"my_package\" exec=\"my_node\" name=\"my_node\" output=\"screen\">\n")
         f.write("    <env name=\"LD_PRELOAD\" value=\"libagnocast_heaphook.so:$(env LD_PRELOAD '')\" />\n")
         f.write("</node>\n```\n\n")
+        f.write("For a component container, set it on the `<node_container>` element. Use the "
+                "`agnocast_components` package; the `agnocast_component_container` executable in the "
+                "`agnocastlib` package is deprecated:\n\n")
+        f.write("```xml\n<node_container pkg=\"agnocast_components\" exec=\"agnocast_component_container\" name=\"my_container\">\n")
+        f.write("    <env name=\"LD_PRELOAD\" value=\"libagnocast_heaphook.so:$(env LD_PRELOAD '')\" />\n")
+        f.write("</node_container>\n```\n\n")
+        f.write("In a Python launch file, use `additional_env`:\n\n")
+        f.write("```python\nimport os\n\ncontainer = ComposableNodeContainer(\n    ...,\n"
+                "    additional_env={\n"
+                "        'LD_PRELOAD': f\"libagnocast_heaphook.so:{os.getenv('LD_PRELOAD', '')}\",\n"
+                "    },\n)\n```\n\n")
+        f.write("!!! warning\n"
+                "    Applications that hook the same allocation/deallocation functions cannot be "
+                "used together with Agnocast.\n\n")
 
         f.write("---\n\n")
         f.write("#### `AGNOCAST_BRIDGE_MODE`\n\n")
