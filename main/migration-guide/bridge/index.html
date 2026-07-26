@@ -676,6 +676,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stable-bridge-node-name" class="md-nav__link">
+    Stable Bridge Node Name
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1362,6 +1369,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stable-bridge-node-name" class="md-nav__link">
+    Stable Bridge Node Name
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1484,6 +1498,15 @@ Agnocast supports the following bridge modes, controlled by the <code>AGNOCAST_B
 <p>If all your nodes use Agnocast and you don't need RMW interoperability:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AGNOCAST_BRIDGE_MODE&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;off&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
+<h3 id="stable-bridge-node-name">Stable Bridge Node Name<a class="headerlink" href="#stable-bridge-node-name" title="Permanent link">#</a></h3>
+<p>The bridge manager node is named <code>agnocast_bridge_node_performance_&lt;ipc_ns_inode&gt;_&lt;pid&gt;</code> by default, which is unique on every launch. When tools reference the node name in static configuration files (e.g. CIE thread configuration), set the <a href="../../api/environment-variables/#agnocast_bridge_node_name_suffix"><code>AGNOCAST_BRIDGE_NODE_NAME_SUFFIX</code></a> environment variable to name the node <code>agnocast_bridge_node_performance_&lt;suffix&gt;</code> instead. The deployment configuration is responsible for choosing a value that is unique within the ROS 2 domain, such as the container name:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yaml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">planning</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGNOCAST_BRIDGE_NODE_NAME_SUFFIX=main_planning</span><span class="w">  </span><span class="c1"># -&gt; /agnocast_bridge_node_performance_main_planning</span>
+</code></pre></div>
+<p>If the value would not form a valid ROS 2 node name, it is ignored with a warning and the default naming is used. See <a href="../../api/environment-variables/#agnocast_bridge_node_name_suffix"><code>AGNOCAST_BRIDGE_NODE_NAME_SUFFIX</code></a> for the exact rules.</p>
 <h2 id="bridge-architecture">Bridge Architecture<a class="headerlink" href="#bridge-architecture" title="Permanent link">#</a></h2>
 <p>The Bridge uses a single bridge manager process per IPC namespace. A bridge for a topic is created <strong>lazily</strong> — only when both an Agnocast endpoint and an external ROS 2 endpoint exist for that topic — and destroyed when either endpoint disappears.</p>
 <pre class="mermaid"><code>graph TD

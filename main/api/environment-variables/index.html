@@ -1244,6 +1244,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#agnocast_bridge_node_name_suffix" class="md-nav__link">
+    AGNOCAST_BRIDGE_NODE_NAME_SUFFIX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agnocast_bridge_plugins_path" class="md-nav__link">
     AGNOCAST_BRIDGE_PLUGINS_PATH
   </a>
@@ -1301,6 +1308,13 @@
         <li class="md-nav__item">
   <a href="#agnocast_bridge_mode" class="md-nav__link">
     AGNOCAST_BRIDGE_MODE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agnocast_bridge_node_name_suffix" class="md-nav__link">
+    AGNOCAST_BRIDGE_NODE_NAME_SUFFIX
   </a>
   
 </li>
@@ -1385,6 +1399,35 @@
 </table>
 <p>Case-insensitive. Falls back to <code>on</code> with a warning if an unknown value is given. <code>1</code> / <code>standard</code> and <code>2</code> / <code>performance</code> are accepted for backward compatibility but are deprecated aliases for <code>on</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">AGNOCAST_BRIDGE_MODE</span><span class="o">=</span>on
+</code></pre></div>
+<hr />
+<h4 id="agnocast_bridge_node_name_suffix"><code>AGNOCAST_BRIDGE_NODE_NAME_SUFFIX</code><a class="headerlink" href="#agnocast_bridge_node_name_suffix" title="Permanent link">#</a></h4>
+<p>Gives the bridge manager node a stable name. By default the node is named <code>agnocast_bridge_node_performance_&lt;ipc_ns_inode&gt;_&lt;pid&gt;</code>, which changes on every launch, so tools that reference node names in static configuration files (e.g. CIE thread configuration) cannot match it. When this variable is set, the node is named <code>agnocast_bridge_node_performance_&lt;suffix&gt;</code> instead.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Node name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unset or empty</td>
+<td><code>agnocast_bridge_node_performance_&lt;ipc_ns_inode&gt;_&lt;pid&gt;</code> (default, unique per launch)</td>
+</tr>
+<tr>
+<td><code>&lt;suffix&gt;</code></td>
+<td><code>agnocast_bridge_node_performance_&lt;suffix&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>The variable carries only the suffix so that the <code>agnocast_bridge_node_</code> prefix, which the <code>ros2 agnocast</code> CLI and other tools rely on, is preserved. <code>-</code> and <code>.</code> (common in container names) are replaced with <code>_</code>. If the value contains any other character not allowed in ROS 2 node names, or the resulting node name would exceed the maximum node name length (255 characters), the value is ignored with a warning and the default naming is used, so a misconfigured value never prevents the bridge from starting.</p>
+<p>The deployment configuration is responsible for injecting a value that is unique within the ROS 2 domain, such as the container name (combined with an ECU name in multi-ECU setups):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yaml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">planning</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGNOCAST_BRIDGE_NODE_NAME_SUFFIX=main_planning</span><span class="w">  </span><span class="c1"># -&gt; /agnocast_bridge_node_performance_main_planning</span>
 </code></pre></div>
 <hr />
 <h4 id="agnocast_bridge_plugins_path"><code>AGNOCAST_BRIDGE_PLUGINS_PATH</code><a class="headerlink" href="#agnocast_bridge_plugins_path" title="Permanent link">#</a></h4>
