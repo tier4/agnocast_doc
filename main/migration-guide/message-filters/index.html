@@ -641,6 +641,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#migrating-a-synchronizer" class="md-nav__link">
     Migrating a Synchronizer
   </a>
@@ -675,8 +682,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exacttime-policy" class="md-nav__link">
+    ExactTime Policy
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#approximatetime-policy" class="md-nav__link">
     ApproximateTime Policy
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callback-signatures" class="md-nav__link">
+    Callback Signatures
   </a>
   
 </li>
@@ -1355,6 +1376,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#migrating-a-synchronizer" class="md-nav__link">
     Migrating a Synchronizer
   </a>
@@ -1389,8 +1417,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exacttime-policy" class="md-nav__link">
+    ExactTime Policy
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#approximatetime-policy" class="md-nav__link">
     ApproximateTime Policy
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callback-signatures" class="md-nav__link">
+    Callback Signatures
   </a>
   
 </li>
@@ -1486,6 +1528,8 @@
 </tbody>
 </table>
 <p>Synchronizing standard ROS 2 subscriptions (<code>std::shared_ptr&lt;const M&gt;</code>) and Agnocast subscriptions (<code>agnocast::ipc_shared_ptr&lt;const M&gt;</code>) within the same <code>Synchronizer</code> is not supported — all inputs must be Agnocast subscriptions.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h2>
+<p>Both sync policies extract an <code>rclcpp::Time</code> from each message. You must specialize the <code>message_filters::message_traits::TimeStamp</code> trait for every message type used with the <code>Synchronizer</code>. Messages with a <code>header.stamp</code> field (e.g., <code>sensor_msgs::msg::Image</code>, <code>geometry_msgs::msg::PoseStamped</code>) are supported out of the box.</p>
 <h2 id="migrating-a-synchronizer">Migrating a Synchronizer<a class="headerlink" href="#migrating-a-synchronizer" title="Permanent link">#</a></h2>
 <h3 id="before-rclcpp-message_filters">Before (rclcpp message_filters)<a class="headerlink" href="#before-rclcpp-message_filters" title="Permanent link">#</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;message_filters/subscriber.h&gt;</span>
@@ -1596,6 +1640,11 @@
    (<code>Subscriber&lt;MsgA, agnocast::Node&gt;</code>); it defaults to <code>rclcpp::Node</code>, which
    <code>agnocast::Node</code> does not derive from</li>
 </ol>
+<h2 id="exacttime-policy">ExactTime Policy<a class="headerlink" href="#exacttime-policy" title="Permanent link">#</a></h2>
+<p>For <code>ExactTime</code>, the <code>queue_size</code> constructor argument is the maximum number of <strong>incomplete message sets</strong> to buffer. When exceeded, the oldest sets are dropped.</p>
+<p>You can register a drop callback that is invoked whenever incomplete sets are discarded. It has the same signature as the main callback:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sync</span><span class="p">.</span><span class="n">getPolicy</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerDropCallback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">MySyncNode</span><span class="o">::</span><span class="n">dropCallback</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="approximatetime-policy">ApproximateTime Policy<a class="headerlink" href="#approximatetime-policy" title="Permanent link">#</a></h2>
 <p>The migration steps are the same as ExactTime — replace <code>ExactTime</code> with <code>ApproximateTime</code> in the policy type:</p>
 <div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="n">SyncPolicy</span><span class="w"> </span><span class="o">=</span>
@@ -1635,6 +1684,36 @@
 </tr>
 </tbody>
 </table>
+<p>Unlike <code>ExactTime</code>, the <code>queue_size</code> constructor argument limits the number of buffered messages <strong>per topic</strong> (not message sets). It must be greater than 0; a value of at least 2 is recommended, since a queue size of 1 tends to drop many messages.</p>
+<p><code>ApproximateTime</code> does not support drop callbacks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The policy logs a one-time warning if messages arrive out of timestamp order, or if the actual interval between messages is smaller than the bound declared with <code>setInterMessageLowerBound()</code>.</p>
+</div>
+<h2 id="callback-signatures">Callback Signatures<a class="headerlink" href="#callback-signatures" title="Permanent link">#</a></h2>
+<p>The synchronized callback can use any of these parameter types, and they can be mixed:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// By const reference (recommended)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="n">MsgA</span><span class="w"> </span><span class="k">const</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="n">MsgB</span><span class="w"> </span><span class="k">const</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+
+<span class="c1">// By value</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb</span><span class="p">(</span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="n">MsgA</span><span class="w"> </span><span class="k">const</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span>
+<span class="w">        </span><span class="n">agnocast</span><span class="o">::</span><span class="n">ipc_shared_ptr</span><span class="o">&lt;</span><span class="n">MsgB</span><span class="w"> </span><span class="k">const</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+
+<span class="c1">// As MessageEvent (provides receipt time metadata)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cb</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">MsgA</span><span class="w"> </span><span class="k">const</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">agnocast</span><span class="o">::</span><span class="n">message_filters</span><span class="o">::</span><span class="n">MessageEvent</span><span class="o">&lt;</span><span class="n">MsgB</span><span class="w"> </span><span class="k">const</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
+<p>Callbacks can be registered as:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Free function</span>
+<span class="n">sync</span><span class="p">.</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">myFreeFunction</span><span class="p">);</span>
+
+<span class="c1">// Bound via std::bind</span>
+<span class="n">sync</span><span class="p">.</span><span class="n">registerCallback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">MyClass</span><span class="o">::</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">placeholders</span><span class="o">::</span><span class="n">_1</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">placeholders</span><span class="o">::</span><span class="n">_2</span><span class="p">));</span>
+
+<span class="c1">// Member function pointer (recommended for class methods)</span>
+<span class="n">sync</span><span class="p">.</span><span class="n">registerCallback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">MyClass</span><span class="o">::</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="migrating-a-passthrough-filter">Migrating a PassThrough Filter<a class="headerlink" href="#migrating-a-passthrough-filter" title="Permanent link">#</a></h2>
 <p><code>PassThrough</code> forwards messages without filtering — useful when you already have a subscription and want to feed it into a Synchronizer. The API is identical to rclcpp's <code>message_filters::PassThrough</code>.</p>
 <h3 id="before-rclcpp-message_filters_1">Before (rclcpp message_filters)<a class="headerlink" href="#before-rclcpp-message_filters_1" title="Permanent link">#</a></h3>
