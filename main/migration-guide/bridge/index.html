@@ -1414,6 +1414,7 @@
 
 <h1 id="agnocast-ros-2-bridge">Agnocast-ROS 2 Bridge<a class="headerlink" href="#agnocast-ros-2-bridge" title="Permanent link">#</a></h1>
 <p>The Bridge enables communication between Agnocast nodes and standard ROS 2 nodes (RMW). It automatically forwards messages bidirectionally, allowing gradual migration — you don't need to migrate all nodes at once.
+Message circulation (echo-back) is automatically prevented by the Bridge's internal logic; no additional configuration or constraints are required.
 The Bridge can be introduced at <strong>either Stage 1 or Stage 2</strong>. It is independent of which node class you use.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1467,7 +1468,7 @@ Agnocast supports the following bridge modes, controlled by the <code>AGNOCAST_B
 </tr>
 </tbody>
 </table>
-<p>Values are case-insensitive. <code>1</code> / <code>standard</code> and <code>2</code> / <code>performance</code> are accepted for backward compatibility but are deprecated aliases for <code>on</code>.</p>
+<p>Values are case-insensitive. If an unknown value is given, the Bridge falls back to <code>on</code> with a warning. <code>1</code> / <code>standard</code> and <code>2</code> / <code>performance</code> are accepted for backward compatibility but are deprecated aliases for <code>on</code>.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
 <h3 id="setting-the-bridge-mode">Setting the Bridge Mode<a class="headerlink" href="#setting-the-bridge-mode" title="Permanent link">#</a></h3>
 <p><strong>In launch files (XML):</strong></p>
@@ -1517,15 +1518,30 @@ ros2<span class="w"> </span>agnocast<span class="w"> </span>generate-bridge-plug
 ros2<span class="w"> </span>agnocast<span class="w"> </span>generate-bridge-plugins<span class="w"> </span>--all
 </code></pre></div>
 <p>Specify interface types with their fully-qualified names (e.g., <code>std_msgs/msg/String</code>).
-At least one of <code>--message-types</code>, <code>--service-types</code>, or <code>--all</code> is required.</p>
+At least one of <code>--message-types</code>, <code>--service-types</code>, or <code>--all</code> is required.
+Use <code>--output-dir</code> to choose where the package is generated (default: <code>./agnocast_bridge_plugins</code>):</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>agnocast<span class="w"> </span>generate-bridge-plugins<span class="w"> </span>--all<span class="w"> </span>--output-dir<span class="w"> </span>~/my_ws/src/agnocast_bridge_plugins
+</code></pre></div>
 <p><strong>Step 2:</strong> Build the plugins:</p>
 <div class="highlight"><pre><span></span><code>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>agnocast_bridge_plugins
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you add new custom message types later, regenerate and rebuild the plugins. To search additional plugin directories, set <a href="../../api/environment-variables/#agnocast_bridge_plugins_path"><code>AGNOCAST_BRIDGE_PLUGINS_PATH</code></a>.</p>
+</div>
 <p>For Agnocast-wide limitations (memory layout requirements, single-ECU scope, domain isolation), see <a href="../../#limitations">Limitations</a>.</p>
 <h2 id="qos-behavior">QoS Behavior<a class="headerlink" href="#qos-behavior" title="Permanent link">#</a></h2>
 <p>The Bridge's QoS behavior differs by direction:</p>
 <p><strong>ROS 2 → Agnocast (R2A):</strong>
-The Bridge's internal ROS 2 subscription inherits the QoS settings from the external Agnocast subscriber.</p>
+The Bridge's internal ROS 2 subscription inherits the QoS settings from the external Agnocast subscriber. The Bridge's internal Agnocast publisher uses fixed QoS:</p>
+<ul>
+<li>Depth: 10</li>
+<li>Durability: TransientLocal</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Because the internal ROS 2 subscription inherits the external Agnocast subscriber's QoS, avoid a QoS mismatch on the ROS 2 side — specifically, a <strong>Volatile publisher vs. Transient Local subscriber</strong> combination, which prevents the connection.</p>
+</div>
 <p><strong>Agnocast → ROS 2 (A2R):</strong>
 The Bridge's internal ROS 2 publisher uses fixed QoS:</p>
 <ul>
