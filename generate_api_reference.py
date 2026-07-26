@@ -1015,6 +1015,31 @@ def main():
         f.write("```bash\nexport AGNOCAST_BRIDGE_MODE=on\n```\n\n")
 
         f.write("---\n\n")
+        f.write("#### `AGNOCAST_BRIDGE_NODE_NAME_SUFFIX`\n\n")
+        f.write("Gives the bridge manager node a stable name. By default the node is named "
+                "`agnocast_bridge_node_performance_<ipc_ns_inode>_<pid>`, which changes on every launch, "
+                "so tools that reference node names in static configuration files (e.g. CIE thread "
+                "configuration) cannot match it. When this variable is set, the node is named "
+                "`agnocast_bridge_node_performance_<suffix>` instead.\n\n")
+        f.write("| Value | Node name |\n")
+        f.write("|-------|-----------|\n")
+        f.write("| unset or empty | `agnocast_bridge_node_performance_<ipc_ns_inode>_<pid>` (default, unique per launch) |\n")
+        f.write("| `<suffix>` | `agnocast_bridge_node_performance_<suffix>` |\n")
+        f.write("\nThe variable carries only the suffix so that the `agnocast_bridge_node_` prefix, "
+                "which the `ros2 agnocast` CLI and other tools rely on, is preserved. "
+                "`-` and `.` (common in container names) are replaced with `_`. If the value contains "
+                "any other character not allowed in ROS 2 node names, or the resulting node name would "
+                "exceed the maximum node name length (255 characters), the value is ignored with a "
+                "warning and the default naming is used, so a misconfigured value never prevents the "
+                "bridge from starting.\n\n")
+        f.write("The deployment configuration is responsible for injecting a value that is unique "
+                "within the ROS 2 domain, such as the container name (combined with an ECU name in "
+                "multi-ECU setups):\n\n")
+        f.write("```yaml\n# docker-compose.yaml\nservices:\n  planning:\n    environment:\n"
+                "      - AGNOCAST_BRIDGE_NODE_NAME_SUFFIX=main_planning"
+                "  # -> /agnocast_bridge_node_performance_main_planning\n```\n\n")
+
+        f.write("---\n\n")
         f.write("#### `AGNOCAST_BRIDGE_PLUGINS_PATH`\n\n")
         f.write("Colon-separated list of additional search paths for "
                 "bridge plugin shared libraries (`.so` files). If not set, plugins are searched in "
