@@ -1446,6 +1446,10 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 <p class="admonition-title">Note</p>
 <p>These parameters use virtual address space, not physical memory. Actual physical memory is allocated on demand as pages are touched.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Size the pool generously. When a process exhausts its memory pool, allocations simply fail (<code>malloc</code> returns <code>NULL</code>, <code>posix_memalign</code> returns <code>ENOMEM</code>), which typically crashes the application. The pool is not grown at runtime, so if a process may need more memory, increase <code>mempool_size_gb</code> in advance.</p>
+</div>
 <p>To persist parameters and auto-load at boot:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/modprobe.d/agnocast.conf</span>
 <span class="na">options agnocast mempool_num</span><span class="o">=</span><span class="s">8192 mempool_size_gb=32</span>
