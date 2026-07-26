@@ -1337,11 +1337,31 @@
 <hr />
 <h4 id="ld_preload"><code>LD_PRELOAD</code><a class="headerlink" href="#ld_preload" title="Permanent link">#</a></h4>
 <p><strong>Required.</strong> Must include <code>libagnocast_heaphook.so</code> to route heap allocations to shared memory. Agnocast validates this at startup and exits with an error if missing.</p>
-<p>Set it per-node in a launch file:</p>
+<p>The heaphook replaces the following allocation/deallocation functions: <code>malloc</code>, <code>free</code>, <code>calloc</code>, <code>realloc</code>, <code>posix_memalign</code>, <code>aligned_alloc</code>, and <code>memalign</code>. <code>valloc</code> and <code>pvalloc</code> are intercepted but not supported; calling them aborts the process.</p>
+<p>Set it per-node in a launch file. Prepend <code>libagnocast_heaphook.so</code> to the existing <code>LD_PRELOAD</code> value (the <code>$(env LD_PRELOAD '')</code> part) so that libraries already listed there are preserved:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;node</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;my_package&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;my_node&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my_node&quot;</span><span class="w"> </span><span class="na">output=</span><span class="s">&quot;screen&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;LD_PRELOAD&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;libagnocast_heaphook.so:$(env LD_PRELOAD &#39;&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/node&gt;</span>
 </code></pre></div>
+<p>For a component container, set it on the <code>&lt;node_container&gt;</code> element. Use the <code>agnocast_components</code> package; the <code>agnocast_component_container</code> executable in the <code>agnocastlib</code> package is deprecated:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;node_container</span><span class="w"> </span><span class="na">pkg=</span><span class="s">&quot;agnocast_components&quot;</span><span class="w"> </span><span class="na">exec=</span><span class="s">&quot;agnocast_component_container&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my_container&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;env</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;LD_PRELOAD&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;libagnocast_heaphook.so:$(env LD_PRELOAD &#39;&#39;)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/node_container&gt;</span>
+</code></pre></div>
+<p>In a Python launch file, use <code>additional_env</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">ComposableNodeContainer</span><span class="p">(</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="n">additional_env</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;LD_PRELOAD&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;libagnocast_heaphook.so:</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;LD_PRELOAD&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Applications that hook the same allocation/deallocation functions cannot be used together with Agnocast.</p>
+</div>
 <hr />
 <h4 id="agnocast_bridge_mode"><code>AGNOCAST_BRIDGE_MODE</code><a class="headerlink" href="#agnocast_bridge_mode" title="Permanent link">#</a></h4>
 <p>Enables or disables the Agnocast–ROS 2 Bridge for interoperability with standard ROS 2 nodes.</p>
