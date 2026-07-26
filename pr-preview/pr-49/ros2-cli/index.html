@@ -1,0 +1,2627 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://autowarefoundation.github.io/agnocast_doc/ros2-cli/">
+      
+      
+        <link rel="prev" href="../callback-isolated-executor/tutorial/">
+      
+      
+        <link rel="next" href="../tips/">
+      
+      <link rel="icon" href="../assets/images/tier4.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>ROS 2 CLI - Agnocast</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/mermaid@8.13.10/dist/mermaid.css">
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ros-2-cli" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Agnocast" class="md-header__button md-logo" aria-label="Agnocast" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 117.4 109.1 192h293.8l-26.1-74.6c-4.5-12.8-16.6-21.4-30.2-21.4H165.4c-13.6 0-25.7 8.6-30.2 21.4zm-95.6 79.4L74.8 96.3C88.3 57.8 124.6 32 165.4 32h181.2c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2v192c0 17.7-14.3 32-32 32h-32c-17.7 0-32-14.3-32-32v-48H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0-64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Agnocast
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ROS 2 CLI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/autowarefoundation/agnocast" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../environment-setup/" class="md-tabs__link">
+        Environment Setup
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../migration-guide/" class="md-tabs__link">
+        Migration Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../callback-isolated-executor/" class="md-tabs__link">
+        CallbackIsolatedExecutor
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        ROS 2 CLI
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../tips/" class="md-tabs__link">
+        Tips
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        API Reference
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Agnocast" class="md-nav__button md-logo" aria-label="Agnocast" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 117.4 109.1 192h293.8l-26.1-74.6c-4.5-12.8-16.6-21.4-30.2-21.4H165.4c-13.6 0-25.7 8.6-30.2 21.4zm-95.6 79.4L74.8 96.3C88.3 57.8 124.6 32 165.4 32h181.2c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2v192c0 17.7-14.3 32-32 32h-32c-17.7 0-32-14.3-32-32v-48H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0-64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
+
+    </a>
+    Agnocast
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/autowarefoundation/agnocast" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../environment-setup/">Environment Setup</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Environment Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment-setup/configuration/" class="md-nav__link">
+        System Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment-setup/scripts/" class="md-nav__link">
+        Scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment-setup/upgrading/" class="md-nav__link">
+        Upgrading
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../migration-guide/">Migration Guide</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Migration Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide/stage1/" class="md-nav__link">
+        Stage 1: Agnocast Pub/Sub
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide/stage2/" class="md-nav__link">
+        Stage 2: agnocast::Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide/polling-subscriber/" class="md-nav__link">
+        Polling Subscriber
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide/services/" class="md-nav__link">
+        Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide/message-filters/" class="md-nav__link">
+        Message Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide/bridge/" class="md-nav__link">
+        Bridge
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../callback-isolated-executor/">CallbackIsolatedExecutor</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          CallbackIsolatedExecutor
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../callback-isolated-executor/integration-guide/" class="md-nav__link">
+        Integration Guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../callback-isolated-executor/yaml-specification/" class="md-nav__link">
+        YAML Specification
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../callback-isolated-executor/non-ros-threads/" class="md-nav__link">
+        Non-ROS Threads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../callback-isolated-executor/tutorial/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">ROS 2 CLI</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          ROS 2 CLI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../tips/">Tips</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Tips
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/containers/" class="md-nav__link">
+        Running in Containers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/caret/" class="md-nav__link">
+        CARET Support
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/troubleshooting/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../api/">API Reference</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/free-functions/" class="md-nav__link">
+        Free Functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/type-aliases/" class="md-nav__link">
+        Type Aliases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/node/" class="md-nav__link">
+        Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/publisher/" class="md-nav__link">
+        Publisher
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/subscription/" class="md-nav__link">
+        Subscription
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/takesubscription/" class="md-nav__link">
+        TakeSubscription
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/pollingsubscriber/" class="md-nav__link">
+        PollingSubscriber
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ipc_shared_ptr/" class="md-nav__link">
+        ipc_shared_ptr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/client/" class="md-nav__link">
+        Client
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/service/" class="md-nav__link">
+        Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/timerbase/" class="md-nav__link">
+        TimerBase
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/generictimer/" class="md-nav__link">
+        GenericTimer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/walltimer/" class="md-nav__link">
+        WallTimer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/executors/" class="md-nav__link">
+        Executors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/options/" class="md-nav__link">
+        Options
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/message-filters/" class="md-nav__link">
+        Message Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/environment-variables/" class="md-nav__link">
+        Environment Variables
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#support-status-of-ros2-commands-for-agnocast" class="md-nav__link">
+    Support Status of ros2 Commands for Agnocast
+  </a>
+  
+    <nav class="md-nav" aria-label="Support Status of ros2 Commands for Agnocast">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-top-level-ros2-commands" class="md-nav__link">
+    1. Top-level ros2 commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ros2-node-verbs" class="md-nav__link">
+    2. ros2 node verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ros2-topic-verbs" class="md-nav__link">
+    3. ros2 topic verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ros2-service-verbs" class="md-nav__link">
+    4. ros2 service verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-ros2-param-verbs" class="md-nav__link">
+    5. ros2 param verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-ros2-action-verbs" class="md-nav__link">
+    6. ros2 action verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-ros2-lifecycle-verbs" class="md-nav__link">
+    7. ros2 lifecycle verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ros2-component-verbs" class="md-nav__link">
+    8. ros2 component verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-ros2-bag-verbs" class="md-nav__link">
+    9. ros2 bag verbs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-ros2-agnocast-verbs" class="md-nav__link">
+    10. ros2 agnocast verbs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-ros2-command-for-agnocast" class="md-nav__link">
+    How to use ros2 command for Agnocast
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use ros2 command for Agnocast">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#topic-list" class="md-nav__link">
+    Topic List
+  </a>
+  
+    <nav class="md-nav" aria-label="Topic List">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table-1-pubsub-situations-and-display-names" class="md-nav__link">
+    Table 1: Pub/Sub situations and display names
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-mode" class="md-nav__link">
+    Debug Mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-info" class="md-nav__link">
+    Topic Info
+  </a>
+  
+    <nav class="md-nav" aria-label="Topic Info">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debug-mode_1" class="md-nav__link">
+    Debug Mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-echo" class="md-nav__link">
+    Topic Echo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-hz" class="md-nav__link">
+    Topic Hz
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-delay" class="md-nav__link">
+    Topic Delay
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-list" class="md-nav__link">
+    Node List
+  </a>
+  
+    <nav class="md-nav" aria-label="Node List">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debug-mode_2" class="md-nav__link">
+    Debug Mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-info" class="md-nav__link">
+    Node Info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bag-record" class="md-nav__link">
+    Bag Record
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="ros-2-cli">ROS 2 CLI<a class="headerlink" href="#ros-2-cli" title="Permanent link">#</a></h1>
+<p>Agnocast ships a <code>ros2agnocast</code> package that extends the standard <code>ros2</code> CLI with Agnocast-aware verbs. This page describes:</p>
+<ul>
+<li>which standard <code>ros2</code> commands work with Agnocast endpoints, and</li>
+<li>how to use the Agnocast-specific commands (<code>ros2 topic list_agnocast</code>, <code>ros2 node info_agnocast</code>, …).</li>
+</ul>
+<h2 id="support-status-of-ros2-commands-for-agnocast">Support Status of ros2 Commands for Agnocast<a class="headerlink" href="#support-status-of-ros2-commands-for-agnocast" title="Permanent link">#</a></h2>
+<p>This section enumerates the standard <code>ros2</code> CLI commands shipped with <code>ros2cli</code> (and related packages such as <code>ros2bag</code>, <code>ros2lifecycle</code>) and describes how they behave in an Agnocast environment.</p>
+<p>Columns used in the tables below:</p>
+<ul>
+<li><strong>Works as-is</strong> — whether the unmodified <code>ros2</code> command produces useful results for Agnocast endpoints.<ul>
+<li>✓ Works without modification (either the command does not depend on Agnocast semantics, or the information it needs is available on DDS).</li>
+<li>⚠ Works partially — typically, DDS-visible aspects (bridged topics, <code>rclcpp::Node</code>-based nodes that use Agnocast pub/sub, etc.) are reported correctly, but purely Agnocast-only endpoints are invisible.</li>
+<li>✗ Does not see Agnocast-only endpoints because Agnocast bypasses the RMW/DDS layer.</li>
+<li>N/A Not applicable (the command is Agnocast-specific and has no upstream <code>ros2</code> counterpart).</li>
+</ul>
+</li>
+<li><strong>Agnocast version</strong> — whether <code>ros2agnocast</code> provides a dedicated Agnocast-aware verb (e.g. <code>ros2 topic list_agnocast</code>, <code>ros2 agnocast generate-bridge-plugins</code>). ✓ means a variant exists; ✗ means no variant exists today. The verb-level tables below mark each verb's <strong>scope</strong>:<ul>
+<li><strong>Cluster-wide</strong> — shows Agnocast endpoints across all IPC namespaces and ECUs on the same <code>ROS_DOMAIN_ID</code> wherever an Agnocast discovery agent runs. Without a discovery agent, some commands do not work at all; others fall back to showing only the current IPC namespace.</li>
+<li><strong>Local IPC namespace</strong> — inspects only the IPC namespace the command runs in.</li>
+</ul>
+</li>
+<li><strong>Planned</strong> — whether dedicated Agnocast support is intended.<ul>
+<li><code>Yes</code> Agnocast-specific support is planned.</li>
+<li><code>No</code> Explicitly not planned (the command is DDS-only and has no Agnocast counterpart).</li>
+<li><code>TBD</code> Not decided.</li>
+<li><code>-</code> Not applicable — the command already works as-is (including via the bridge), so no dedicated Agnocast support is needed.</li>
+</ul>
+</li>
+<li><strong>Notes</strong> — short explanation and pointers.</li>
+</ul>
+<h3 id="1-top-level-ros2-commands">1. Top-level ros2 commands<a class="headerlink" href="#1-top-level-ros2-commands" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 action</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Agnocast does not implement Actions (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a>). Pure Agnocast nodes are not visible.</td>
+</tr>
+<tr>
+<td><code>ros2 bag</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ (<code>record_agnocast</code>)</td>
+<td align="center">-</td>
+<td>Standard <code>ros2 bag record</code> works only when a bridge is already active; Agnocast-only topics are not captured without one. The <code>_agnocast</code> variant extends <code>record</code> with full Agnocast awareness. See §9.</td>
+</tr>
+<tr>
+<td><code>ros2 component</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Component Container loading works for <code>agnocast::Node</code>. See "Composable Node Considerations" in <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a>.</td>
+</tr>
+<tr>
+<td><code>ros2 daemon</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>DDS discovery daemon; unrelated to Agnocast's shared memory path.</td>
+</tr>
+<tr>
+<td><code>ros2 doctor</code> / <code>ros2 wtf</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Reports DDS/RMW health only. No Agnocast-specific diagnostics yet.</td>
+</tr>
+<tr>
+<td><code>ros2 interface</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Inspects message/service/action <strong>definitions</strong> (<code>show</code>, <code>list</code>, <code>proto</code>, <code>package</code>, <code>packages</code>) via the ament index. It does not touch any running node or transport, so Agnocast-defined types in user packages are listed and shown like any other ROS 2 type.</td>
+</tr>
+<tr>
+<td><code>ros2 launch</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Launches processes; Agnocast executables are launched the same way.</td>
+</tr>
+<tr>
+<td><code>ros2 lifecycle</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td><code>agnocast::Node</code> does not support lifecycle (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a> §4.3).</td>
+</tr>
+<tr>
+<td><code>ros2 multicast</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Exercises DDS multicast; unrelated to Agnocast.</td>
+</tr>
+<tr>
+<td><code>ros2 node</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ (<code>list_agnocast</code>, <code>info_agnocast</code>)</td>
+<td align="center">-</td>
+<td><code>as-is</code> does not see pure <code>agnocast::Node</code> instances at all — only <code>rclcpp::Node</code>-based nodes (including those that use Agnocast pub/sub) appear. Use the <code>_agnocast</code> verbs to include <code>agnocast::Node</code>. See §2.</td>
+</tr>
+<tr>
+<td><code>ros2 param</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td><code>agnocast::Node</code> now instantiates a <code>ParameterService</code> during construction, so the standard parameter verbs work against Agnocast nodes the same as against <code>rclcpp::Node</code>.</td>
+</tr>
+<tr>
+<td><code>ros2 pkg</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Package metadata operations (<code>create</code>, <code>list</code>, <code>prefix</code>, <code>executables</code>, <code>xml</code>) read from the colcon/ament install layout and <code>package.xml</code>. Transport-agnostic and works the same for Agnocast packages.</td>
+</tr>
+<tr>
+<td><code>ros2 run</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Launches an executable; no Agnocast-specific behavior.</td>
+</tr>
+<tr>
+<td><code>ros2 security</code></td>
+<td align="center">N/A</td>
+<td align="center">✗</td>
+<td align="center">No</td>
+<td>Manages SROS2 / DDS-Security artifacts (enclaves, keystores, permission/policy files) that authenticate and encrypt DDS traffic. <strong>Has no effect on Agnocast pub/sub</strong>: communication between Agnocast endpoints goes through shared memory, not DDS, so SROS2 policies neither authorize nor restrict it. The commands still run, but generated artifacts only protect the DDS side (including the Agnocast↔ROS 2 bridge).</td>
+</tr>
+<tr>
+<td><code>ros2 service</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Agnocast services use internal shared-memory topics prefixed with <code>/AGNOCAST_SRV_*</code> and are not exposed via DDS. Agnocast services are marked experimental (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a> §2.6).</td>
+</tr>
+<tr>
+<td><code>ros2 topic</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ (<code>list_agnocast</code>, <code>info_agnocast</code>, <code>echo_agnocast</code>, <code>hz_agnocast</code>, <code>delay_agnocast</code>)</td>
+<td align="center">-</td>
+<td>Standard <code>ros2 topic</code> verbs have limited visibility into Agnocast: pure Agnocast-only topics are invisible, and bridged topics are seen only from the DDS side. The <code>_agnocast</code> variants extend each verb with full Agnocast awareness. See §3.</td>
+</tr>
+<tr>
+<td><code>ros2 agnocast</code></td>
+<td align="center">N/A</td>
+<td align="center">✓ (new top-level command)</td>
+<td align="center">-</td>
+<td>Provided by <code>ros2agnocast</code> for Agnocast-specific operations (<code>version</code>, <code>generate-bridge-plugins</code>, <code>discovery-daemon-status</code>, <code>bridge-daemon-status</code>). See §10.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-ros2-node-verbs">2. <code>ros2 node</code> verbs<a class="headerlink" href="#2-ros2-node-verbs" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Scope of Agnocast verb</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 node list</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>list_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> lists only <code>rclcpp::Node</code>-based nodes, not pure <code>agnocast::Node</code> instances. <code>list_agnocast</code> also lists <code>agnocast::Node</code> instances, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports <code>-a</code>, <code>-c</code>, and <code>-d</code>. Internal nodes — the domain bridge (<code>agnocast_bridge_node_*</code>), the <a href="../callback-isolated-executor/">CIE (Callback Isolated Executor)</a> thread configurator (<code>/agnocast_cie_thread_configurator/*</code>), and the discovery agent (<code>agnocast_discovery_agent_*</code>) — are hidden by default and shown by both <code>-d</code> and <code>--all</code>/<code>-a</code>. <code>-c</code> counts the currently displayed set (internal nodes included only with <code>-d</code> or <code>-a</code>).</td>
+</tr>
+<tr>
+<td><code>ros2 node info</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>info_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> cannot target a pure <code>agnocast::Node</code> (it is absent from <code>ros2 node list</code>), and does not label Agnocast publishers/subscribers on the nodes it can show. <code>info_agnocast</code> adds those Agnocast publishers/subscribers and bridge-status labels, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-ros2-topic-verbs">3. <code>ros2 topic</code> verbs<a class="headerlink" href="#3-ros2-topic-verbs" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Scope of Agnocast verb</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 topic list</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>list_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> lists only topics with DDS endpoints, so pure Agnocast-only topics are missing and bridged topics carry no Agnocast marking. <code>list_agnocast</code> adds Agnocast-only topics and tags Agnocast topics <code>(Agnocast enabled)</code> / <code>(Agnocast enabled, bridged)</code>, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports <code>-d</code> (includes internal topics under <code>/agnocast_cie_thread_configurator/</code>, currently <code>callback_group_info</code>). See <a href="#topic-list">Topic List</a> below.</td>
+</tr>
+<tr>
+<td><code>ros2 topic info</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>info_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> cannot target a pure Agnocast-only topic (it is absent from <code>ros2 topic list</code>), and shows only DDS publishers/subscribers for bridged topics. <code>info_agnocast</code> adds Agnocast publisher/subscriber counts, QoS and message type, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise only the current IPC namespace. Supports <code>-v</code> and <code>-d</code>. See <a href="#topic-info">Topic Info</a> below.</td>
+</tr>
+<tr>
+<td><code>ros2 topic echo</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>echo_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> cannot target pure Agnocast-only topics and works only for bridged topics. <code>echo_agnocast</code> adds support for pure Agnocast-only topics, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise, these topics cannot be observed. See <a href="#topic-echo">Topic Echo</a> below.</td>
+</tr>
+<tr>
+<td><code>ros2 topic pub</code></td>
+<td align="center">⚠</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">TBD</td>
+<td>Publishes via DDS, so messages reach Agnocast subscribers only via the bridge. The <code>--wait-matching-subscriptions</code> option does <strong>not</strong> work correctly for Agnocast subscribers — DDS discovery counts only the bridge-side DDS subscription (if any), not the Agnocast subscribers behind it.</td>
+</tr>
+<tr>
+<td><code>ros2 topic hz</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>hz_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> cannot target pure Agnocast-only topics and works only for bridged topics. <code>hz_agnocast</code> adds support for pure Agnocast-only topics, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise, these topics cannot be observed. See <a href="#topic-hz">Topic Hz</a> below.</td>
+</tr>
+<tr>
+<td><code>ros2 topic bw</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">TBD</td>
+<td>Requires subscribing to the topic.</td>
+</tr>
+<tr>
+<td><code>ros2 topic delay</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>delay_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> cannot target pure Agnocast-only topics and works only for bridged topics. <code>delay_agnocast</code> adds support for pure Agnocast-only topics, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise, these topics cannot be observed. See <a href="#topic-delay">Topic Delay</a> below.</td>
+</tr>
+<tr>
+<td><code>ros2 topic type</code></td>
+<td align="center">⚠</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">No</td>
+<td>Resolves a topic's message type via the DDS graph, which works for bridged topics (their DDS endpoints carry the type). No Agnocast <code>type</code> verb is planned, but <code>ros2 topic info_agnocast &lt;topic&gt;</code> now reports the type of a pure Agnocast-only topic when a discovery agent is running, showing <code>&lt;UNKNOWN&gt;</code> only if none has reported one.</td>
+</tr>
+<tr>
+<td><code>ros2 topic find</code></td>
+<td align="center">⚠</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">No</td>
+<td>Lists topics of a given type via the DDS graph. Same constraint as <code>type</code>: bridged topics are findable; pure Agnocast-only topics are not, because no type→name index exists on the Agnocast side.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-ros2-service-verbs">4. <code>ros2 service</code> verbs<a class="headerlink" href="#4-ros2-service-verbs" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 service list</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ros2 service call</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ros2 service type</code> / <code>find</code> / <code>info</code> / <code>echo</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-ros2-param-verbs">5. <code>ros2 param</code> verbs<a class="headerlink" href="#5-ros2-param-verbs" title="Permanent link">#</a></h3>
+<p><code>agnocast::Node</code> instantiates a <code>ParameterService</code> during construction, so the standard <code>ros2 param</code> verbs operate on <code>agnocast::Node</code> exactly as on <code>rclcpp::Node</code>. No Agnocast-specific verb is needed.</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 param list</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Works for both <code>rclcpp::Node</code> and <code>agnocast::Node</code>.</td>
+</tr>
+<tr>
+<td><code>ros2 param get</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 param set</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 param describe</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 param dump</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 param load</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 param delete</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-ros2-action-verbs">6. <code>ros2 action</code> verbs<a class="headerlink" href="#6-ros2-action-verbs" title="Permanent link">#</a></h3>
+<p><code>agnocast::Node</code> does not provide an Actions implementation. Pure Agnocast nodes are not discovered by DDS action discovery.</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 action list</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Agnocast has no Action implementation.</td>
+</tr>
+<tr>
+<td><code>ros2 action info</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 action send_goal</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 action echo</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Same as above.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-ros2-lifecycle-verbs">7. <code>ros2 lifecycle</code> verbs<a class="headerlink" href="#7-ros2-lifecycle-verbs" title="Permanent link">#</a></h3>
+<p><code>agnocast::Node</code> does not support Lifecycle (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a> §4.3).</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 lifecycle nodes</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>No lifecycle support in Agnocast.</td>
+</tr>
+<tr>
+<td><code>ros2 lifecycle list</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 lifecycle get</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 lifecycle set</code></td>
+<td align="center">✗</td>
+<td align="center">✗</td>
+<td align="center">TBD</td>
+<td>Same as above.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-ros2-component-verbs">8. <code>ros2 component</code> verbs<a class="headerlink" href="#8-ros2-component-verbs" title="Permanent link">#</a></h3>
+<p>Component containers can load <code>agnocast::Node</code> subclasses; the container itself is a DDS participant (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a> §5).</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 component list</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Operates on DDS-visible containers.</td>
+</tr>
+<tr>
+<td><code>ros2 component load</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Loading an Agnocast-enabled component into a container is supported.</td>
+</tr>
+<tr>
+<td><code>ros2 component unload</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ros2 component types</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Lists registered component plugin types via <code>ament_index</code> (<code>rclcpp_components</code> resources); transport-agnostic.</td>
+</tr>
+<tr>
+<td><code>ros2 component standalone</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">-</td>
+<td>Launches a component in a self-contained container process. Works for <code>agnocast::Node</code>, with the same caveat as Composable Node loading — the container becomes a DDS participant (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md">agnocast_node_interface_comparison.md</a> §5).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="9-ros2-bag-verbs">9. <code>ros2 bag</code> verbs<a class="headerlink" href="#9-ros2-bag-verbs" title="Permanent link">#</a></h3>
+<p><code>ros2 bag record</code> captures DDS traffic only; Agnocast-only topics live in shared memory and are not captured unless the Agnocast↔ROS 2 bridge is active. <code>record_agnocast</code> watches for Agnocast topics and automatically creates the required bridges, making them visible to DDS and therefore recordable.</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Works as-is</th>
+<th align="center">Agnocast version</th>
+<th align="center">Scope of Agnocast verb</th>
+<th align="center">Planned</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 bag record</code></td>
+<td align="center">⚠</td>
+<td align="center">✓ <code>record_agnocast</code></td>
+<td align="center">Cluster-wide</td>
+<td align="center">-</td>
+<td><code>as-is</code> cannot target pure Agnocast-only topics and works only for bridged topics. <code>record_agnocast</code> adds support for pure Agnocast-only topics, wherever a discovery agent runs (across IPC namespaces and ECUs); otherwise, these topics cannot be recorded. See <a href="#bag-record">Bag Record</a> below.</td>
+</tr>
+<tr>
+<td><code>ros2 bag play</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">-</td>
+<td>Works as-is. Note that messages originally published by Agnocast publishers are replayed as ROS 2 (DDS) publishers.</td>
+</tr>
+<tr>
+<td><code>ros2 bag info</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">-</td>
+<td>Operates on a stored bag file, independent of transport.</td>
+</tr>
+<tr>
+<td><code>ros2 bag list</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 bag convert</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 bag reindex</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">-</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td><code>ros2 bag burst</code></td>
+<td align="center">✓</td>
+<td align="center">✗</td>
+<td align="center">—</td>
+<td align="center">-</td>
+<td>Same as <code>play</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-ros2-agnocast-verbs">10. <code>ros2 agnocast</code> verbs<a class="headerlink" href="#10-ros2-agnocast-verbs" title="Permanent link">#</a></h3>
+<p><code>ros2agnocast</code> registers a top-level <code>ros2 agnocast</code> command with the following verbs (see <a href="https://github.com/autowarefoundation/agnocast/blob/main/src/ros2agnocast/setup.py"><code>src/ros2agnocast/setup.py</code></a>).</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th align="center">Scope</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ros2 agnocast --version</code> / <code>-v</code></td>
+<td align="center">Local host only</td>
+<td>Print version information for Agnocast components installed on the host where the command is run (userland libraries and the loaded kernel module).</td>
+</tr>
+<tr>
+<td><code>ros2 agnocast version</code></td>
+<td align="center">Local host only</td>
+<td>Same as <code>--version</code> (verb form).</td>
+</tr>
+<tr>
+<td><code>ros2 agnocast generate-bridge-plugins</code></td>
+<td align="center">Build-time</td>
+<td>Generate a ROS 2 bridge plugin package for user message types. Operates on local source/install trees, not on any running system.</td>
+</tr>
+<tr>
+<td><code>ros2 agnocast discovery-daemon-status</code></td>
+<td align="center">Local IPC namespace</td>
+<td>Check that the Agnocast discovery agent for the <strong>current</strong> IPC namespace is running and healthy. Exits non-zero if it is not. Add <code>-v</code> for per-check detail.</td>
+</tr>
+<tr>
+<td><code>ros2 agnocast bridge-daemon-status</code></td>
+<td align="center">Local IPC namespace</td>
+<td>Check that the Agnocast bridge daemon process for the <strong>current</strong> IPC namespace is running and healthy. Exits non-zero if it is not. Add <code>-v</code> for per-check detail.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-use-ros2-command-for-agnocast">How to use ros2 command for Agnocast<a class="headerlink" href="#how-to-use-ros2-command-for-agnocast" title="Permanent link">#</a></h2>
+<p>The following sections show usage examples for the Agnocast-specific verbs:</p>
+<ul>
+<li><code>ros2 topic list_agnocast</code></li>
+<li><code>ros2 topic info_agnocast /topic_name</code></li>
+<li><code>ros2 topic echo_agnocast /topic_name</code></li>
+<li><code>ros2 topic hz_agnocast /topic_name</code></li>
+<li><code>ros2 topic delay_agnocast /topic_name</code></li>
+<li><code>ros2 node list_agnocast</code></li>
+<li><code>ros2 node info_agnocast /node_name</code></li>
+<li><code>ros2 bag record_agnocast</code></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Scope</p>
+<p><code>list_agnocast</code> / <code>info_agnocast</code> show Agnocast endpoints wherever an Agnocast discovery agent runs, across IPC namespaces and ECUs on the same <code>ROS_DOMAIN_ID</code>; otherwise they show only the current IPC namespace. The DDS side is cluster-wide as usual.</p>
+</div>
+<h3 id="topic-list">Topic List<a class="headerlink" href="#topic-list" title="Permanent link">#</a></h3>
+<p>To list all topics including Agnocast, use <code>ros2 topic list_agnocast</code>.</p>
+<p>The <code>(Agnocast enabled)</code> marking covers every IPC namespace and ECU where a discovery agent runs; otherwise it reflects only the current IPC namespace.</p>
+<p>If a topic is Agnocast enabled, it will be shown with a "(Agnocast enabled)" suffix.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast
+/topic_name1
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+/topic_name3
+</code></pre></div>
+<p>If you want to get only Agnocast related topics, use <code>ros2 topic list_agnocast | grep Agnocast</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Agnocast
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+</code></pre></div>
+<p>If an Agnocast topic is bridged to ROS 2 publishers or subscribers, it is shown with the "(Agnocast enabled, bridged)" suffix.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast
+/topic_name1<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled,<span class="w"> </span>bridged<span class="o">)</span>
+/topic_name3
+</code></pre></div>
+<p>The <code>(Agnocast enabled, bridged)</code> suffix means <strong>the topic has both Agnocast endpoints and ROS 2 endpoints, and a bridge process is forwarding between them</strong>. All three conditions are required:</p>
+<ul>
+<li>at least one Agnocast publisher or subscriber on the topic,</li>
+<li>at least one ROS 2 (DDS-side) endpoint on the other direction (e.g. an Agnocast publisher with a ROS 2 subscriber, or vice versa), and</li>
+<li>the bridge manager process is enabled (<code>AGNOCAST_BRIDGE_MODE=on</code>) and running.</li>
+</ul>
+<p>If any one of these is missing, the suffix is just <code>(Agnocast enabled)</code>. For example, a topic with only an Agnocast publisher and no ROS 2 subscriber is shown as <code>(Agnocast enabled)</code> regardless of whether the bridge process is running — there is simply no DDS-side counterpart to bridge to. Table 1 below enumerates every combination.</p>
+<h4 id="table-1-pubsub-situations-and-display-names">Table 1: Pub/Sub situations and display names<a class="headerlink" href="#table-1-pubsub-situations-and-display-names" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">pub</th>
+<th align="left">sub</th>
+<th align="left">bridge</th>
+<th align="left">display</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>rclcpp::publisher</code></td>
+<td align="left"><code>rclcpp::subscription</code></td>
+<td align="left">off / on</td>
+<td align="left"><code>/my_topic</code></td>
+</tr>
+<tr>
+<td align="left"><code>agnocast::publisher</code></td>
+<td align="left"><code>rclcpp::subscription</code></td>
+<td align="left">off</td>
+<td align="left"><code>/my_topic (WARN: one or more necessary bridges are not running)</code></td>
+</tr>
+<tr>
+<td align="left"><code>agnocast::publisher</code></td>
+<td align="left"><code>rclcpp::subscription</code></td>
+<td align="left">on</td>
+<td align="left"><code>/my_topic (Agnocast enabled, bridged)</code></td>
+</tr>
+<tr>
+<td align="left"><code>rclcpp::publisher</code></td>
+<td align="left"><code>agnocast::subscription</code></td>
+<td align="left">off</td>
+<td align="left"><code>/my_topic (WARN: one or more necessary bridges are not running)</code></td>
+</tr>
+<tr>
+<td align="left"><code>rclcpp::publisher</code></td>
+<td align="left"><code>agnocast::subscription</code></td>
+<td align="left">on</td>
+<td align="left"><code>/my_topic (Agnocast enabled, bridged)</code></td>
+</tr>
+<tr>
+<td align="left"><code>agnocast::publisher</code></td>
+<td align="left"><code>agnocast::subscription</code></td>
+<td align="left">off / on</td>
+<td align="left"><code>/my_topic (Agnocast enabled)</code></td>
+</tr>
+<tr>
+<td align="left"><code>agnocast::publisher</code></td>
+<td align="left">none</td>
+<td align="left">off / on</td>
+<td align="left"><code>/my_topic (Agnocast enabled)</code></td>
+</tr>
+<tr>
+<td align="left">none</td>
+<td align="left"><code>agnocast::subscription</code></td>
+<td align="left">off / on</td>
+<td align="left"><code>/my_topic (Agnocast enabled)</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">#</a></h4>
+<ul>
+<li>If an Agnocast topic and a ROS 2 topic share the same name but have different message types, the status will still be displayed as (Agnocast enabled, bridged). However, in this case, the actual communication will not be established.</li>
+</ul>
+<h4 id="debug-mode">Debug Mode<a class="headerlink" href="#debug-mode" title="Permanent link">#</a></h4>
+<p>By default, <code>ros2 topic list_agnocast</code> hides internal topics under <code>/agnocast_cie_thread_configurator/</code> (currently <code>callback_group_info</code>) to provide a cleaner view. To include them, use the <code>--debug</code> or <code>-d</code> flag.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast
+/topic_name1
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+
+$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>list_agnocast<span class="w"> </span>-d
+/agnocast_cie_thread_configurator/callback_group_info
+/topic_name1
+/topic_name2<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+</code></pre></div>
+<h3 id="topic-info">Topic Info<a class="headerlink" href="#topic-info" title="Permanent link">#</a></h3>
+<p>To show the topic info including Agnocast, use <code>ros2 topic info_agnocast /topic_name</code>.</p>
+<p>The Agnocast publisher/subscriber details below cover every IPC namespace and ECU where a discovery agent runs; otherwise they reflect only the current IPC namespace.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info_agnocast<span class="w"> </span>/my_topic
+Type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">0</span>
+Agnocast<span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">0</span>
+Agnocast<span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<p>For more details, use <code>--verbose</code> or <code>-v</code>.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info_agnocast<span class="w"> </span>/my_topic<span class="w"> </span>-v
+Type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">0</span>
+Agnocast<span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+
+Node<span class="w"> </span>name:<span class="w"> </span>talker_node
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>PUBLISHER<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
+
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">0</span>
+Agnocast<span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+
+Node<span class="w"> </span>name:<span class="w"> </span>listener_node
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>SUBSCRIPTION<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
+</code></pre></div>
+<h4 id="debug-mode_1">Debug Mode<a class="headerlink" href="#debug-mode_1" title="Permanent link">#</a></h4>
+<p>By default, <code>ros2 topic info_agnocast</code> hides internal bridge nodes and endpoints to provide a cleaner view. To include these internal details, use the <code>--debug</code> or <code>-d</code> flag.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info_agnocast<span class="w"> </span>/my_topic<span class="w"> </span>-d
+Type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+Agnocast<span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">2</span>
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+Agnocast<span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<p>You can combine <code>-d</code> with <code>-v</code> for full verbose output including bridge node details:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info_agnocast<span class="w"> </span>/my_topic<span class="w"> </span>-v<span class="w"> </span>-d
+Type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+Agnocast<span class="w"> </span>Publisher<span class="w"> </span>count:<span class="w"> </span><span class="m">2</span>
+
+Node<span class="w"> </span>name:<span class="w"> </span>agnocast_bridge_node_86050
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>PUBLISHER
+GID:<span class="w"> </span><span class="m">01</span>.10.b2.d2.ef.55.13.0d.74.cc.0c.e6.00.00.16.03.00.00.00.00.00.00.00.00
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>Reliability:<span class="w"> </span>RELIABLE
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">10</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>TRANSIENT_LOCAL
+<span class="w">  </span>Lifespan:<span class="w"> </span>Infinite
+<span class="w">  </span>Deadline:<span class="w"> </span>Infinite
+<span class="w">  </span>Liveliness:<span class="w"> </span>AUTOMATIC
+<span class="w">  </span>Liveliness<span class="w"> </span>lease<span class="w"> </span>duration:<span class="w"> </span>Infinite
+
+Node<span class="w"> </span>name:<span class="w"> </span>agnocast_bridge_node_86050
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>PUBLISHER<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">10</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>TRANSIENT_LOCAL
+
+Node<span class="w"> </span>name:<span class="w"> </span>talker_node
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>PUBLISHER<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
+
+ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">1</span>
+Agnocast<span class="w"> </span>Subscription<span class="w"> </span>count:<span class="w"> </span><span class="m">2</span>
+
+Node<span class="w"> </span>name:<span class="w"> </span>agnocast_bridge_node_86050
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>SUBSCRIPTION
+GID:<span class="w"> </span><span class="m">01</span>.10.b2.d2.ef.55.13.0d.74.cc.0c.e6.00.00.15.04.00.00.00.00.00.00.00.00
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>Reliability:<span class="w"> </span>RELIABLE
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
+<span class="w">  </span>Lifespan:<span class="w"> </span>Infinite
+<span class="w">  </span>Deadline:<span class="w"> </span>Infinite
+<span class="w">  </span>Liveliness:<span class="w"> </span>AUTOMATIC
+<span class="w">  </span>Liveliness<span class="w"> </span>lease<span class="w"> </span>duration:<span class="w"> </span>Infinite
+
+Node<span class="w"> </span>name:<span class="w"> </span>listener_node
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>SUBSCRIPTION<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
+
+Node<span class="w"> </span>name:<span class="w"> </span>agnocast_bridge_node_86050
+Node<span class="w"> </span>namespace:<span class="w"> </span>/
+Topic<span class="w"> </span>type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray
+Endpoint<span class="w"> </span>type:<span class="w"> </span>SUBSCRIPTION<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+QoS<span class="w"> </span>profile:
+<span class="w">  </span>History<span class="w"> </span><span class="o">(</span>Depth<span class="o">)</span>:<span class="w"> </span>KEEP_LAST<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">  </span>Durability:<span class="w"> </span>VOLATILE
+</code></pre></div>
+<h3 id="topic-echo">Topic Echo<a class="headerlink" href="#topic-echo" title="Permanent link">#</a></h3>
+<p><code>echo_agnocast</code> is an Agnocast extension of <code>ros2 topic echo</code>. It also works for standard ROS 2 topics.</p>
+<p><code>echo_agnocast</code> works cluster-wide wherever a discovery agent runs (across IPC namespaces and ECUs on the same <code>ROS_DOMAIN_ID</code>); without a discovery agent, Agnocast-only topics cannot be observed.</p>
+<p>When the discovery agent is running:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>echo_agnocast<span class="w"> </span>/my_topic
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>ros2cli<span class="w"> </span>command...
+id:<span class="w"> </span><span class="m">870</span>
+data:
+-<span class="w"> </span><span class="m">870</span>
+-<span class="w"> </span><span class="m">871</span>
+-<span class="w"> </span><span class="m">872</span>
+-<span class="w"> </span><span class="m">873</span>
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+<p>Without a discovery agent, the command exits with an error:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>echo_agnocast<span class="w"> </span>/my_topic
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+NOTE:<span class="w"> </span>no<span class="w"> </span>/_agnocast_discovery<span class="w"> </span>agent<span class="w"> </span>visible<span class="p">;</span><span class="w"> </span>showing<span class="w"> </span><span class="nb">local</span><span class="w"> </span>NS<span class="w"> </span>only<span class="w"> </span>via<span class="w"> </span>ioctl.<span class="w"> </span>Start<span class="w"> </span>one<span class="w"> </span>with<span class="w"> </span><span class="sb">`</span>ros2<span class="w"> </span>run<span class="w"> </span>ros2agnocast_discovery_agent<span class="w"> </span>discovery_agent<span class="sb">`</span><span class="w"> </span>to<span class="w"> </span>see<span class="w"> </span>other<span class="w"> </span>NSes<span class="w"> </span>/<span class="w"> </span>ECUs.
+ERROR:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>resolve<span class="w"> </span>message<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>The<span class="w"> </span>topic<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>found<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>graph<span class="w"> </span>or<span class="w"> </span>via<span class="w"> </span>/_agnocast_discovery.<span class="w"> </span>Make<span class="w"> </span>sure<span class="w"> </span>the<span class="w"> </span>topic<span class="w"> </span>exists<span class="w"> </span>and,<span class="w"> </span><span class="k">for</span><span class="w"> </span>Agnocast<span class="w"> </span>topics,<span class="w"> </span>the<span class="w"> </span>discovery<span class="w"> </span>agent<span class="w"> </span>is<span class="w"> </span>running.
+</code></pre></div>
+<p>Standard <code>ros2 topic echo</code> CLI options are passed through:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>echo_agnocast<span class="w"> </span>--once<span class="w"> </span>--no-arr<span class="w"> </span>--filter<span class="w"> </span><span class="s2">&quot;m.id % 50 == 0&quot;</span><span class="w"> </span>/my_topic
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>ros2cli<span class="w"> </span>command...
+id:<span class="w"> </span><span class="m">4450</span>
+data:<span class="w"> </span><span class="s1">&#39;&lt;sequence type: int64, length: 128000&gt;&#39;</span>
+---
+</code></pre></div>
+<h3 id="topic-hz">Topic Hz<a class="headerlink" href="#topic-hz" title="Permanent link">#</a></h3>
+<p><code>hz_agnocast</code> is an Agnocast extension of <code>ros2 topic hz</code>. It also works for standard ROS 2 topics.</p>
+<p><code>hz_agnocast</code> works cluster-wide wherever a discovery agent runs (across IPC namespaces and ECUs on the same <code>ROS_DOMAIN_ID</code>); without a discovery agent, Agnocast-only topics cannot be observed.</p>
+<p>When the discovery agent is running:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>hz_agnocast<span class="w"> </span>/my_topic
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>ros2cli<span class="w"> </span>command...
+average<span class="w"> </span>rate:<span class="w"> </span><span class="m">9</span>.832
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.101s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.103s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00049s<span class="w"> </span>window:<span class="w"> </span><span class="m">11</span>
+average<span class="w"> </span>rate:<span class="w"> </span><span class="m">10</span>.037
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.052s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.103s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.01052s<span class="w"> </span>window:<span class="w"> </span><span class="m">22</span>
+average<span class="w"> </span>rate:<span class="w"> </span><span class="m">9</span>.977
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.052s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.103s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00878s<span class="w"> </span>window:<span class="w"> </span><span class="m">32</span>
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+<p>Without a discovery agent, the command exits with an error:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>hz_agnocast<span class="w"> </span>/my_topic
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+NOTE:<span class="w"> </span>no<span class="w"> </span>/_agnocast_discovery<span class="w"> </span>agent<span class="w"> </span>visible<span class="p">;</span><span class="w"> </span>showing<span class="w"> </span><span class="nb">local</span><span class="w"> </span>NS<span class="w"> </span>only<span class="w"> </span>via<span class="w"> </span>ioctl.<span class="w"> </span>Start<span class="w"> </span>one<span class="w"> </span>with<span class="w"> </span><span class="sb">`</span>ros2<span class="w"> </span>run<span class="w"> </span>ros2agnocast_discovery_agent<span class="w"> </span>discovery_agent<span class="sb">`</span><span class="w"> </span>to<span class="w"> </span>see<span class="w"> </span>other<span class="w"> </span>NSes<span class="w"> </span>/<span class="w"> </span>ECUs.
+ERROR:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>resolve<span class="w"> </span>message<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>The<span class="w"> </span>topic<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>found<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>graph<span class="w"> </span>or<span class="w"> </span>via<span class="w"> </span>/_agnocast_discovery.<span class="w"> </span>Make<span class="w"> </span>sure<span class="w"> </span>the<span class="w"> </span>topic<span class="w"> </span>exists<span class="w"> </span>and,<span class="w"> </span><span class="k">for</span><span class="w"> </span>Agnocast<span class="w"> </span>topics,<span class="w"> </span>the<span class="w"> </span>discovery<span class="w"> </span>agent<span class="w"> </span>is<span class="w"> </span>running.
+</code></pre></div>
+<p>Standard <code>ros2 topic hz</code> CLI options are passed through:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>hz_agnocast<span class="w"> </span>--filter<span class="w"> </span><span class="s2">&quot;m.id % 10 == 0&quot;</span><span class="w"> </span>/my_topic
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>ros2cli<span class="w"> </span>command...
+average<span class="w"> </span>rate:<span class="w"> </span><span class="m">0</span>.990
+<span class="w">        </span>min:<span class="w"> </span><span class="m">1</span>.009s<span class="w"> </span>max:<span class="w"> </span><span class="m">1</span>.011s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00077s<span class="w"> </span>window:<span class="w"> </span><span class="m">2</span>
+average<span class="w"> </span>rate:<span class="w"> </span><span class="m">1</span>.002
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.960s<span class="w"> </span>max:<span class="w"> </span><span class="m">1</span>.011s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.02200s<span class="w"> </span>window:<span class="w"> </span><span class="m">4</span>
+average<span class="w"> </span>rate:<span class="w"> </span><span class="m">1</span>.000
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.960s<span class="w"> </span>max:<span class="w"> </span><span class="m">1</span>.011s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.02022s<span class="w"> </span>window:<span class="w"> </span><span class="m">5</span>
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+<h3 id="topic-delay">Topic Delay<a class="headerlink" href="#topic-delay" title="Permanent link">#</a></h3>
+<p><code>delay_agnocast</code> is an Agnocast extension of <code>ros2 topic delay</code>. It also works for standard ROS 2 topics.</p>
+<p><code>delay_agnocast</code> works cluster-wide wherever a discovery agent runs (across IPC namespaces and ECUs on the same <code>ROS_DOMAIN_ID</code>); without a discovery agent, Agnocast-only topics cannot be observed.</p>
+<p>When the discovery agent is running:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>delay_agnocast<span class="w"> </span>/pose_chatter
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/pose_chatter&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>ros2cli<span class="w"> </span>command...
+average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</span>.001
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00000s<span class="w"> </span>window:<span class="w"> </span><span class="m">1</span>
+average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</span>.001
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00014s<span class="w"> </span>window:<span class="w"> </span><span class="m">3</span>
+average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</span>.001
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00012s<span class="w"> </span>window:<span class="w"> </span><span class="m">5</span>
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+<p>Without a discovery agent, the command exits with an error:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>delay_agnocast<span class="w"> </span>/pose_chatter
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/pose_chatter&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+NOTE:<span class="w"> </span>no<span class="w"> </span>/_agnocast_discovery<span class="w"> </span>agent<span class="w"> </span>visible<span class="p">;</span><span class="w"> </span>showing<span class="w"> </span><span class="nb">local</span><span class="w"> </span>NS<span class="w"> </span>only<span class="w"> </span>via<span class="w"> </span>ioctl.<span class="w"> </span>Start<span class="w"> </span>one<span class="w"> </span>with<span class="w"> </span><span class="sb">`</span>ros2<span class="w"> </span>run<span class="w"> </span>ros2agnocast_discovery_agent<span class="w"> </span>discovery_agent<span class="sb">`</span><span class="w"> </span>to<span class="w"> </span>see<span class="w"> </span>other<span class="w"> </span>NSes<span class="w"> </span>/<span class="w"> </span>ECUs.
+ERROR:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>resolve<span class="w"> </span>message<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/pose_chatter&#39;</span>.<span class="w"> </span>The<span class="w"> </span>topic<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>found<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>ROS<span class="w"> </span><span class="m">2</span><span class="w"> </span>graph<span class="w"> </span>or<span class="w"> </span>via<span class="w"> </span>/_agnocast_discovery.<span class="w"> </span>Make<span class="w"> </span>sure<span class="w"> </span>the<span class="w"> </span>topic<span class="w"> </span>exists<span class="w"> </span>and,<span class="w"> </span><span class="k">for</span><span class="w"> </span>Agnocast<span class="w"> </span>topics,<span class="w"> </span>the<span class="w"> </span>discovery<span class="w"> </span>agent<span class="w"> </span>is<span class="w"> </span>running.
+</code></pre></div>
+<p>Standard <code>ros2 topic delay</code> CLI options are passed through:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>delay_agnocast<span class="w"> </span>-w<span class="w"> </span><span class="m">1</span><span class="w"> </span>/pose_chatter
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Triggering<span class="w"> </span>A2R<span class="w"> </span>bridge<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;/pose_chatter&#39;</span>.<span class="w"> </span>This<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span>few<span class="w"> </span>seconds...
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>ros2cli<span class="w"> </span>command...
+average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</span>.002
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.002s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.002s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00000s<span class="w"> </span>window:<span class="w"> </span><span class="m">1</span>
+average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</span>.001
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00000s<span class="w"> </span>window:<span class="w"> </span><span class="m">1</span>
+average<span class="w"> </span>delay:<span class="w"> </span><span class="m">0</span>.001
+<span class="w">        </span>min:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>max:<span class="w"> </span><span class="m">0</span>.001s<span class="w"> </span>std<span class="w"> </span>dev:<span class="w"> </span><span class="m">0</span>.00000s<span class="w"> </span>window:<span class="w"> </span><span class="m">1</span>
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+<h3 id="node-list">Node List<a class="headerlink" href="#node-list" title="Permanent link">#</a></h3>
+<p>To list all nodes including those implemented with Agnocast, use <code>ros2 node list_agnocast</code>.</p>
+<p><code>agnocast::Node</code> instances are listed for every IPC namespace and ECU where a discovery agent runs; otherwise only for the current IPC namespace.</p>
+<p>Standard ROS 2 nodes are displayed normally, while <code>agnocast::Node</code> instances are marked with the "(Agnocast enabled)" suffix.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>node<span class="w"> </span>list_agnocast
+/ros2_talker_node
+/agnocast_listener_node<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+</code></pre></div>
+<h4 id="debug-mode_2">Debug Mode<a class="headerlink" href="#debug-mode_2" title="Permanent link">#</a></h4>
+<p>By default, <code>ros2 node list_agnocast</code> hides internal nodes — the domain bridge (<code>agnocast_bridge_node_*</code>), the CIE thread configurator (<code>/agnocast_cie_thread_configurator/*</code>, one per process using CIE), and the discovery agent (<code>agnocast_discovery_agent_*</code>) — to provide a cleaner view. To include these internal details, use the <code>--debug</code> or <code>-d</code> flag. They are also shown by <code>--all</code>/<code>-a</code>.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>node<span class="w"> </span>list_agnocast<span class="w"> </span>-d
+/ros2_talker_node
+/agnocast_bridge_node_86050
+/agnocast_cie_thread_configurator/client_node_86123
+/agnocast_discovery_agent_25c9a78b_4026531839_d0
+/agnocast_listener_node<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+</code></pre></div>
+<h4 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">#</a></h4>
+<p>Detection of <code>agnocast::Node</code> instances depends on the presence of Agnocast-enabled endpoints. A node without at least one Agnocast publisher or subscriber will be omitted from the output.</p>
+<h3 id="node-info">Node Info<a class="headerlink" href="#node-info" title="Permanent link">#</a></h3>
+<p>To show the node info including Agnocast, use <code>ros2 node info_agnocast /node_name</code>.</p>
+<p>Agnocast publisher/subscriber details are reported for a node in any IPC namespace or ECU where a discovery agent runs; otherwise only for the current IPC namespace.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>node<span class="w"> </span>info_agnocast<span class="w"> </span>/listener_node
+<span class="w">  </span>Subscribers:
+<span class="w">    </span>/parameter_events:<span class="w"> </span>rcl_interfaces/msg/ParameterEvent
+<span class="w">    </span>/my_topic:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled,<span class="w"> </span>bridged<span class="o">)</span>
+<span class="w">  </span>Publishers:
+<span class="w">    </span>/my_topic2:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray<span class="w"> </span><span class="o">(</span>Agnocast<span class="w"> </span>enabled<span class="o">)</span>
+<span class="w">    </span>/parameter_events:<span class="w"> </span>rcl_interfaces/msg/ParameterEvent
+<span class="w">    </span>/rosout:<span class="w"> </span>rcl_interfaces/msg/Log
+<span class="w">  </span>Service<span class="w"> </span>Servers:
+<span class="w">    </span>/listener_node/describe_parameters:<span class="w"> </span>rcl_interfaces/srv/DescribeParameters
+<span class="w">    </span>/listener_node/get_parameter_types:<span class="w"> </span>rcl_interfaces/srv/GetParameterTypes
+<span class="w">    </span>/listener_node/get_parameters:<span class="w"> </span>rcl_interfaces/srv/GetParameters
+<span class="w">    </span>/listener_node/list_parameters:<span class="w"> </span>rcl_interfaces/srv/ListParameters
+<span class="w">    </span>/listener_node/set_parameters:<span class="w"> </span>rcl_interfaces/srv/SetParameters
+<span class="w">    </span>/listener_node/set_parameters_atomically:<span class="w"> </span>rcl_interfaces/srv/SetParametersAtomically
+<span class="w">  </span>Service<span class="w"> </span>Clients:
+<span class="w">  </span>Action<span class="w"> </span>Servers:
+<span class="w">  </span>Action<span class="w"> </span>Clients:
+</code></pre></div>
+<p>Similar to <code>ros2 topic list_agnocast</code>, the (Agnocast enabled, bridged) suffix in the node info indicates that communication has been successfully established between Agnocast and ROS 2 for that specific topic.</p>
+<p>If a topic is Agnocast-enabled but not currently bridged (e.g., there is no corresponding ROS 2 publisher/subscriber or the bridge process is not active), it will be displayed simply as (Agnocast enabled). This allows you to verify the connectivity status of each topic directly from the node's perspective.</p>
+<h3 id="bag-record">Bag Record<a class="headerlink" href="#bag-record" title="Permanent link">#</a></h3>
+<p><code>record_agnocast</code> is an Agnocast extension of <code>ros2 bag record</code>. It continuously watches for Agnocast topics and automatically creates the corresponding bridge when they appear, making them recordable. It also works for standard ROS 2 topics.</p>
+<p><code>record_agnocast</code> works cluster-wide wherever a discovery agent runs (across IPC namespaces and ECUs on the same <code>ROS_DOMAIN_ID</code>); without a discovery agent, Agnocast-only topics cannot be recorded (they are silently missed).</p>
+<p>When the discovery agent is running:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>bag<span class="w"> </span>record_agnocast<span class="w"> </span>-o<span class="w"> </span>rosbag_output<span class="w"> </span>-e<span class="w"> </span>/my_*
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059372</span>.244129306<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Press<span class="w"> </span>SPACE<span class="w"> </span><span class="k">for</span><span class="w"> </span>pausing/resuming<span class="w"> </span><span class="o">(</span>RecorderImpl<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:223<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059372</span>.244225399<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Event<span class="w"> </span>publisher<span class="w"> </span>thread:<span class="w"> </span>Started<span class="w"> </span><span class="o">(</span>event_publisher_thread_main<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder_event_notifier_impl.hpp:169<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059372</span>.245935596<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Starting<span class="w"> </span>recording<span class="w"> </span>to<span class="w"> </span><span class="s1">&#39;rosbag_output&#39;</span><span class="w"> </span><span class="o">(</span>record<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:303<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059372</span>.246716373<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>topics...<span class="w"> </span><span class="o">(</span>record<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:329<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059372</span>.246728940<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Recording...<span class="w"> </span><span class="o">(</span>record<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:338<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059372</span>.246865915<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Topics<span class="w"> </span>discovery<span class="w"> </span>started.<span class="w"> </span><span class="o">(</span>topics_discovery<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:629<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059373</span>.218892553<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Subscribed<span class="w"> </span>to<span class="w"> </span>topic<span class="w"> </span><span class="s1">&#39;/my_topic&#39;</span><span class="w"> </span><span class="o">(</span>subscribe_topic<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:730<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059379</span>.681077909<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Topics<span class="w"> </span>discovery<span class="w"> </span>stopped.<span class="w"> </span><span class="o">(</span>topics_discovery<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:671<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059379</span>.681410757<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Pausing<span class="w"> </span>recording.<span class="w"> </span><span class="o">(</span>pause<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:547<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059379</span>.681530215<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_cpp<span class="o">]</span>:<span class="w"> </span>Writing<span class="w"> </span>remaining<span class="w"> </span>messages<span class="w"> </span>from<span class="w"> </span>cache<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>bag.<span class="w"> </span>It<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="o">(</span>stop<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_cpp/cache/cache_consumer.cpp:44<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059379</span>.684395117<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Recording<span class="w"> </span>stopped<span class="w"> </span><span class="o">(</span>stop<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:281<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059379</span>.691063397<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Event<span class="w"> </span>publisher<span class="w"> </span>thread:<span class="w"> </span>Exited<span class="w"> </span><span class="o">(</span>event_publisher_thread_main<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder_event_notifier_impl.hpp:220<span class="o">)</span>
+$<span class="w"> </span>ros2<span class="w"> </span>bag<span class="w"> </span>info<span class="w"> </span>rosbag_output
+
+Files:<span class="w">             </span>rosbag_output_0.mcap
+Bag<span class="w"> </span>size:<span class="w">          </span><span class="m">62</span>.5<span class="w"> </span>MiB
+Storage<span class="w"> </span>id:<span class="w">        </span>mcap
+ROS<span class="w"> </span>Distro:<span class="w">        </span>jazzy
+Duration:<span class="w">          </span><span class="m">6</span>.272831748s
+Start:<span class="w">             </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">11</span>:42:53.307379851<span class="w"> </span><span class="o">(</span><span class="m">1781059373</span>.307379851<span class="o">)</span>
+End:<span class="w">               </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">11</span>:42:59.580211599<span class="w"> </span><span class="o">(</span><span class="m">1781059379</span>.580211599<span class="o">)</span>
+Messages:<span class="w">          </span><span class="m">64</span>
+Topic<span class="w"> </span>information:<span class="w"> </span>Topic:<span class="w"> </span>/my_topic<span class="w"> </span><span class="p">|</span><span class="w"> </span>Type:<span class="w"> </span>agnocast_sample_interfaces/msg/DynamicSizeArray<span class="w"> </span><span class="p">|</span><span class="w"> </span>Count:<span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Serialization<span class="w"> </span>Format:<span class="w"> </span>cdr
+Service:<span class="w">           </span><span class="m">0</span>
+Service<span class="w"> </span>information:<span class="w"> </span>
+</code></pre></div>
+<p>Without a discovery agent, the command starts but records nothing for Agnocast-only topics (silently unobservable):</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>bag<span class="w"> </span>record_agnocast<span class="w"> </span>-o<span class="w"> </span>rosbag_output<span class="w"> </span>-e<span class="w"> </span>/my_*
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059455</span>.269319259<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Press<span class="w"> </span>SPACE<span class="w"> </span><span class="k">for</span><span class="w"> </span>pausing/resuming<span class="w"> </span><span class="o">(</span>RecorderImpl<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:223<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059455</span>.269340122<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Event<span class="w"> </span>publisher<span class="w"> </span>thread:<span class="w"> </span>Started<span class="w"> </span><span class="o">(</span>event_publisher_thread_main<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder_event_notifier_impl.hpp:169<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059455</span>.271078152<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Starting<span class="w"> </span>recording<span class="w"> </span>to<span class="w"> </span><span class="s1">&#39;rosbag_output&#39;</span><span class="w"> </span><span class="o">(</span>record<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:303<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059455</span>.271900382<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>topics...<span class="w"> </span><span class="o">(</span>record<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:329<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059455</span>.271912956<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Recording...<span class="w"> </span><span class="o">(</span>record<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:338<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059455</span>.271961053<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Topics<span class="w"> </span>discovery<span class="w"> </span>started.<span class="w"> </span><span class="o">(</span>topics_discovery<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:629<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059462</span>.239325076<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Topics<span class="w"> </span>discovery<span class="w"> </span>stopped.<span class="w"> </span><span class="o">(</span>topics_discovery<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:671<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059462</span>.239964342<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Pausing<span class="w"> </span>recording.<span class="w"> </span><span class="o">(</span>pause<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:547<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059462</span>.240101000<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_cpp<span class="o">]</span>:<span class="w"> </span>Writing<span class="w"> </span>remaining<span class="w"> </span>messages<span class="w"> </span>from<span class="w"> </span>cache<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>bag.<span class="w"> </span>It<span class="w"> </span>may<span class="w"> </span>take<span class="w"> </span>a<span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="o">(</span>stop<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_cpp/cache/cache_consumer.cpp:44<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059462</span>.241862458<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Recording<span class="w"> </span>stopped<span class="w"> </span><span class="o">(</span>stop<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder.cpp:281<span class="o">)</span>
+<span class="o">[</span>INFO<span class="w"> </span><span class="m">1781059462</span>.244343500<span class="o">]</span><span class="w"> </span><span class="o">[</span>rosbag2_recorder<span class="o">]</span>:<span class="w"> </span>Event<span class="w"> </span>publisher<span class="w"> </span>thread:<span class="w"> </span>Exited<span class="w"> </span><span class="o">(</span>event_publisher_thread_main<span class="o">()</span><span class="w"> </span>at<span class="w"> </span>./src/rosbag2_transport/recorder_event_notifier_impl.hpp:220<span class="o">)</span>
+$<span class="w"> </span>ros2<span class="w"> </span>bag<span class="w"> </span>info<span class="w"> </span>rosbag_output
+
+Files:<span class="w">             </span>rosbag_output_0.mcap
+Bag<span class="w"> </span>size:<span class="w">          </span><span class="m">1</span>.8<span class="w"> </span>KiB
+Storage<span class="w"> </span>id:<span class="w">        </span>mcap
+ROS<span class="w"> </span>Distro:<span class="w">        </span>jazzy
+Duration:<span class="w">          </span><span class="m">0</span>.000000000s
+Start:<span class="w">             </span>Apr<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">2262</span><span class="w"> </span><span class="m">08</span>:47:16.854775807<span class="w"> </span><span class="o">(</span><span class="m">9223372036</span>.854775807<span class="o">)</span>
+End:<span class="w">               </span>Apr<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">2262</span><span class="w"> </span><span class="m">08</span>:47:16.854775807<span class="w"> </span><span class="o">(</span><span class="m">9223372036</span>.854775807<span class="o">)</span>
+Messages:<span class="w">          </span><span class="m">0</span>
+Topic<span class="w"> </span>information:<span class="w"> </span>
+Service:<span class="w">           </span><span class="m">0</span>
+Service<span class="w"> </span>information:<span class="w"> </span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../callback-isolated-executor/tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tutorial" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Tutorial
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tips/" class="md-footer__link md-footer__link--next" aria-label="Next: Tips" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Tips
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 TIER IV, Inc.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://unpkg.com/mermaid@8.13.10/dist/mermaid.min.js"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+      
+    
+  </body>
+</html>
