@@ -77,6 +77,20 @@ If all your nodes use Agnocast and you don't need RMW interoperability:
 <env name="AGNOCAST_BRIDGE_MODE" value="off" />
 ```
 
+### Stable Bridge Node Name
+
+The bridge manager node is named `agnocast_bridge_node_performance_<ipc_ns_inode>_<pid>` by default, which is unique on every launch. When tools reference the node name in static configuration files (e.g. CIE thread configuration), set the [`AGNOCAST_BRIDGE_NODE_NAME_SUFFIX`](../api/environment-variables.md#agnocast_bridge_node_name_suffix) environment variable to name the node `agnocast_bridge_node_performance_<suffix>` instead. The deployment configuration is responsible for choosing a value that is unique within the ROS 2 domain, such as the container name:
+
+```yaml
+# docker-compose.yaml
+services:
+  planning:
+    environment:
+      - AGNOCAST_BRIDGE_NODE_NAME_SUFFIX=main_planning  # -> /agnocast_bridge_node_performance_main_planning
+```
+
+If the value would not form a valid ROS 2 node name, it is ignored with a warning and the default naming is used. See [`AGNOCAST_BRIDGE_NODE_NAME_SUFFIX`](../api/environment-variables.md#agnocast_bridge_node_name_suffix) for the exact rules.
+
 ## Bridge Architecture
 
 The Bridge uses a single bridge manager process per IPC namespace. A bridge for a topic is created **lazily** — only when both an Agnocast endpoint and an external ROS 2 endpoint exist for that topic — and destroyed when either endpoint disappears.
