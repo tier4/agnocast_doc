@@ -396,7 +396,7 @@ Without a discovery agent, the command exits with an error:
 ```bash
 $ ros2 topic echo_agnocast /my_topic
 [*] Triggering A2R bridge for '/my_topic'. This may take a few seconds...
-NOTE: no /_agnocast_discovery agent visible; showing local NS only via ioctl. Start one with `ros2 run ros2agnocast_discovery_agent discovery_agent` to see other NSes / ECUs.
+NOTE: no /_agnocast_discovery agent visible; showing local NS only via ioctl. Start one with `ros2 run ros2agnocast_discovery_agent agnocast_discovery_agent` to see other NSes / ECUs.
 ERROR: Could not resolve message type for '/my_topic'. The topic was not found in the ROS 2 graph or via /_agnocast_discovery. Make sure the topic exists and, for Agnocast topics, the discovery agent is running.
 ```
 
@@ -437,7 +437,7 @@ Without a discovery agent, the command exits with an error:
 ```bash
 $ ros2 topic hz_agnocast /my_topic
 [*] Triggering A2R bridge for '/my_topic'. This may take a few seconds...
-NOTE: no /_agnocast_discovery agent visible; showing local NS only via ioctl. Start one with `ros2 run ros2agnocast_discovery_agent discovery_agent` to see other NSes / ECUs.
+NOTE: no /_agnocast_discovery agent visible; showing local NS only via ioctl. Start one with `ros2 run ros2agnocast_discovery_agent agnocast_discovery_agent` to see other NSes / ECUs.
 ERROR: Could not resolve message type for '/my_topic'. The topic was not found in the ROS 2 graph or via /_agnocast_discovery. Make sure the topic exists and, for Agnocast topics, the discovery agent is running.
 ```
 
@@ -482,7 +482,7 @@ Without a discovery agent, the command exits with an error:
 ```bash
 $ ros2 topic delay_agnocast /pose_chatter
 [*] Triggering A2R bridge for '/pose_chatter'. This may take a few seconds...
-NOTE: no /_agnocast_discovery agent visible; showing local NS only via ioctl. Start one with `ros2 run ros2agnocast_discovery_agent discovery_agent` to see other NSes / ECUs.
+NOTE: no /_agnocast_discovery agent visible; showing local NS only via ioctl. Start one with `ros2 run ros2agnocast_discovery_agent agnocast_discovery_agent` to see other NSes / ECUs.
 ERROR: Could not resolve message type for '/pose_chatter'. The topic was not found in the ROS 2 graph or via /_agnocast_discovery. Make sure the topic exists and, for Agnocast topics, the discovery agent is running.
 ```
 
