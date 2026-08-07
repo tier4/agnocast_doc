@@ -17,7 +17,7 @@ Polling-based subscription that retrieves messages on demand via take().
 agnocast::ipc_shared_ptr<const MessageT> TakeSubscription::take(bool allow_same_message)
 ```
 
-Retrieve the latest message from the topic.
+Retrieve one message from the topic.
 
 | Template Parameter | Description |
 |-----------|-------------|
@@ -25,7 +25,7 @@ Retrieve the latest message from the topic.
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `allow_same_message` | `false` | If true, may return the same message as the previous call (useful for always having the latest value). If false, returns only new messages since the last take. |
+| `allow_same_message` | `false` | If true, returns the oldest entry within the subscription's history depth, and may return the same message as the previous call. If false, returns the oldest entry not yet received by this subscriber, i.e. FIFO. |
 
 | | |
 |-----------|-------------|

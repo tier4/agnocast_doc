@@ -70,6 +70,20 @@ Key changes:
 2. `sub_->take(msg, msg_info)` → `sub_->take_data()` which returns an `agnocast::ipc_shared_ptr<const T>` (zero-copy)
 3. Use `agnocast::create_subscription` free function (no callback argument)
 
+!!! warning "Use a history depth of 1"
+    `take_data()` returns exactly one message per call, and reads are non-destructive: entries stay
+    in shared memory while a per-subscriber watermark records how far this subscriber has read. The
+    history depth bounds how far back the search goes, and the **oldest** entry within that window
+    is returned.
+
+    With a depth of 1 the window holds a single entry, so the most recent message is returned and
+    the same message is returned again when nothing newer has been published. 
+
+!!! info "Planned relocation"
+    `agnocast::PollingSubscriber` reproduces Autoware's polling subscriber, which is an
+    Autoware-specific API that Agnocast does not intend to maintain as public API. The class is
+    planned to move to `autoware_agnocast_wrapper` and be removed from Agnocast.
+
 ### After (Agnocast Stage 2)
 
 ```cpp
