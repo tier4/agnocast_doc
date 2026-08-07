@@ -3,6 +3,7 @@ nav:
     - Environment Setup: environment-setup
     - Migration Guide: migration-guide
     - CallbackIsolatedExecutor: callback-isolated-executor
+    - Domain Bridge: domain-bridge
     - ROS 2 CLI: ros2-cli
     - Tips: tips
     - API Reference: api

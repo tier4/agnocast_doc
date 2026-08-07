@@ -1046,6 +1046,15 @@ def main():
                 "the default package install location.\n\n")
         f.write("```bash\nexport AGNOCAST_BRIDGE_PLUGINS_PATH=/opt/my_plugins:/home/user/plugins\n```\n\n")
 
+        f.write("---\n\n")
+        f.write("#### `AGNOCAST_DOMAIN_BRIDGE_CONFIG`\n\n")
+        f.write("Default path to a [`domain_bridge` rule file](../domain-bridge/configuration.md) for "
+                "the standalone `register_domain_bridge` tool: "
+                "`ros2 run ros2agnocast_discovery_agent register_domain_bridge` reads it when "
+                "`--config` is not given. Register the rules **before** the nodes that use those "
+                "topics start.\n\n")
+        f.write("```bash\nexport AGNOCAST_DOMAIN_BRIDGE_CONFIG=/path/to/domain_bridge.yaml\n```\n\n")
+
     write_page("environment-variables.md", write_env_vars)
     landing_entries.append(("Environment Variables", "environment-variables.md",
                             "`LD_PRELOAD`, `AGNOCAST_BRIDGE_MODE`, and other runtime configuration variables."))
