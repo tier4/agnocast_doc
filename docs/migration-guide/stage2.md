@@ -228,6 +228,23 @@ No launch file changes are needed from Stage 1 — `LD_PRELOAD` and the containe
 
 `agnocast::Node` provides an API largely compatible with `rclcpp::Node`, but some APIs are not yet supported. Before migrating to Stage 2, check the [agnocast::Node interface comparison](https://github.com/autowarefoundation/agnocast/blob/main/docs/agnocast_node_interface_comparison.md) to confirm the APIs your node uses are supported.
 
+The following `rclcpp::Node` APIs are **not supported** by `agnocast::Node` (they either do not exist or throw an exception):
+
+- Graph APIs: `get_node_names()`, `get_topic_names_and_types()`, `get_service_names_and_types()`, `get_publishers_info_by_topic()`, `get_subscriptions_info_by_topic()`, `get_graph_event()`, `wait_for_graph_change()`. Note that `count_publishers()` and `count_subscribers()` **are** supported.
+- `get_rcl_node_handle()` / `get_shared_rcl_node_handle()`: throw `std::runtime_error` because DDS is not used.
+- `create_generic_publisher()` / `create_generic_subscription()` as node members. The free functions `agnocast::create_generic_publisher()` and `agnocast::create_generic_subscription()` support `agnocast::Node`.
+- `declare_parameters()` / `get_parameter_or()`
+- Sub-nodes: `create_sub_node()`, `get_sub_namespace()`, `get_effective_namespace()`
+- `get_node_options()`
+- Lifecycle nodes (see the [ros2 CLI page](../ros2-cli/index.md) for the `ros2 lifecycle` behavior)
+
+Behavioral differences to be aware of:
+
+- `set_parameters()` / `set_parameters_atomically()` do not publish to `/parameter_events`.
+- `use_sim_time` uses a single clock, and dynamically switching it from `true` to `false` at runtime is not supported for `create_timer()` timers.
+- The command-line arguments `--enable-rosout-logs` and `-e` (enclave) are unsupported.
+- `get_context()` returns the `rclcpp::Context` passed via `NodeOptions` (the Component Container's context when the node is component-loaded). For a standalone node it returns the global default context, which is non-null but reports `is_valid() == false`.
+
 ### Summary of Changes from Stage 1 to Stage 2
 
 | Aspect | Stage 1 | Stage 2 |
