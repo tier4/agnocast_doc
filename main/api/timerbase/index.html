@@ -1170,6 +1170,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set_on_reset_callback" class="md-nav__link">
+    set_on_reset_callback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_on_reset_callback" class="md-nav__link">
+    clear_on_reset_callback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_clock" class="md-nav__link">
     get_clock()
   </a>
@@ -1329,6 +1343,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set_on_reset_callback" class="md-nav__link">
+    set_on_reset_callback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_on_reset_callback" class="md-nav__link">
+    clear_on_reset_callback()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get_clock" class="md-nav__link">
     get_clock()
   </a>
@@ -1401,6 +1429,30 @@
 </tr>
 </tbody>
 </table>
+<hr />
+<h4 id="set_on_reset_callback"><code>set_on_reset_callback()</code><a class="headerlink" href="#set_on_reset_callback" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">TimerBase</span><span class="o">::</span><span class="n">set_on_reset_callback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p>Sets a callback to be invoked each time the timer is reset. This function aligns with <code>rclcpp::set_on_reset_callback</code>. For extended details regarding best practices (e.g., keeping the callback non-blocking), please refer to the rclcpp documentation. This function is thread-safe. Calling it again will override any previously set callback.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>callback</code></td>
+<td>The functor to be called at reset. It receives the number of times the timer has been reset as an argument.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="clear_on_reset_callback"><code>clear_on_reset_callback()</code><a class="headerlink" href="#clear_on_reset_callback" title="Permanent link">#</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">TimerBase</span><span class="o">::</span><span class="n">clear_on_reset_callback</span><span class="p">()</span>
+</code></pre></div>
+<p>Clear the callback registered for reset timer.</p>
 <hr />
 <h4 id="get_clock"><code>get_clock()</code><a class="headerlink" href="#get_clock" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">rclcpp</span><span class="o">::</span><span class="n">Clock</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">TimerBase</span><span class="o">::</span><span class="n">get_clock</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>

@@ -2689,7 +2689,21 @@
 <h4 id="count_publishers"><code>count_publishers()</code><a class="headerlink" href="#count_publishers" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kt">size_t</span><span class="w"> </span><span class="n">Node</span><span class="o">::</span><span class="n">count_publishers</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic_name</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </code></pre></div>
-<p>Return the number of publishers on a topic.</p>
+<p>Return the number of publishers on a topic. Counts the agnocast publishers in the same domain, plus the ROS 2 publishers reported by a bridge when one is running. Endpoints that a bridge created itself are excluded, so the result reflects the publishers the application set up.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>topic_name</code></td>
+<td>Topic name. A relative name is resolved against this node's namespace.</td>
+</tr>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -2708,7 +2722,21 @@
 <h4 id="count_subscribers"><code>count_subscribers()</code><a class="headerlink" href="#count_subscribers" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kt">size_t</span><span class="w"> </span><span class="n">Node</span><span class="o">::</span><span class="n">count_subscribers</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">topic_name</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </code></pre></div>
-<p>Return the number of subscribers on a topic.</p>
+<p>Return the number of subscribers on a topic. Counts the agnocast subscribers in the same domain, plus the ROS 2 subscribers reported by a bridge when one is running. Endpoints that a bridge created itself are excluded, so the result reflects the subscribers the application set up. Agnocast subscribers living in the calling process are not counted, because the underlying query answers how many other processes receive a published message.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>topic_name</code></td>
+<td>Topic name. A relative name is resolved against this node's namespace.</td>
+</tr>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -2719,7 +2747,7 @@
 <tbody>
 <tr>
 <td><strong>Returns</strong></td>
-<td>Subscriber count.</td>
+<td>Subscriber count, excluding agnocast subscribers in the calling process.</td>
 </tr>
 </tbody>
 </table>
