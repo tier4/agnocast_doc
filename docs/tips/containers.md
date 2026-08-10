@@ -32,7 +32,7 @@ docker run --device /dev/agnocast ...
 
 ### Shared IPC namespace
 
-Agnocast uses POSIX shared memory (`/dev/shm`) and POSIX message queues (`/dev/mqueue`) for inter-process communication. These resources are scoped by the Linux IPC namespace. By default, each Docker container gets its own private IPC namespace, meaning **Agnocast processes in different containers cannot communicate with each other**.
+Agnocast uses POSIX shared memory (`/dev/shm`) for inter-process communication, and the kernel module scopes publishers and subscribers by the Linux IPC namespace. By default, each Docker container gets its own private IPC namespace, meaning **Agnocast processes in different containers cannot communicate with each other**.
 
 To enable communication, all Agnocast containers must share the same IPC namespace.
 

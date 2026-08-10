@@ -1,52 +1,5 @@
 # System Configuration
 
-## Kernel Parameters
-
-Agnocast uses POSIX message queues for inter-process notification. The default Linux limits are too low for typical robotics workloads.
-
-### Required
-
-Set the maximum number of messages per queue:
-
-```bash
-sudo sysctl -w fs.mqueue.msg_max=256
-```
-
-To persist across reboots, add to `/etc/sysctl.d/agnocast.conf`:
-
-```ini
-fs.mqueue.msg_max = 256
-```
-
-### Optional (for large deployments)
-
-```ini
-# Maximum number of message queues system-wide
-fs.mqueue.queues_max = 1024
-```
-
-#### Per-user POSIX message queue memory limit
-
-Each bridge manager message queue consumes memory proportional to the maximum message size and queue depth. When running many Agnocast processes simultaneously, the per-user POSIX message queue memory limit (`RLIMIT_MSGQUEUE`) may be exceeded, causing `mq_open` to fail.
-
-To increase the limit, either add the following line to `/etc/security/limits.conf`:
-
-```bash
-* - msgqueue unlimited
-```
-
-Or use `prlimit` to change the limit for the current shell:
-
-```bash
-sudo prlimit --pid=$$ --msgqueue=unlimited
-```
-
-You can verify the current limit with:
-
-```bash
-ulimit -q
-```
-
 ## RT Throttling (for CallbackIsolatedExecutor)
 
 If using real-time scheduling with the CallbackIsolatedExecutor, you may need to increase the RT throttling limit. The default allows RT tasks to use 95% of each period:
