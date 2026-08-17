@@ -1470,8 +1470,13 @@
 </tr>
 <tr>
 <td><code>priority</code></td>
-<td>Yes (except <code>SCHED_DEADLINE</code>)</td>
-<td>Thread priority or nice value</td>
+<td><code>SCHED_FIFO</code> / <code>SCHED_RR</code> only</td>
+<td>Real-time priority (1–99, 99 = highest)</td>
+</tr>
+<tr>
+<td><code>nice</code></td>
+<td><code>SCHED_OTHER</code> / <code>SCHED_BATCH</code> / <code>SCHED_IDLE</code> only</td>
+<td>Nice value (-20–19, lower = stronger)</td>
 </tr>
 <tr>
 <td><code>affinity</code></td>
@@ -1518,45 +1523,46 @@
 <thead>
 <tr>
 <th>Policy</th>
-<th>Priority</th>
+<th>Parameter</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>SCHED_FIFO</code></td>
-<td>1–99 (99 = highest)</td>
+<td><code>priority</code>: 1–99 (99 = highest)</td>
 <td>Real-time, first-in-first-out</td>
 </tr>
 <tr>
 <td><code>SCHED_RR</code></td>
-<td>1–99 (99 = highest)</td>
+<td><code>priority</code>: 1–99 (99 = highest)</td>
 <td>Real-time, round-robin</td>
 </tr>
 <tr>
 <td><code>SCHED_OTHER</code></td>
-<td>-20–19 (nice value)</td>
+<td><code>nice</code>: -20–19 (lower = stronger)</td>
 <td>Default Linux scheduler</td>
 </tr>
 <tr>
 <td><code>SCHED_BATCH</code></td>
-<td>-20–19 (nice value)</td>
+<td><code>nice</code>: -20–19 (lower = stronger)</td>
 <td>Batch processing</td>
 </tr>
 <tr>
 <td><code>SCHED_IDLE</code></td>
-<td>-20–19 (nice value)</td>
-<td>Lowest priority (nice value has no practical effect)</td>
+<td><code>nice</code>: -20–19 (no practical effect)</td>
+<td>Lowest priority</td>
 </tr>
 <tr>
 <td><code>SCHED_DEADLINE</code></td>
-<td>N/A</td>
-<td>Deadline-based (requires <code>runtime</code>, <code>period</code>, <code>deadline</code>)</td>
+<td><code>runtime</code>, <code>period</code>, <code>deadline</code></td>
+<td>Deadline-based</td>
 </tr>
 </tbody>
 </table>
+<p>The scheduling-parameter key is policy-dependent: real-time policies (<code>SCHED_FIFO</code> / <code>SCHED_RR</code>) require <code>priority</code>, while CFS policies (<code>SCHED_OTHER</code> / <code>SCHED_BATCH</code> / <code>SCHED_IDLE</code>) require <code>nice</code>. A missing required key is rejected at startup with an error naming the required one; a key belonging to the other policy class is ignored like any other unknown key. Values outside the valid range are also rejected.</p>
 <h3 id="sched_deadline">SCHED_DEADLINE<a class="headerlink" href="#sched_deadline" title="Permanent link">#</a></h3>
-<p>For <code>SCHED_DEADLINE</code>, specify <code>runtime</code>, <code>period</code>, and <code>deadline</code> (in nanoseconds) instead of <code>priority</code>:</p>
+<p>For <code>SCHED_DEADLINE</code>, specify <code>runtime</code>, <code>period</code>, and <code>deadline</code> (in nanoseconds) instead of <code>priority</code> or <code>nice</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">callback_groups</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/my_node/my_deadline_group@Timer</span>
 <span class="w">    </span><span class="nt">policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCHED_DEADLINE</span>
@@ -1592,8 +1598,13 @@
 </tr>
 <tr>
 <td><code>priority</code></td>
-<td>Yes (except <code>SCHED_DEADLINE</code>)</td>
-<td>Thread priority or nice value</td>
+<td><code>SCHED_FIFO</code> / <code>SCHED_RR</code> only</td>
+<td>Real-time priority (1–99, 99 = highest)</td>
+</tr>
+<tr>
+<td><code>nice</code></td>
+<td><code>SCHED_OTHER</code> / <code>SCHED_BATCH</code> / <code>SCHED_IDLE</code> only</td>
+<td>Nice value (-20–19, lower = stronger)</td>
 </tr>
 <tr>
 <td><code>affinity</code></td>
@@ -1704,7 +1715,7 @@
 
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/logging_node/default_cb_group@Subscription(/rosout)</span>
 <span class="w">    </span><span class="nt">policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCHED_OTHER</span>
-<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">    </span><span class="nt">nice</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
 
 <span class="nt">non_ros_threads</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sensor_driver</span>
