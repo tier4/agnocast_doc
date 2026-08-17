@@ -43,17 +43,17 @@ callback_groups:
   - id: /cie_tutorial_node@Timer(100000000)
     affinity: ~
     policy: SCHED_OTHER
-    priority: 0
+    nice: 0
 
   - id: /cie_tutorial_node@Timer(200000000)
     affinity: ~
     policy: SCHED_OTHER
-    priority: 0
+    nice: 0
 
   - id: /cie_tutorial_node@Timer(1000000000)
     affinity: ~
     policy: SCHED_OTHER
-    priority: 0
+    nice: 0
 
 non_ros_threads: []
 ```
@@ -88,7 +88,7 @@ callback_groups:
 
   - id: /cie_tutorial_node@Timer(1000000000)
     policy: SCHED_OTHER
-    priority: 0
+    nice: 0
 
 non_ros_threads: []
 ```
