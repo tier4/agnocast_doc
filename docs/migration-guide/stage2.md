@@ -16,6 +16,7 @@ In Stage 2, you replace `rclcpp::Node` with `agnocast::Node`. This bypasses the 
 
 class MyPublisher : public rclcpp::Node
 {
+  rclcpp::CallbackGroup::SharedPtr group_;
   agnocast::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 
@@ -29,12 +30,12 @@ class MyPublisher : public rclcpp::Node
 public:
   MyPublisher() : Node("my_publisher")
   {
-    auto group = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+    group_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
 
     pub_ = agnocast::create_publisher<std_msgs::msg::String>(
       this, "/topic", 10);
     timer_ = create_wall_timer(100ms,
-      std::bind(&MyPublisher::timer_callback, this), group);
+      std::bind(&MyPublisher::timer_callback, this), group_);
   }
 };
 ```
@@ -43,10 +44,12 @@ public:
 
 ```cpp
 #include "agnocast/agnocast.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
 class MyPublisher : public agnocast::Node                           // (1)
 {
+  rclcpp::CallbackGroup::SharedPtr group_;
   agnocast::Publisher<std_msgs::msg::String>::SharedPtr pub_;
   agnocast::TimerBase::SharedPtr timer_;                            // (2)
 
@@ -60,12 +63,12 @@ class MyPublisher : public agnocast::Node                           // (1)
 public:
   MyPublisher() : Node("my_publisher")
   {
-    auto group = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+    group_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
 
     pub_ = this->create_publisher<std_msgs::msg::String>(           // (3)
       "/topic", 10);
     timer_ = this->create_wall_timer(100ms,
-      std::bind(&MyPublisher::timer_callback, this), group);
+      std::bind(&MyPublisher::timer_callback, this), group_);
   }
 };
 ```
@@ -87,6 +90,7 @@ Key changes:
 
 class MySubscriber : public rclcpp::Node
 {
+  rclcpp::CallbackGroup::SharedPtr group_;
   agnocast::Subscription<std_msgs::msg::String>::SharedPtr sub_;
 
   void callback(const agnocast::ipc_shared_ptr<std_msgs::msg::String> & msg)
@@ -97,9 +101,9 @@ class MySubscriber : public rclcpp::Node
 public:
   MySubscriber() : Node("my_subscriber")
   {
-    auto group = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+    group_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
     agnocast::SubscriptionOptions options;
-    options.callback_group = group;
+    options.callback_group = group_;
 
     sub_ = agnocast::create_subscription<std_msgs::msg::String>(
       this, "/topic", 10,
@@ -113,10 +117,12 @@ public:
 
 ```cpp
 #include "agnocast/agnocast.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
 class MySubscriber : public agnocast::Node                          // (1)
 {
+  rclcpp::CallbackGroup::SharedPtr group_;
   agnocast::Subscription<std_msgs::msg::String>::SharedPtr sub_;
 
   void callback(const agnocast::ipc_shared_ptr<std_msgs::msg::String> & msg)
@@ -127,9 +133,9 @@ class MySubscriber : public agnocast::Node                          // (1)
 public:
   MySubscriber() : Node("my_subscriber")
   {
-    auto group = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+    group_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
     agnocast::SubscriptionOptions options;
-    options.callback_group = group;
+    options.callback_group = group_;
 
     sub_ = this->create_subscription<std_msgs::msg::String>(        // (2)
       "/topic", 10,
@@ -255,5 +261,4 @@ Behavioral differences to be aware of:
 | Context check | `rclcpp::ok()` | `agnocast::ok()` |
 | Shutdown | `rclcpp::shutdown()` | `agnocast::shutdown()` |
 | Executor | `agnocast::*AgnocastExecutor` | `agnocast::AgnocastOnly*Executor` |
-| rclcpp dependency | Required | Not required |
 | RMW participant | Created | Not created |
