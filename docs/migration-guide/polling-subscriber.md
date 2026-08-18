@@ -1,6 +1,6 @@
 # Polling Subscriber
 
-Agnocast provides `agnocast::PollingSubscriber`, a pull-based subscription that lets you fetch the latest message on demand rather than receiving it via a callback. This corresponds to the `subscription->take()` pattern in rclcpp, but returns a zero-copy shared pointer from shared memory instead of copying data into a provided message.
+Agnocast provides `agnocast::PollingSubscriber`, a pull-based subscription that lets you fetch a message on demand rather than receiving it via a callback. This corresponds to the `subscription->take()` pattern in rclcpp, but returns a zero-copy shared pointer from shared memory instead of copying data into a provided message.
 
 `PollingSubscriber` is available at both Stage 1 (`rclcpp::Node`) and Stage 2 (`agnocast::Node`).
 
@@ -69,6 +69,32 @@ Key changes:
 1. `rclcpp::Subscription` → `agnocast::PollingSubscriber` (no dummy callback needed)
 2. `sub_->take(msg, msg_info)` → `sub_->take_data()` which returns an `agnocast::ipc_shared_ptr<const T>` (zero-copy)
 3. Use `agnocast::create_subscription` free function (no callback argument)
+
+!!! warning "Use a history depth of 1"
+    `take_data()` returns exactly one message per call, and reads are non-destructive: entries stay
+    in shared memory while a per-subscriber watermark records how far this subscriber has read. The
+    search starts at the newest entry and walks back at most `depth` deliverable entries, and the
+    **oldest** entry within that window is returned.
+
+    With a depth of 1 the window holds a single entry, so the most recent message is returned, and
+    the same message is returned again when nothing newer has been published. With a greater depth,
+    once at least `depth` messages have been published, the returned message lags the newest one by
+    exactly `depth - 1` and the lag does not recover — so `take_data()` means "the latest value"
+    only with a depth of 1.
+
+!!! warning "Deprecated"
+    `agnocast::PollingSubscriber` reproduces Autoware's polling subscriber, which is an
+    Autoware-specific API that Agnocast does not intend to maintain as public API. The class is
+    planned to move to `autoware_agnocast_wrapper` and be removed from Agnocast, so its entry
+    points — the polling overloads of `create_subscription()`, `take_data()`, and `takeData()` —
+    are marked `[[deprecated]]` and calling them emits a compiler warning. No removal version has
+    been decided yet.
+
+    For new code, use [`agnocast::TakeSubscription`](../api/takesubscription.md) directly: keep the
+    last returned message on the caller side and call [`take(false)`](../api/takesubscription.md#take),
+    which returns the oldest entry within the window not yet received by this subscriber. `take(true)`
+    — the mode `take_data()` uses — exists only for `PollingSubscriber` and is expected to go with
+    it, so it logs a one-time warning at runtime.
 
 ### After (Agnocast Stage 2)
 
