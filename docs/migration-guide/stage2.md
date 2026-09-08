@@ -222,6 +222,8 @@ agnocast_components_register_node(
 
 No launch file changes are needed from Stage 1 — `LD_PRELOAD` and the container executable remain the same.
 
+Unlike a node with `main`, a composable node calls neither `agnocast::init()` nor `agnocast::shutdown()`; the container's `rclcpp::init()` and `rclcpp::shutdown()` cover the Agnocast side too. Calling `agnocast::init()` from a component throws.
+
 ## Supplementary Information
 
 ### agnocast::Node API Compatibility
@@ -243,6 +245,7 @@ Behavioral differences to be aware of:
 - `set_parameters()` / `set_parameters_atomically()` do not publish to `/parameter_events`.
 - `use_sim_time` uses a single clock, and dynamically switching it from `true` to `false` at runtime is not supported for `create_timer()` timers.
 - The command-line arguments `--enable-rosout-logs` and `-e` (enclave) are unsupported.
+- A node with `main` takes its global arguments (remappings, parameter overrides) from `agnocast::init(argc, argv)`. A component-loaded node takes them from the container, the same way an `rclcpp::Node` component does.
 - `get_context()` returns the `rclcpp::Context` passed via `NodeOptions` (the Component Container's context when the node is component-loaded). For a standalone node it returns the global default context, which is non-null but reports `is_valid() == false`.
 
 ### Summary of Changes from Stage 1 to Stage 2
